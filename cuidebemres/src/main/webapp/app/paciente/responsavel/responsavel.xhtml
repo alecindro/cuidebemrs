@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/resources/template.xhtml">
+	<ui:define name="content">
+		<p:outputPanel id="createuser">
+			<p:panel
+				header="#{bundle.cadresponsavel} do paciente #{responsavelmb.paciente.nome}"
+				toggleable="true">
+				<h:form>
+					<h:inputHidden value="#{responsavelmb.responsavel.idresponsavel}" />
+					<p:panelGrid columns="2" layout="grid"
+						columnClasses="twenty-percent,eighty-percent">
+						<p:outputLabel value="#{bundle.form_nome} *" for="nome"></p:outputLabel>
+						<p:inputText id="nome" value="#{responsavelmb.responsavel.nome}"
+							title="#{bundle.nome}" styleClass="fifty-percent"
+							requiredMessage="#{bundle.requiredmessage_nome}"></p:inputText>
+						<p:outputLabel value="#{bundle.form_apelido}" for="apelido" />
+						<p:inputText id="apelido"
+							value="#{responsavelmb.responsavel.apelido}"
+							title="#{bundle.apelido}" styleClass="fifty-percent" />
+						<p:outputLabel value="#{bundle.form_email}" for="email" />
+						<p:inputText id="email" autocomplete="off"
+							value="#{responsavelmb.responsavel.email}"
+							title="#{bundle.email}" type="email" styleClass="fifty-percent"
+							requiredMessage="#{bundle.requiredmessage_email}">
+							<p:keyFilter mask="email"></p:keyFilter>
+						</p:inputText>
+							<p:outputLabel value="#{bundle.form_datanascimento}"
+							for="datanascimento" />
+						<p:calendar id="datanascimento" pattern="dd/MM/yyyy"
+							navigator="true" mode="popup" yearRange="c-80:c+0"
+							value="#{responsavelmb.responsavel.datanascimento}"
+							title="#{bundle.datanascimento}" showOn="button" />
+					
+					</p:panelGrid>
+					<p:commandButton value="#{bundle.return}"
+						action="/app/paciente/paciente.xhtml">
+						<f:param name="idpaciente"
+							value="#{responsavelmb.paciente.idpaciente}"></f:param>
+					</p:commandButton>
+					<p:commandButton value="#{bundle.save}"
+						action="#{responsavelmb.saveResponsavel}" update="createuser">
+						<f:param name="idpaciente"
+							value="#{responsavelmb.paciente.idpaciente}" />
+						
+						</p:commandButton>
+				</h:form>
+			</p:panel>
+			<p:panel header="#{bundle.foto}"
+				visible="#{responsavelmb.responsavel.idresponsavel != null}"
+				toggleable="true">
+
+				<h:form>
+					<h:inputHidden value="#{responsavelmb.responsavel.idresponsavel}" />
+					<h:inputHidden value="#{responsavelmb.paciente.idpaciente}" />
+					<p:panelGrid columns="2" layout="grid"
+						columnClasses="thirty-percent,seventy-percent">
+						<p:outputPanel id="userimage">
+							<p:graphicImage
+								url="/rs/images/responsavel/#{responsavelmb.responsavel.idresponsavel}"
+								cache="false"></p:graphicImage>
+						</p:outputPanel>
+
+
+						<p:fileUpload id="photo" cancelLabel="#{bundle.cancel}"
+							multiple="false" uploadLabel="#{bundle.save}"
+							label="#{bundle.alter}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+							invalidFileMessage="São permitidas somente imagens (gif, jpeg, jpg e png)"
+							fileUploadListener="#{responsavelmb.handlePhotoResponsavel}"
+							mode="advanced" update="userimage">
+							<h:inputHidden value="#{responsavelmb.responsavel.idresponsavel}"
+								id="iduserphoto" />
+						</p:fileUpload>
+					</p:panelGrid>
+				</h:form>
+			</p:panel>
+			<p:panel header="#{bundle.telefones}"
+				visible="#{responsavelmb.responsavel.idresponsavel != null}"
+				toggleable="true">
+				<h:form>
+					<p:panelGrid columns="2" layout="grid"
+						columnClasses="twenty-percent,eighty-percent">
+						<p:outputLabel value="#{bundle.form_tipotelefone}"
+							for="tipotelefone" />
+						<p:selectOneMenu value="#{responsavelmb.telefone.tipo}"
+							id="tipotelefone" title="#{bundle.tipotelefone}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{usuariomb.tipoTelefones}"
+								var="tipotelefone" itemLabel="#{tipotelefone.name()}"
+								itemValue="#{tipotelefone.name()}"></f:selectItems>
+						</p:selectOneMenu>
+						<p:outputLabel value="#{bundle.form_operadora}" for="operadora" />
+						<p:selectOneMenu value="#{responsavelmb.telefone.operadora}"
+							id="operadora" title="#{bundle.operadora}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{usuariomb.operadoras}" var="operadora"
+								itemLabel="#{operadora.name()}" itemValue="#{operadora.name()}"></f:selectItems>
+						</p:selectOneMenu>
+						<p:outputLabel value="#{bundle.form_ddd}" for="ddd" />
+						<p:inputText id="ddd" value="#{responsavelmb.telefone.ddd}"
+							title="#{bundle.ddd}" required="true" styleClass="five-percent"
+							maxlength="2" requiredMessage="#{bundle.requiredmessage_ddd}">
+							<p:keyFilter mask="pint"></p:keyFilter>
+						</p:inputText>
+						<p:outputLabel value="#{bundle.form_telefone}" for="telefone" />
+						<p:inputText id="telefone"
+							value="#{responsavelmb.telefone.telefone}"
+							title="#{bundle.telefone}" required="true"
+							requiredMessage="#{bundle.requiredmessage_telefone}">
+							<p:keyFilter mask="pint"></p:keyFilter>
+						</p:inputText>
+					</p:panelGrid>
+					<p:commandButton value="#{bundle.add}"
+						action="#{responsavelmb.savePhoneResponsavel}"
+						update="@parent:@parent">
+						<f:param name="idresponsavel"
+							value="#{responsavelmb.responsavel.idresponsavel}" />
+						<f:param name="idpaciente"
+							value="#{responsavelmb.paciente.idpaciente}" />
+					</p:commandButton>
+				</h:form>
+
+
+				<h:form>
+					<p:dataTable value="#{responsavelmb.telefones}" var="telefone"
+						id="listel" selection="#{responsavelmb.telefone}" paginator="true"
+						rows="10" selectionMode="single" rowKey="#{telefone.idtelefone}">
+						<p:column headerText="#{bundle.telefone}">
+							<h:outputText value="(#{telefone.ddd}) #{telefone.telefone}" />
+						</p:column>
+						<p:column headerText="#{bundle.tipotelefone}">
+							<h:outputText value="#{telefone.tipo}" />
+						</p:column>
+						<p:column headerText="#{bundle.operadora}">
+							<h:outputText value="#{telefone.operadora}" />
+						</p:column>
+						<p:column>
+							<p:commandButton value="Excluir"
+								action="#{responsavelmb.delPhone}" update="@form:listel">
+								<f:param name="idresponsavel"
+									value="#{responsavelmb.responsavel.idresponsavel}" />
+								<f:param name="idpaciente"
+									value="#{responsavelmb.paciente.idpaciente}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</h:form>
+
+
+			</p:panel>
+		</p:outputPanel>
+
+	</ui:define>
+</ui:composition>
+</html>

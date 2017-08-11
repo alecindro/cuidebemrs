@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/resources/out/template.xhtml">
+	<ui:define name="content">
+		<p:panel header="#{bundle.cadsucesso}" styleClass="ui-corner-all">
+			<div
+				class="font_20">
+				<div class="wpb_wrapper">
+					<p>
+						<span>Seu cadastro foi realizado
+							com <strong>sucesso</strong>!!
+						</span>
+					</p>
+					<p>
+						<span >Agora você está apto a
+							utilizar a aplicação</span>.
+					</p>
+					<p>
+						<span ><strong>Próximos
+								passos:</strong></span>
+					</p>
+					<div id="list2">
+   <ol>
+   	<li><p><em>Complemente seu cadastro</em> insira o endereço, telefone e todas as informações necessárias que nos ajude a atendê-lo melhor.</p></li>
+      <li><p><em>Cadastrar os cuidadores</em> o dia-a-dia do cuidador vai ficar mais fácil com a plataforma CuideBem.</p></li>
+      <li><p><em>Cadastrar os pacientes</em> procure preencher o cadastro da forma mais completa. Com todas as informações tais como data de aniversário, responsáveis, foto, para lhe propiciarmos uma melhor interação com o seu paciente.</p></li>
+      <li><p><em>Cadastrar a agenda</em> permite não esquecer de nenhum evento.</p></li>
+      <li><p><em>Pronto</em>  <strong><a href="/app/index.html" class="font_20">Clique aqui</a></strong> e acesse o Cuide Bem com o seu email e senha cadastrados.</p></li>
+   </ol>
+</div>
+
+				</div>
+			</div>
+		</p:panel>
+	</ui:define>
+
+</ui:composition>
+</html>

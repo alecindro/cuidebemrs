@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/resources/out/template.xhtml">
+	<ui:define name="content">
+	<script type="text/javascript">
+
+  function checkForm(form)
+  {
+	  var terms = document.getElementsByName("terms")[0];
+    if(!terms.checked) {
+    	PF('growl').renderMessage({"summary":"Contrato",
+            "detail":"Aceite os termos do contrato",
+            "severity":"warn"})
+      terms.focus();
+      return false;
+    }
+    return true;
+  }
+
+</script>
+		<p:panel header="#{bundle.dadosiniciais}">
+			<h:form>
+			<p:panelGrid columns="2" layout="grid" columnClasses="twenty-percent, eighty-percent">
+			<p:outputLabel value="#{bundle.form_razaosocial}" for="razaosocial"></p:outputLabel>
+			<p:inputText id="razaosocial" required="true" styleClass="hundred-percent" value="#{cadResidencia.residencia.razao}"></p:inputText>
+			<p:outputLabel value="#{bundle.emailusuarioadmin}" for="emailusuarioadmin"></p:outputLabel>
+			<p:inputText id="emailusuarioadmin" required="true" type="email" placeholder="admin@razao.com.br" styleClass="hundred-percent" value="#{cadResidencia.user.email}">
+			<p:keyFilter regEx="/[a-z0-9_\.\-@]/i" ></p:keyFilter>
+			</p:inputText>
+			<p:outputLabel value="#{bundle.password}" for="password"></p:outputLabel>
+			<h:panelGroup>
+			<p:password id="password" feedback="true" required="true" match="passwordrepit" validatorMessage="#{bundle.password_match}" styleClass="fifty-percent" value="#{cadResidencia.user.password}">
+			<f:validateLength minimum="5" />
+			</p:password>
+			<h:outputText value="#{bundle.min_fivedigts}" />
+			</h:panelGroup>
+			<p:outputLabel value="#{bundle.passwordrepit}" for="passwordrepit"></p:outputLabel>
+			<p:password id="passwordrepit"  required="true" styleClass="fifty-percent" >
+			</p:password>
+			
+			</p:panelGrid>
+			<p:panelGrid columns="2" layout="grid" columnClasses="eighty-percent,twenty-percent">
+			 </p:panelGrid>
+			 <p><input type="checkbox" name="terms">#{bundle.aceitecontrato} <u><a href="/resources/out/contrato_internet.pdf" target="_blank">#{bundle.contrato}</a></u></input></p>
+			<p:commandButton value="#{bundle.proximo}" styleClass="float_right twenty-percent" action="#{cadResidencia.save}" onclick="return checkForm(this);"></p:commandButton>
+			</h:form>
+			</p:panel>
+	</ui:define>
+	</ui:composition>
+</html>

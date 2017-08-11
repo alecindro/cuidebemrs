@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:form>
+	<p:menubar>
+		<p:menuitem value="#{bundle.home}" outcome="/app/index.xhtml"/>
+		<p:submenu label="#{bundle.usuarios}">
+		<p:menuitem value="#{bundle.todos}" outcome="/app/usuario/usuarios.xhtml"/>
+		<p:menuitem value="#{bundle.new}" outcome="/app/usuario/usuario.xhtml"></p:menuitem>
+		<p:menuitem value="#{bundle.excluidos}" outcome="/app/usuario/usuariosExcluidos.xhtml"/>
+		</p:submenu>
+		<p:submenu label="#{bundle.pacientes}">
+		<p:menuitem value="#{bundle.todos}" outcome="/app/paciente/pacientes.xhtml"/>
+		<p:menuitem value="#{bundle.new}" outcome="/app/paciente/paciente.xhtml"></p:menuitem>
+		<p:menuitem value="#{bundle.excluidos}" action="/app/paciente/pacientesExcluidos.xhtml"/>
+		</p:submenu>
+		<p:menuitem value="#{bundle.mydata}" outcome="/app/residencia/residencia.xhtml"/>
+		<p:menuitem value="#{bundle.logout}" action="#{index.logout}"/>
+</p:menubar>
+</h:form>
+
+</html>

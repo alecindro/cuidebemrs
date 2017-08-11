@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/resources/template.xhtml">
+	<ui:define name="content">
+	<h:form>
+			<p:dataGrid id="datalist" value="#{pacientesexcludemb.pacientes}" var="paciente" emptyMessage="#{bundle.pacientesnotdeleted}"
+				layout="grid"   
+				columns="5">
+				<f:facet name="header">
+                                 #{bundle.delpacientes}
+                                 </f:facet>
+				<p:panel header="#{paciente.nome}">
+					<p:panelGrid columns="1" layout="grid">
+						<p:graphicImage url="/rs/images/paciente/#{paciente.idpaciente}"
+							cache="false" >
+							</p:graphicImage>
+					<h:outputText value="email: (#{usuario.email})" />		
+					<p:commandButton value="#{bundle.reactive}" action="#{pacientesexcludemb.enabledPaciente}">
+					</p:commandButton>
+					</p:panelGrid>
+					<f:facet name="footer">
+					#{paciente.status}
+					</f:facet>
+				</p:panel>
+			</p:dataGrid>
+			</h:form>
+		
+	</ui:define>
+</ui:composition>
+</html>

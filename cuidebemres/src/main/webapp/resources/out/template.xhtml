@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Cuide Bem</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<style type="text/css">
+body {
+	margin: 0px;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	background-color: #20272a;
+	font-family: 'latoregular', "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color: #5C666A;
+}
+
+.banner-title {
+	background-color: #C2D5D3 !important;
+	text-align: center;
+	width: 100%
+}
+
+.ten-percent {
+     width: 10%;
+}
+
+.twenty-percent {
+     width: 20%;
+}
+
+.fifty-percent {
+     width: 50%;
+}
+
+.eighty-percent {
+     width: 80%;
+}
+.hundred-percent {
+     width: 100%;
+}
+
+.float_right {
+    float: right;
+}
+.align_right{
+text-align: right;
+}
+.font_20{
+font-size: 20px;
+}
+
+#list2 { width:50%; }
+#list2 ol { font-style:italic; font-family:Georgia, Times, serif; font-size:24px; color:#bfe1f1;  }
+#list2 ol li { }
+#list2 ol li p { padding:8px; font-style:normal; font-family:Arial; font-size:13px; color:#eee; border-left: 1px solid #999; text-align: justify;}
+#list2 ol li p em { display:block; font-size: 20px;}
+</style>
+
+	<h:outputScript library="js" name="jsfcrud.js" />
+</h:head>
+<h:body>
+	<p:growl autoUpdate="true" showDetail="true" showSummary="true" widgetVar="growl"></p:growl>
+	<ui:insert name="header">
+		<div class="banner-title">
+			<div class="ui-corner-all">
+				<div class="ui-g">
+					<div class="ui-g-4 ui-md-4 ui-lg-5"></div>
+					<div class="ui-g-4 ui-md-4 ui-lg-2">
+					<a href="/app/index.xhtml">
+						<img src="/resources/img/titulo25.png"
+							style="width: 100%; height: auto" /></a>
+					</div>
+					<div class="ui-g-4 ui-md-4 ui-lg-5"></div>
+				</div>
+			</div>
+		</div>
+		
+		
+	</ui:insert>
+
+	<div class="ui-g">
+		<div class="ui-g-1 ui-md-1 ui-lg-1">
+		
+		</div>
+		<div class="ui-g-10 ui-md-10 ui-lg-10">
+			<ui:insert name="content"></ui:insert>
+		</div>
+		<div class="ui-g-1 ui-md-1 ui-lg-1"></div>
+	</div>
+
+	<ui:insert name="footer">
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			<p:commandButton value="Sim" type="button"
+				styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+			<p:commandButton value="Não" type="button"
+				styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+		</p:confirmDialog>
+	</ui:insert>
+</h:body>
+</html>

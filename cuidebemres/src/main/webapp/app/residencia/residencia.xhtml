@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/resources/template.xhtml">
+	<ui:define name="content">
+		<p:outputPanel id="createres">
+			<p:panel header="#{bundle.caduser}" toggleable="true">
+				<h:form id="UsuarioCreateForm">
+					<p:panelGrid columns="2" layout="grid"
+						columnClasses="twenty-percent,eighty-percent">
+						<p:outputLabel value="#{bundle.form_razaosocial}" for="razao" />
+						<p:inputText id="razao" autocomplete="off"
+							value="#{residenciamb.residencia.razao}"
+							title="#{bundle.razaosocial}" required="true"
+							styleClass="hundred-percent"
+							requiredMessage="#{bundle.requiredMessage_razao}">
+						</p:inputText>
+						<p:outputLabel value="#{bundle.form_fantasia}" for="fantasia" />
+						<p:inputText id="fantasia" autocomplete="off"
+							value="#{residenciamb.residencia.fantasia}"
+							title="#{bundle.fantasia}" styleClass="fifty-percent">
+						</p:inputText>
+						<p:outputLabel value="#{bundle.form_endereco}" for="endereco" />
+						<p:inputText id="endereco"
+							value="#{residenciamb.residencia.endereco}"
+							title="#{bundle.endereco}" styleClass="hundred-percent">
+						</p:inputText>
+						<p:outputLabel value="#{bundle.form_cep}" for="cep" />
+						<h:panelGroup>
+							<p:inputText id="cep" value="#{residenciamb.residencia.cep}"
+								placeholder="00000000" title="#{bundle.cep}"
+								styleClass="twenty-percent" maxlength="8">
+								<p:keyFilter mask="pint"></p:keyFilter>
+							</p:inputText>
+							<h:outputText value="#{bundle.somentenumeros}" />
+						</h:panelGroup>
+						<p:outputLabel value="#{bundle.form_cnpjorcpf}" for="cnpj"></p:outputLabel>
+						<h:panelGroup>
+							<p:inputText id="cnpj" 
+								placeholder="00000000000000"
+								styleClass="twenty-percent align_right" maxlength="14"
+								value="#{cadResidencia.residencia.cnpj}">
+								<p:keyFilter mask="int"></p:keyFilter>
+							</p:inputText>
+							<h:outputText value="#{bundle.somentenumeros}" />
+						</h:panelGroup>
+					</p:panelGrid>
+					<p:commandButton value="#{bundle.save}"
+						action="#{residenciamb.save()}" update="createres"></p:commandButton>
+				</h:form>
+			</p:panel>
+			<p:panel header="#{bundle.telefones}" toggleable="true">
+				<h:form>
+					<p:panelGrid columns="2" layout="grid"
+						columnClasses="twenty-percent,eighty-percent">
+						<p:outputLabel value="#{bundle.form_tipotelefone}"
+							for="tipotelefone" />
+						<p:selectOneMenu value="#{residenciamb.telefone.tipo}"
+							id="tipotelefone" title="#{bundle.tipotelefone}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{usuariomb.tipoTelefones}"
+								var="tipotelefone" itemLabel="#{tipotelefone.name()}"
+								itemValue="#{tipotelefone.name()}"></f:selectItems>
+						</p:selectOneMenu>
+						<p:outputLabel value="#{bundle.form_operadora}" for="operadora" />
+						<p:selectOneMenu value="#{residenciamb.telefone.operadora}"
+							id="operadora" title="#{bundle.operadora}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{usuariomb.operadoras}" var="operadora"
+								itemLabel="#{operadora.name()}" itemValue="#{operadora.name()}"></f:selectItems>
+						</p:selectOneMenu>
+						<p:outputLabel value="#{bundle.form_ddd}" for="ddd" />
+						<p:inputText id="ddd" value="#{residenciamb.telefone.ddd}"
+							title="#{bundle.ddd}" required="true" styleClass="five-percent"
+							maxlength="2" requiredMessage="#{bundle.requiredmessage_ddd}">
+							<p:keyFilter mask="pint"></p:keyFilter>
+						</p:inputText>
+						<p:outputLabel value="#{bundle.form_telefone}" for="telefone" />
+						<p:inputText id="telefone"
+							value="#{residenciamb.telefone.telefone}"
+							title="#{bundle.telefone}" required="true"
+							requiredMessage="#{bundle.requiredmessage_telefone}">
+							<p:keyFilter mask="pint"></p:keyFilter>
+						</p:inputText>
+					</p:panelGrid>
+					<p:commandButton value="#{bundle.add}"
+						action="#{residenciamb.saveTelefone()}" update="@parent:@parent">
+					</p:commandButton>
+				</h:form>
+				<h:form>
+					<p:dataTable value="#{residenciamb.telefones}" var="telefone"
+						id="listel" selection="#{residenciamb.telefone}" paginator="true"
+						rows="10" selectionMode="single" rowKey="#{telefone.idtelefone}">
+						<p:column headerText="#{bundle.telefone}">
+							<h:outputText value="(#{telefone.ddd}) #{telefone.telefone}" />
+						</p:column>
+						<p:column headerText="#{bundle.tipotelefone}">
+							<h:outputText value="#{telefone.tipo}" />
+						</p:column>
+						<p:column headerText="#{bundle.operadora}">
+							<h:outputText value="#{telefone.operadora}" />
+						</p:column>
+						<p:column>
+							<p:commandButton value="Excluir"
+								action="#{residenciamb.delPhone}" update="@form:listel">
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</p:panel>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>
+</html>

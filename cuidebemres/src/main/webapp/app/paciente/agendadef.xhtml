@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/resources/template.xhtml">
+	<ui:define name="content">
+		<p:panel header="#{bundle.agendadeftitle}">
+			<h:form>
+				<p:fieldset legend="#{bundle.define_time}">
+					<p:panelGrid layout="grid" columns="2"
+						columnClasses="twenty-percent,eighty-percent">
+
+						<p:outputLabel value="#{bundle.form_data_inicio}" for="dtinicio" />
+						<p:calendar id="dtinicio" pattern="dd/MM/yyyy" required="true"
+							value="#{agendadefmb.dataInicio}" navigator="true" mode="popup"
+							yearRange="c-1:c+0" showOn="button" />
+						<p:outputLabel value="#{bundle.form_data_fim}" for="dtfim" />
+						<p:calendar id="dtfim" pattern="dd/MM/yyyy" required="true"
+							value="#{agendadefmb.dataFim}" navigator="true" mode="popup"
+							yearRange="c-1:c+0" showOn="button" />
+						<p:outputLabel for="time" value="#{bundle.form_horario}" />
+
+						<p:inputText id="time" type="time" placeholder="hh:mm"
+							required="true" value="#{agendadefmb.horario}">
+							<p:keyFilter regEx="([01]?[0-9]|2[0-3]):[0-5][0-9]"></p:keyFilter>
+						</p:inputText>
+						<p:outputLabel for="repet_hora"
+							value="#{bundle.form_repetir_cada}" />
+						<h:panelGroup>
+							<p:inputText id="repet_hora"
+								value="#{agendadefmb.repetirHorario}" maxlength="2">
+								<p:keyFilter mask="pint"></p:keyFilter>
+							</p:inputText>
+							<p:outputLabel value="#{bundle.hora_s}"></p:outputLabel>
+						</h:panelGroup>
+						<p:outputLabel value="#{bundle.form_repetir_person}" for="repet" />
+						<p:selectBooleanCheckbox value="#{agendadefmb.repetir}" id="repet">
+							<p:ajax event="change" update="paneldias" />
+						</p:selectBooleanCheckbox>
+					</p:panelGrid>
+				</p:fieldset>
+				<p:outputPanel id="paneldias">
+					<p:fieldset legend="#{bundle.personalizado}"
+						rendered="#{agendadefmb.repetir}">
+						<p:panelGrid layout="grid" columns="2"
+							columnClasses="twenty-percent,eighty-percent">
+							<p:outputLabel value="#{bundle.form_dias_semana}" for="semana" />
+							<p:selectManyCheckbox id="semana" layout="responsive" columns="1"
+								value="#{agendadefmb.daysOfWeekSelected}">
+								<f:selectItem itemValue="0" itemLabel="#{bundle.segunda_semana}" />
+								<f:selectItem itemValue="1" itemLabel="#{bundle.terca_semana}" />
+								<f:selectItem itemValue="2" itemLabel="#{bundle.quarta_semana}" />
+								<f:selectItem itemValue="3" itemLabel="#{bundle.quinta_semana}" />
+								<f:selectItem itemValue="4" itemLabel="#{bundle.sexta_semana}" />
+								<f:selectItem itemValue="5" itemLabel="#{bundle.sabado_semana}" />
+								<f:selectItem itemValue="6" itemLabel="#{bundle.domingo_semana}" />
+							</p:selectManyCheckbox>
+						</p:panelGrid>
+					</p:fieldset>
+				</p:outputPanel>
+				<p:fieldset legend="#{bundle.evento}">
+					<p:outputLabel value="#{bundle.form_tipo_evento}" for="tipoevento"></p:outputLabel>
+					<p:selectOneMenu id="tipoevento"
+						value="#{agendadefmb.grupEventoSelected}">
+						<p:ajax update="panelrotina" />
+						<f:selectItem itemLabel="#{bundle.select_evento}" itemValue="" />
+						<f:selectItems value="#{agendadefmb.grupoEvento}" var="grupoevento"
+							itemValue="#{grupoevento}"
+							itemLabel="#{grupoevento}" />
+					</p:selectOneMenu>
+				     <p:outputLabel id="labeltiporotina" value="#{bundle.form_rotina}"
+							for="tiporotina"></p:outputLabel>
+						<p:selectOneMenu id="tiporotina"
+							rendered="#{agendadefmb.rotinaSelected.name() == 'SINALVITAL'}"
+							value="#{agendadefmb.subgrupEventoSelected}">
+							<p:ajax />
+							<f:selectItem itemLabel="#{bundle.select_rotina}" itemValue="" />
+							<f:selectItems value="#{agendadefmb.rotinaSelected.tipo}"
+								var="item" itemValue="#{item}" itemLabel="#{item.descricao}" />
+						</p:selectOneMenu>
+					
+
+
+				</p:fieldset>
+			</h:form>
+		</p:panel>
+
+
+	</ui:define>
+</ui:composition>
+</html>

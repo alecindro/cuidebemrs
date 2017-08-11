@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/resources/template.xhtml">
+	<ui:define name="content">
+		<div class="ui-g">
+			<div class="ui-lg-3"></div>
+			<div class="ui-g-12 ui-md-12 ui-lg-6">
+				<p:panel>
+					<f:facet name="header">
+	Eventos do Paciente: 
+	</f:facet>
+					<section class="timeline">
+					<ul>
+						<ui:repeat var="evento" value="#{eventopacientemb.eventos}">
+							<li class="in-view">
+								<div>
+								<time>#{evento.hour}</time>
+									#{evento.data} <br/>
+									#{evento.grupoevento} <br /> #{evento.subgrupoevento} <br />
+									#{evento.respeventos} <br /> Cuidador : #{evento.idusuario.apelido}
+								</div> <span class="ui-btn-timeline"> </span>
+							</li>
+						</ui:repeat>
+					</ul>
+					</section>
+				</p:panel>
+			</div>
+			<div class="ui-lg-3"></div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
