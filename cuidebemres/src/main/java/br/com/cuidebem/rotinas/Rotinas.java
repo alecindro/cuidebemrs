@@ -8,7 +8,7 @@ public enum Rotinas {
 	SINALVITAL("Sinais Vitais", SinaisVitais.getDescricaos()), 
 	RESPIRATORIO("Respiratório", Respiratorio.getDescricaos()), 
 	NUTRICAO("Nutrição", Nutricao.getDescricaos()), 
-	MEDICACAO("Medicação", Medicacao.getDescricaos()), 
+	MEDICACAO("Medicação", Patologias.getDescricaos()), 
 	INTEROCORRENCIAS("Interocorrências", InterOcorrencias.getDescricaos()), 
 	HIGIENE("Higiene", Higiene.getDescricaos()), 
 	ELIMINACOES("Eliminações", Eliminacoes.getDescricaos()), 

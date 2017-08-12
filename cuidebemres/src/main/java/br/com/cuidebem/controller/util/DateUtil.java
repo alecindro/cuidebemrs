@@ -1,16 +1,22 @@
 package br.com.cuidebem.controller.util;
 
 import java.time.DayOfWeek;
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.MonthDay;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import org.apache.commons.collections.ArrayStack;
 
 public class DateUtil {
 
@@ -20,6 +26,17 @@ public class DateUtil {
 		int hour = calendar.get(Calendar.HOUR_OF_DAY);
 		int minute = calendar.get(Calendar.MINUTE);
 		return LocalTime.of(hour, minute).toString();
+	}
+	
+	public static Date convertHour(Date date, String hour) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		String[] values = hour.split(":");
+		int _hour = Integer.valueOf(values[0]);
+		int minute = Integer.valueOf(values[1]);
+		calendar.set(Calendar.HOUR_OF_DAY, _hour);
+		calendar.set(Calendar.MINUTE, minute);
+		return calendar.getTime();
 	}
 
 	public static Date convertDate(String dateinput) throws Exception {
@@ -55,5 +72,45 @@ public class DateUtil {
 		}
 		return list;
 	}
+	
+	public static List<Date> listDates(Date inicio, Date fim, String hour){
+		List<Date> dates = new ArrayList<Date>();
+		Instant inicioInstant = convertHour(inicio, hour).toInstant();
+		Instant fimInstant = convertHour(fim, hour).toInstant();
+		
+		while(inicioInstant.compareTo(fimInstant)>=0){
+			Date date = Date.from(inicioInstant);
+			dates.add(date);
+			inicioInstant = inicioInstant.plus(1,ChronoUnit.DAYS);
+		}
+		return dates;
+	}
+	
+	public static List<Date> listDates(Date inicio, Date fim, String hour,int repeatHour){
+		List<Date> dates = new ArrayList<Date>();
+		Instant inicioInstant = convertHour(inicio, hour).toInstant();
+		Instant fimInstant = convertHour(fim, hour).toInstant();
+		while(inicioInstant.compareTo(fimInstant)>=0){
+			Date date = Date.from(inicioInstant);
+			dates.add(date);
+			inicioInstant = inicioInstant.plus(Duration.ofHours(repeatHour));
+		}
+		return dates;
+	}
+	public static List<Date> listDates(Date inicio, Date fim, String hour,String[] daysOfWeek){
+		List<String> days = Arrays.asList(daysOfWeek);
+		List<Date> dates = new ArrayList<Date>();
+		Instant inicioInstant = convertHour(inicio, hour).toInstant();
+		Instant fimInstant = convertHour(fim, hour).toInstant();
+		while(inicioInstant.compareTo(fimInstant)>=0){
+			if(days.contains(DayOfWeek.from(inicioInstant).getDisplayName(TextStyle.FULL, Locale.getDefault()))){
+				Date date = Date.from(inicioInstant);
+				dates.add(date);
+			}
+			inicioInstant = inicioInstant.plus(1,ChronoUnit.DAYS);
+		}
+		return dates;
+	}
+	
 
 }
