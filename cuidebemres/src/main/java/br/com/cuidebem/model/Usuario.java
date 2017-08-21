@@ -48,7 +48,8 @@ import javax.xml.bind.annotation.XmlTransient;
 		@NamedQuery(name = "Usuario.findAllDisabled", query = "SELECT u FROM Usuario u where u.enabled = false")
 		})
 @NamedNativeQueries({
-	@NamedNativeQuery(name="Usuario.findByResidenciaEnabled", query="select u.* from usuario u inner join usuario_residencia ur on u.idusuario = ur.idusuario where ur.idresidencia = ?1 and u.enabled = ?2",resultClass=Usuario.class)
+	@NamedNativeQuery(name="Usuario.findByResidenciaEnabled", query="select u.* from usuario u inner join usuario_residencia ur on u.idusuario = ur.idusuario where ur.idresidencia = ?1 and u.enabled = ?2",resultClass=Usuario.class),
+	@NamedNativeQuery(name="Usuario.findByTipoUsuarioEnabled", query="select u.* from usuario u inner join usuario_residencia ur on u.idusuario = ur.idusuario where ur.idresidencia = ?1 and u.enabled = ?2 and u.tipousuario = ?3",resultClass=Usuario.class)
 })
 public class Usuario implements Serializable {
 

@@ -32,6 +32,9 @@
 			<p:inputText id="emailusuarioadmin" required="true" type="email" placeholder="admin@razao.com.br" styleClass="hundred-percent" value="#{cadResidencia.user.email}">
 			<p:keyFilter regEx="/[a-z0-9_\.\-@]/i" ></p:keyFilter>
 			</p:inputText>
+			<p:outputLabel value="#{bundle.nome}" for="nomeusuarioadmin"></p:outputLabel>
+			<p:inputText id="nomeusuarioadmin" required="true" styleClass="hundred-percent" value="#{cadResidencia.nomeUsuario}">
+			</p:inputText>
 			<p:outputLabel value="#{bundle.password}" for="password"></p:outputLabel>
 			<h:panelGroup>
 			<p:password id="password" feedback="true" required="true" match="passwordrepit" validatorMessage="#{bundle.password_match}" styleClass="fifty-percent" value="#{cadResidencia.user.password}">

@@ -21,11 +21,12 @@ public class CadResidencia {
 	@Inject
 	private Users user;
 	@EJB
-	private ResidenciaFacade residenciaFacade; 
+	private ResidenciaFacade residenciaFacade;
+	private String nomeUsuario;
 	
 	public String save(){
 		try {
-			residenciaFacade.create(residencia,user);
+			residenciaFacade.create(residencia,user,nomeUsuario);
 			return "cadressucess.xhtml";
 		} catch (ControllerException e) {
 			JsfUtil.addErrorMessage(Bundle.getValue(e.getMessage()));
@@ -54,6 +55,14 @@ public class CadResidencia {
 	}
 	public void setUser(Users user) {
 		this.user = user;
+	}
+
+	public String getNomeUsuario() {
+		return nomeUsuario;
+	}
+
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
 	}
 	
 	

@@ -86,12 +86,18 @@ public class UsuarioView extends IndexView {
 
 	public void create() {
 		try {
-			if (usuario.getIdusuario() == null) {
 				Roles role = rolesFacade.find(usuario.getTipoUsuario());
 				usersFacade.create(role, usuario.getEmail(), password);
-			}
-		
-			usuario = usuarioFacade.create(getIdresidencia(), usuario);
+				usuario = usuarioFacade.create(getIdresidencia(), usuario);
+			JsfUtil.addSuccessMessage(Bundle.getValue("cadsucesso"));
+		} catch (ControllerException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+	
+	public void edit(){
+		try {
+			usuario = usuarioFacade.editUsuario(getResidencia(), usuario);
 			JsfUtil.addSuccessMessage(Bundle.getValue("cadsucesso"));
 		} catch (ControllerException e) {
 			JsfUtil.addErrorMessage(e.getMessage());

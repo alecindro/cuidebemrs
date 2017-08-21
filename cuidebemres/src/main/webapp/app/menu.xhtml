@@ -18,6 +18,11 @@
 		<p:menuitem value="#{bundle.new}" outcome="/app/paciente/paciente.xhtml"></p:menuitem>
 		<p:menuitem value="#{bundle.excluidos}" action="/app/paciente/pacientesExcluidos.xhtml"/>
 		</p:submenu>
+		<p:submenu label="#{bundle.reports}">
+		<p:menuitem value="#{bundle.report_bypaciente}" outcome="/app/report/pacienteReport.xhtml"/>
+		<p:menuitem value="#{bundle.report_bycuidador}" outcome="/app/report/cuidadorReport.xhtml"></p:menuitem>
+		</p:submenu>
+		
 		<p:menuitem value="#{bundle.mydata}" outcome="/app/residencia/residencia.xhtml"/>
 		<p:menuitem value="#{bundle.logout}" action="#{index.logout}"/>
 </p:menubar>

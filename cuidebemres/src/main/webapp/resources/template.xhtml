@@ -106,7 +106,7 @@ div.niver li.ui-datascroller-item {
 	color: #242729;
 }
 
-div.niver li.ui-datascroller-item a.link-no-decoration{
+div.niver li.ui-datascroller-item a.link-no-decoration {
 	display: block;
 	text-decoration: none;
 	color: #242729;
@@ -120,12 +120,13 @@ div.niver li.ui-datascroller-item a.link-no-decoration:hover {
 	background: linear-gradient(#99a699, #778877);
 	color: #eeffee;
 }
-.ui-selectonemenu-trigger{
-width: 24px !important;
+
+.ui-selectonemenu-trigger {
+	width: 24px !important;
 }
 </style>
-<script type="text/javascript">
-PrimeFaces.locales['pt-br'] = {
+	<script type="text/javascript">
+PrimeFaces.locales['pt'] = {
 	    closeText: 'Fechar',
 	    prevText: 'Anterior',
 	    nextText: 'Próximo',
@@ -192,6 +193,12 @@ PrimeFaces.locales['pt-br'] = {
 	<div class="ui-g">
 		<div class="ui-g-12 ui-md-12 ui-lg-12">
 			<ui:insert name="footer">
+				<p:ajaxStatus onstart="PF('statusDialog').show()"
+					onsuccess="PF('statusDialog').hide()"></p:ajaxStatus>
+				<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+					closable="false" resizable="false" showHeader="false">
+					<p:graphicImage url="/resources/img/ajaxloadingbar.gif" />
+				</p:dialog>
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 					<p:commandButton value="Sim" type="button"
 						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />

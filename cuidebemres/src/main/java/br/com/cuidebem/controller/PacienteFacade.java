@@ -35,6 +35,13 @@ public class PacienteFacade extends AbstractFacade<Paciente> {
 	}
 
 	public Paciente save(Paciente paciente, Residencia residencia) throws ControllerException {
+		if (paciente.getNome() != null) {
+			paciente.setNome(paciente.getNome().trim());
+			if (paciente.getApelido() == null || paciente.getApelido().trim().equals("")) {
+				String[] nomes = paciente.getNome().split("\\s");
+				paciente.setApelido(nomes[0]);
+			}
+		}
 		paciente.setEnabled(true);
 		paciente.setIdresidencia(residencia);
 		return edit(paciente);

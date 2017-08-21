@@ -64,6 +64,36 @@ public class EventoFacade extends AbstractFacade<Evento> {
 			throw new ControllerException(e.getMessage(), e);
 		}
 	}
+	
+	public List<Evento> findByPacienteDataregistro(Integer idpaciente, Date dateBegin, Date dateEnd) throws ControllerException {
+		try {
+			javax.persistence.Query query = getEntityManager().createNativeQuery(Evento.EVENTO_PACIENTE_DATAREGISTRO);
+			query.setParameter(1, idpaciente);
+			query.setParameter(2, dateBegin);
+			query.setParameter(3, dateEnd);
+			@SuppressWarnings("unchecked")
+			List<Object[]> tuples = query.getResultList();
+			List<Evento> eventos = new ArrayList<Evento>();
+			for (Object[] o : tuples) {
+				Evento evento = new Evento((Integer) o[0], (String) o[1], (Date) o[2], (Date) o[3],  (String.valueOf(o[4])).equals("1"),
+						(String) o[5], (String) o[6], (String) o[7], (String) o[8]);
+				Paciente paciente = new Paciente();
+				paciente.setIdpaciente((Integer) o[9]);
+				paciente.setNome((String) o[10]);
+				paciente.setApelido((String) o[11]);
+				Usuario usuario = new Usuario();
+				usuario.setIdusuario((Integer) o[12]);
+				usuario.setNome((String) o[13]);
+				usuario.setApelido((String) o[14]);
+				evento.setIdusuario(usuario);
+				evento.setIdpaciente(paciente);
+				eventos.add(evento);
+			}
+			return eventos;
+		} catch (Exception e) {
+			throw new ControllerException(e.getMessage(), e);
+		}
+	}
 
 	public List<Evento> findEnabledByCuidador(Integer idcuidador, Date date) throws ControllerException {
 		try {
@@ -71,6 +101,36 @@ public class EventoFacade extends AbstractFacade<Evento> {
 			query.setParameter(1, idcuidador);
 			query.setParameter(2, date);
 			query.setParameter(3, date);
+			@SuppressWarnings("unchecked")
+			List<Object[]> tuples = query.getResultList();
+			List<Evento> eventos = new ArrayList<Evento>();
+			for (Object[] o : tuples) {
+				Evento evento = new Evento((Integer) o[0], (String) o[1], (Date) o[2], (Date) o[3],  (String.valueOf(o[4])).equals("1"),
+						(String) o[5], (String) o[6], (String) o[7], (String) o[8]);
+				Paciente paciente = new Paciente();
+				paciente.setIdpaciente((Integer) o[9]);
+				paciente.setNome((String) o[10]);
+				paciente.setApelido((String) o[11]);
+				Usuario usuario = new Usuario();
+				usuario.setIdusuario((Integer) o[12]);
+				usuario.setNome((String) o[13]);
+				usuario.setApelido((String) o[14]);
+				evento.setIdusuario(usuario);
+				evento.setIdpaciente(paciente);
+				eventos.add(evento);
+			}
+			return eventos;
+		} catch (Exception e) {
+			throw new ControllerException(e.getMessage(), e);
+		}
+	}
+	
+	public List<Evento> findByCuidadorDataregistro(Integer idcuidador, Date dateBegin,Date dateEnd) throws ControllerException {
+		try {
+			javax.persistence.Query query = getEntityManager().createNativeQuery(Evento.EVENTO_CUIDADOR_DATAREGISTRO);
+			query.setParameter(1, idcuidador);
+			query.setParameter(2, dateBegin);
+			query.setParameter(3, dateEnd);
 			@SuppressWarnings("unchecked")
 			List<Object[]> tuples = query.getResultList();
 			List<Evento> eventos = new ArrayList<Evento>();

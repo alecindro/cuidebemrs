@@ -35,12 +35,12 @@
 									for="datanascimento" />
 								<p:calendar id="datanascimento" pattern="dd/MM/yyyy"
 									navigator="true" mode="popup" yearRange="c-120:c+0"
-									value="#{pacientemb.paciente.datanascimento}"
+									value="#{pacientemb.paciente.datanascimento}" locale="pt"
 									title="#{bundle.datanascimento}" showOn="button" />
 							</p:panelGrid>
 							<p:button value="#{bundle.cancel}"
 								outcome="/app/paciente/pacientes.xhtml"
-								rendered="#{usuariomb.usuario.idusuario != null}" />
+								/>
 
 							<p:commandButton value="#{bundle.delete}"
 								action="#{pacientemb.delPaciente}"

@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import br.com.cuidebem.controller.def.TipoUsuario;
 import br.com.cuidebem.controller.exception.ControllerException;
 import br.com.cuidebem.model.Residencia;
 import br.com.cuidebem.model.Usuario;
@@ -44,10 +45,12 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
 	}
 
 	public Usuario create(Residencia residencia, Usuario usuario) throws ControllerException {
-		usuario.setNome(usuario.getNome().trim());
-		if (usuario.getApelido() == null) {
-			String[] nomes = usuario.getNome().split("\\s");
-			usuario.setApelido(nomes[0]);
+		if (usuario.getNome() != null) {
+			usuario.setNome(usuario.getNome().trim());
+			if (usuario.getApelido() == null || usuario.getApelido().trim().equals("")) {
+				String[] nomes = usuario.getNome().split("\\s");
+				usuario.setApelido(nomes[0]);
+			}
 		}
 		usuario = edit(usuario);
 		UsuarioResidencia usuarioResidencia = new UsuarioResidencia();
@@ -57,29 +60,45 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
 		usuario.getUsuarioResidenciaList().add(usuarioResidencia);
 		return usuario;
 	}
+	
+	public Usuario editUsuario(Residencia residencia, Usuario usuario) throws ControllerException{
+		if (usuario.getNome() != null) {
+			usuario.setNome(usuario.getNome().trim());
+			if (usuario.getApelido() == null || usuario.getApelido().trim().equals("")) {
+				String[] nomes = usuario.getNome().split("\\s");
+				usuario.setApelido(nomes[0]);
+			}
+		}
+		return edit(usuario);
+	}
 
 	public Usuario create(Integer idresidencia, Usuario usuario) throws ControllerException {
-		if(idresidencia == null){
+		if (idresidencia == null) {
 			throw new ControllerException(Bundle.getValue("error.save"));
 		}
 		Residencia residencia = residenciaFacade.find(idresidencia);
 		return create(residencia, usuario);
 	}
-	
-	public List<Usuario> findAllDisabled(Integer idresidencia) throws ControllerException{
-		return findByNativeQuery("Usuario.findByResidenciaEnabled",idresidencia,false);
+
+	public List<Usuario> findAllDisabled(Integer idresidencia) throws ControllerException {
+		return findByNativeQuery("Usuario.findByResidenciaEnabled", idresidencia, false);
 	}
-	
-	public List<Usuario> findAllEnabled(Integer idresidencia) throws ControllerException{
-		return findByNativeQuery("Usuario.findByResidenciaEnabled",idresidencia,true);
+
+	public List<Usuario> findAllEnabled(Integer idresidencia) throws ControllerException {
+		return findByNativeQuery("Usuario.findByResidenciaEnabled", idresidencia, true);
 	}
-	
-	public void delete(Usuario usuario) throws ControllerException{
+
+	public List<Usuario> findCuidadoresEnabled(Integer idresidencia) throws ControllerException {
+		return findByNativeQuery("Usuario.findByTipoUsuarioEnabled", idresidencia, true,
+				TipoUsuario.CUIDADOR.getValue());
+	}
+
+	public void delete(Usuario usuario) throws ControllerException {
 		usuario.setEnabled(false);
 		edit(usuario);
 	}
-	
-	public void reativar(Usuario usuario) throws ControllerException{
+
+	public void reativar(Usuario usuario) throws ControllerException {
 		usuario.setEnabled(true);
 		edit(usuario);
 	}

@@ -51,7 +51,7 @@
 						</p:selectOneRadio>
 						<p:outputLabel value="#{bundle.form_datanascimento}"
 							for="datanascimento" />
-						<p:calendar id="datanascimento" pattern="dd/MM/yyyy"
+						<p:calendar id="datanascimento" pattern="dd/MM/yyyy" locale="pt"
 							navigator="true" mode="popup" yearRange="c-80:c+0"
 							value="#{usuariomb.usuario.datanascimento}"
 							title="#{bundle.datanascimento}" showOn="button" />
@@ -63,9 +63,13 @@
 						action="#{usuariomb.delete}" rendered="#{usuariomb.usuario.idusuario != null}" immediate="true">
 						<f:param name="idusuario" value="#{usuariomb.usuario.idusuario}"></f:param>
 						</p:commandButton>
-					<p:commandButton actionListener="#{usuariomb.create}"
-						value="#{bundle.save}" update="createuser" />
-					
+					<p:commandButton actionListener="#{usuariomb.edit}" rendered="#{usuariomb.usuario.idusuario != null}"
+						value="#{bundle.save}" update="createuser">
+						<f:param name="idusuario" value="#{usuariomb.usuario.idusuario}"></f:param>
+						</p:commandButton>
+					<p:commandButton actionListener="#{usuariomb.create}" rendered="#{usuariomb.usuario.idusuario == null}"
+						value="#{bundle.save}" update="createuser">
+						</p:commandButton>
 
 				</h:form>
 			</p:panel>

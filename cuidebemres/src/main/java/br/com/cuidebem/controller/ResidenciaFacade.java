@@ -36,7 +36,7 @@ public class ResidenciaFacade extends AbstractFacade<Residencia> {
 		super(Residencia.class);
 	}
 
-	public Residencia create(Residencia residencia, Users user) throws ControllerException {
+	public Residencia create(Residencia residencia, Users user,String nomeUsuario) throws ControllerException {
 		try {
 			Usuario usuario = usuarioFacade.find(user.getEmail());
 			residencia = edit(residencia);
@@ -45,6 +45,7 @@ public class ResidenciaFacade extends AbstractFacade<Residencia> {
 			usersFacade.create(user, roles);
 			if (usuario == null) {
 				usuario = new Usuario();
+				usuario.setNome(nomeUsuario);
 				usuario.setEmail(user.getEmail());
 				usuario.setEnabled(true);
 			}

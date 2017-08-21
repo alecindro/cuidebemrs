@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 import br.com.cuidebem.controller.exception.ControllerException;
+import br.com.cuidebem.model.Residencia;
 import br.com.cuidebem.model.Usuario;
 import br.com.cuidebem.model.UsuarioResidencia;
 
@@ -28,5 +29,21 @@ public class UsuarioResidenciaFacade extends AbstractFacade<UsuarioResidencia> {
     public List<UsuarioResidencia> find(Usuario usuario) throws ControllerException{
     	QueryParameter parameters = QueryParameter.init("idusuario", usuario.getIdusuario());
     	return findWithNamedQuery("UsuarioResidencia.findByIdusuario", parameters, 0);
+    }
+    
+    public boolean exits(Usuario usuario, Residencia residencia) throws ControllerException{
+    	if(usuario.getIdusuario() == null){
+    		return false;
+    	}
+    	if(residencia.getIdresidencia() == null){
+    		return false;
+    	}
+    	QueryParameter parameters = QueryParameter.init("idusuario", usuario.getIdusuario());
+    	parameters.add("idresidencia", residencia.getIdresidencia());
+    	List<UsuarioResidencia> list = findWithNamedQuery("UsuarioResidencia.find", parameters,1);
+    	if(list != null && list.size() > 0){
+    		return true;
+    	}
+    	return false;
     }
 }

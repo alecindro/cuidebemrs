@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/resources/template.xhtml">
+<ui:define name="content">
+<p:fieldset legend="#{bundle.search}">
+<h:form>
+<p:panelGrid columns="2" layout="grid" columnClasses="twenty-percent,eighty-percent">
+<p:outputLabel value="#{bundle.form_paciente}" for="selectpaciente"></p:outputLabel>
+<p:selectOneMenu value="#{pacienteReport.idpaciente}" id="selectpaciente" required="true">
+<f:selectItem itemLabel="#{bundle.select}" itemValue="" />
+<f:selectItems value="#{pacienteReport.pacientes}" var="paciente" itemLabel="#{paciente.apelido}" itemValue="#{paciente.idpaciente}"></f:selectItems>
+</p:selectOneMenu>
+<p:outputLabel value="#{bundle.form_data_inicio}" for="dtinicial"></p:outputLabel>
+<p:calendar value="#{pacienteReport.dataInicial}" id="dtinicial"  pattern="dd/MM/yyyy" required="true" navigator="true" locale="pt"
+									mode="popup" yearRange="c-1:c+0" showOn="button"></p:calendar>
+<p:outputLabel value="#{bundle.form_data_fim}" for="dtfinal"></p:outputLabel>
+<p:calendar value="#{pacienteReport.dataFinal}" id="dtfinal"  pattern="dd/MM/yyyy" locale="pt" required="true" navigator="true" mode="popup" yearRange="c-1:c+0" showOn="button"></p:calendar>
+</p:panelGrid>
+<p:commandButton value="#{bundle.find}" action="#{pacienteReport.search()}" update="tableEventos"></p:commandButton>
+</h:form>
+</p:fieldset>
+<p:dataTable value="#{pacienteReport.eventos}" var="evento" id="tableEventos" emptyMessage="#{bundle.noevento}" reflow="true">
+<p:column headerText="#{bundle.dataregistro}">
+<h:outputText value="#{evento.dataregistro}">
+<f:convertDateTime pattern="HH:mm dd/MM/yyyy"/>
+</h:outputText>
+</p:column>
+<p:column headerText="#{bundle.cuidador}">
+<h:outputText value="#{evento.idusuario.apelido}" />
+</p:column>
+<p:column headerText="#{bundle.tipo_evento}">
+<h:outputText value="#{evento.grupoevento}" />
+</p:column>
+<p:column headerText="#{bundle.rotina}">
+<h:outputText value="#{evento.subgrupoevento}" />
+</p:column>
+<p:column headerText="#{bundle.registro}">
+<h:outputText value="#{evento.respeventos}" />
+</p:column>
+<p:column headerText="#{bundle.observacao}">
+<h:outputText value="#{evento.obsevento}" />
+</p:column>
+</p:dataTable>
+
+</ui:define>
+
+	</ui:composition>
+</html>
