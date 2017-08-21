@@ -7,7 +7,10 @@ import javax.persistence.EntityResult;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.SqlResultSetMapping;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import br.com.cuidebem.model.Agenda;
 
 @Entity
 @SqlResultSetMapping(name="eventoatual", entities=@EntityResult(entityClass=PacienteEventoAtual.class)) 
@@ -27,6 +30,8 @@ public class PacienteEventoAtual implements Serializable {
 	private Integer qtdade;
 	private String apelido;
 	private Boolean enabled;
+	@Transient
+	private Agenda agenda;
 	
 	public Integer getIdpaciente() {
 		return idpaciente;
@@ -53,6 +58,13 @@ public class PacienteEventoAtual implements Serializable {
 	}
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+	
+	public Agenda getAgenda() {
+		return agenda;
+	}
+	public void setAgenda(Agenda agenda) {
+		this.agenda = agenda;
 	}
 	@Override
 	public String toString() {

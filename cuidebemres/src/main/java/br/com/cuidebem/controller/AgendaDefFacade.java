@@ -1,39 +1,50 @@
 package br.com.cuidebem.controller;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import br.com.cuidebem.controller.exception.ControllerException;
-import br.com.cuidebem.model.Agenda;
-import br.com.cuidebem.model.AgendaDef;
+import br.com.cuidebem.model.Agendadef;
 
 @Stateless
-public class AgendaDefFacade extends AbstractFacade<AgendaDef>{
+public class AgendaDefFacade extends AbstractFacade<Agendadef>{
 
 	@EJB
 	private AgendaFacade agendaFacade;
-	private static List<Agenda> agendas = new ArrayList<Agenda>();
-	static{
-		Agenda agenda = new Agenda();
-		agenda.setData(Calendar.getInstance().getTime());
-		agenda.setGrupoEvento("Nutrição");
-		agenda.setSubGrupoEvento("Café da manhã");
-		agenda.setMade(false);
-		agenda.setObservacao("Com leite Integral.");
-		agendas.add(agenda);
-	}
+	
 	public AgendaDefFacade() {
-		super(AgendaDef.class);
+		super(Agendadef.class);
 	}
 	
-	public AgendaDef save(AgendaDef agendaDef) throws ControllerException{
-		//agendaDef = edit(agendaDef);
-		
-		return agendaDef;
+	public Agendadef save(Agendadef agendadef) throws ControllerException{
+		boolean edit = agendadef.getIdagendadef() != null;
+		agendadef.setDataRegistro(Calendar.getInstance(Locale.getDefault()).getTime());
+		agendadef = edit(agendadef);
+		if(!edit){
+		agendaFacade.save(agendadef);
+		}else{
+			agendaFacade.edit(agendadef);
+		}
+		return agendadef;
+	}
+	
+	public void delete(Agendadef agendadef) throws ControllerException{
+		agendaFacade.delete(agendadef);
+		if(agendaFacade.count(agendadef)>0){
+			agendadef.setEnabled(false);
+			edit(agendadef);
+		}else{
+		remove(agendadef);
+		}
+	}
+	
+	public List<Agendadef> findByPaciente(Integer idpaciente) throws ControllerException{
+		QueryParameter parameters = QueryParameter.init("idpaciente", idpaciente);
+		return findWithNamedQuery("Agendadef.findEnabledByPaciente", parameters, 0);
 	}
 
 }

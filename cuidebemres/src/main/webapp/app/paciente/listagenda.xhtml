@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/resources/template.xhtml">
+	<ui:define name="content">
+
+		<div class="ui-g">
+			<div class="ui-g-12 ui-md-12 ui-lg-12">
+
+				<p:panel
+					header="#{bundle.agendadeftitle} #{agendasmb.paciente.apelido}">
+					<p:panelGrid columns="3" layout="grid"
+						columnClasses="twenty-percent,.twenty-percent,sixty-percent">
+						<p:button value="Voltar"
+							outcome="/app/paciente/paciente.xhtml?idpaciente=#{agendasmb.paciente.idpaciente}"></p:button>
+						<p:button value="#{bundle.new_agenda}"
+							outcome="/app/paciente/agendadef.xhtml?idpaciente=#{agendasmb.paciente.idpaciente}"></p:button>
+					</p:panelGrid>
+					<h:form>
+						<h:inputHidden value="#{agendasmb.paciente.idpaciente}" />
+						<p:fieldset legend="#{bundle.agendamento_realizado}">
+							<p:dataTable value="#{agendasmb.listAgendadef}" var="agendadef"
+								emptyMessage="#{bundle.no_agendamento}">
+								<p:column headerText="#{bundle.data_inicio}">
+									<h:outputText value="#{agendadef.datainicio}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
+								</p:column>
+								<p:column headerText="#{bundle.data_fim}">
+									<h:outputText value="#{agendadef.datafim}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
+								</p:column>
+								<p:column headerText="#{bundle.horario}">
+									<h:outputText value="#{agendadef.horario}" />
+								</p:column>
+								<p:column headerText="#{bundle.repetir_hora}">
+									<h:outputText value="#{agendadef.repetirHoras}" />
+								</p:column>
+								<p:column headerText="#{bundle.dias_semana}">
+									<h:outputText value="#{agendadef.namedays}" />
+								</p:column>
+								<p:column headerText="#{bundle.tipo_evento}">
+									<h:outputText value="#{agendadef.grupoevento}" />
+								</p:column>
+								<p:column headerText="#{bundle.rotina}">
+									<h:outputText value="#{agendadef.subgrupoevento}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+
+									</f:facet>
+									<p:button
+										outcome="/app/paciente/agendadef.xhtml?idagendadef=#{agendadef.idagendadef}"
+										value="#{bundle.alterar}">
+									</p:button>
+								</p:column>
+							</p:dataTable>
+						</p:fieldset>
+
+					</h:form>
+				</p:panel>
+			</div>
+			<div class="ui-g-12 ui-md-12 ui-lg-12">
+				<ui:include src="/app/paciente/tableAgenda.xhtml" />
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>
+</html>

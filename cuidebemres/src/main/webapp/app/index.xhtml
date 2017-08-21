@@ -33,7 +33,17 @@
 								</p:commandLink>
 
 							</p:panelGrid>
+<f:facet name="footer">
+<p:panelGrid columns="1" layout="grid" columnClasses="hundred-percent">
+<f:facet name="header">#{bundle.proximoagenda}</f:facet>
 
+<h:outputText value="#{pacienteEvento.agenda.data}" id="nextagenda">
+<f:convertDateTime pattern="HH:mm"/>
+</h:outputText>
+<h:outputText value="#{pacienteEvento.agenda.subGrupoEvento}" />
+
+</p:panelGrid>
+</f:facet>
 						</p:panel>
 					</p:dataGrid>
 				</h:form>

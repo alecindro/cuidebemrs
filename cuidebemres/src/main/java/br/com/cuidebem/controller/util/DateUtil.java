@@ -4,10 +4,13 @@ import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.MonthDay;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,11 +19,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.commons.collections.ArrayStack;
-
 public class DateUtil {
 
-	public static String convertHour(Date date) throws Exception {
+	public static String convertHour(Date date){
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -38,6 +39,32 @@ public class DateUtil {
 		calendar.set(Calendar.MINUTE, minute);
 		return calendar.getTime();
 	}
+	
+	public static Date sumDateDays(Date date, Integer days){
+		return Date.from(date.toInstant().plus(days, ChronoUnit.DAYS));
+	}
+	
+	public static Date sumMinutes(Date date, Integer minutes){
+		return Date.from(date.toInstant().plus(minutes, ChronoUnit.MINUTES));
+	}
+	
+	public static Date getZeroHour(Date date){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE,0);
+		return calendar.getTime();
+	}
+	
+	public static java.sql.Timestamp toSqlDAte(Date date){
+		return new java.sql.Timestamp(date.getTime());
+	}
+
+	
+	public static String getDateNow(){
+		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		return LocalDateTime.now().format(formatador);
+	}
 
 	public static Date convertDate(String dateinput) throws Exception {
 		Calendar calendar = Calendar.getInstance();
@@ -48,7 +75,7 @@ public class DateUtil {
 		return calendar.getTime();
 	}
 
-	public static String convertDate(Date date) throws Exception {
+	public static String convertDate(Date date){
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		int ano = calendar.get(Calendar.YEAR);
@@ -78,7 +105,7 @@ public class DateUtil {
 		Instant inicioInstant = convertHour(inicio, hour).toInstant();
 		Instant fimInstant = convertHour(fim, hour).toInstant();
 		
-		while(inicioInstant.compareTo(fimInstant)>=0){
+		while(inicioInstant.compareTo(fimInstant)<=0){
 			Date date = Date.from(inicioInstant);
 			dates.add(date);
 			inicioInstant = inicioInstant.plus(1,ChronoUnit.DAYS);
@@ -90,26 +117,38 @@ public class DateUtil {
 		List<Date> dates = new ArrayList<Date>();
 		Instant inicioInstant = convertHour(inicio, hour).toInstant();
 		Instant fimInstant = convertHour(fim, hour).toInstant();
-		while(inicioInstant.compareTo(fimInstant)>=0){
+		while(inicioInstant.compareTo(fimInstant)<=0){
 			Date date = Date.from(inicioInstant);
 			dates.add(date);
 			inicioInstant = inicioInstant.plus(Duration.ofHours(repeatHour));
 		}
 		return dates;
 	}
-	public static List<Date> listDates(Date inicio, Date fim, String hour,String[] daysOfWeek){
-		List<String> days = Arrays.asList(daysOfWeek);
+	public static List<Date> listDates(Date inicio, Date fim, String hour,Integer[] daysOfWeek){
+		List<Integer> days = Arrays.asList(daysOfWeek);
 		List<Date> dates = new ArrayList<Date>();
+		
 		Instant inicioInstant = convertHour(inicio, hour).toInstant();
 		Instant fimInstant = convertHour(fim, hour).toInstant();
-		while(inicioInstant.compareTo(fimInstant)>=0){
-			if(days.contains(DayOfWeek.from(inicioInstant).getDisplayName(TextStyle.FULL, Locale.getDefault()))){
+		while(inicioInstant.compareTo(fimInstant)<=0){
+			if(days.contains(LocalDateTime.ofInstant(inicioInstant, ZoneId.of("America/Sao_Paulo")) .get(ChronoField.DAY_OF_WEEK))){
 				Date date = Date.from(inicioInstant);
 				dates.add(date);
 			}
 			inicioInstant = inicioInstant.plus(1,ChronoUnit.DAYS);
 		}
 		return dates;
+	}
+	
+	public static String dayOfWeek(Date date){
+		return LocalDateTime.ofInstant(date.toInstant(), ZoneId.of("America/Sao_Paulo")).getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault());
+	}
+	
+	public static Integer dayValueOfWeek(Date date){
+		if(date == null){
+			return -1;
+		}
+		return LocalDateTime.ofInstant(date.toInstant(), ZoneId.of("America/Sao_Paulo")).getDayOfWeek().getValue();
 	}
 	
 

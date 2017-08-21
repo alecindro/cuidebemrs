@@ -8,122 +8,151 @@
 <ui:composition template="/resources/template.xhtml">
 	<ui:define name="content">
 		<p:outputPanel id="createpaciente">
-			<p:panel header="#{bundle.cadpaciente}" toggleable="true">
-				<h:form id="datapaciente">
-					<h:inputHidden value="#{pacientemb.paciente.idpaciente}" />
-					<p:panelGrid columns="2" layout="grid"
-						columnClasses="twenty-percent,eighty-percent">
-						<p:outputLabel value="#{bundle.form_nome}" for="nome"></p:outputLabel>
-						<p:inputText id="nome" value="#{pacientemb.paciente.nome}"
-							title="#{bundle.nome}" required="true" styleClass="fifty-percent"
-							requiredMessage="#{bundle.requiredmessage_nome}"></p:inputText>
-						<p:outputLabel value="#{bundle.form_apelido}" for="apelido" />
-						<p:inputText id="apelido" value="#{pacientemb.paciente.apelido}"
-							title="#{bundle.apelido}" styleClass="fifty-percent" />
-						<p:outputLabel value="#{bundle.form_genero}" for="genero" />
-						<p:selectOneRadio id="genero"
-							value="#{pacientemb.paciente.genero}" required="true"
-							layout="responsive" columns="1"
-							requiredMessage="#{bundle.EditUsuarioRequiredMessage_genero}">
-							<f:selectItem itemLabel="Feminino" itemValue="false" />
-							<f:selectItem itemLabel="Masculino" itemValue="true" />
-						</p:selectOneRadio>
-						<p:outputLabel value="#{bundle.form_datanascimento}"
-							for="datanascimento" />
-						<p:calendar id="datanascimento" pattern="dd/MM/yyyy"
-							navigator="true" mode="popup" yearRange="c-120:c+0"
-							value="#{pacientemb.paciente.datanascimento}"
-							title="#{bundle.datanascimento}" showOn="button" />
-					</p:panelGrid>
-					<p:button value="#{bundle.cancel}"
-						outcome="/app/paciente/pacientes.xhtml"
-						rendered="#{usuariomb.usuario.idusuario != null}" />
-
-					<p:commandButton value="#{bundle.delete}"
-						action="#{pacientemb.delPaciente}"
-						rendered="#{pacientemb.paciente.idpaciente != null}">
-							<f:param name="idpaciente" value="#{pacientemb.paciente.idpaciente}"/>
-						</p:commandButton>
-					<p:commandButton actionListener="#{pacientemb.savePaciente}"
-						value="#{bundle.save}" update="createpaciente" />
-
-				</h:form>
-			</p:panel>
-			<p:panel header="#{bundle.foto}"
-				visible="#{pacientemb.paciente.idpaciente != null}"
-				toggleable="true">
-				<h:form id="fotopaciente" prependId="false">
-					<p:panelGrid columns="2" layout="grid"
-						columnClasses="thirty-percent,seventy-percent">
-						<p:outputPanel id="userimage">
-							<p:graphicImage
-								url="/rs/images/paciente/#{pacientemb.paciente.idpaciente}"
-								cache="false"></p:graphicImage>
-						</p:outputPanel>
-
-
-						<p:fileUpload id="photo" cancelLabel="#{bundle.cancel}"
-							multiple="false" uploadLabel="#{bundle.save}"
-							label="#{bundle.alter}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-							invalidFileMessage="São permitidas somente imagens (gif, jpeg, jpg e png)"
-							fileUploadListener="#{pacientemb.handleFileUpload}"
-							mode="advanced" update="userimage">
-							<h:inputHidden value="#{pacientemb.paciente.idpaciente}"
-								id="iduserphoto" />
-						</p:fileUpload>
-					</p:panelGrid>
-				</h:form>
-			</p:panel>
-			<p:panel header="#{bundle.patologias}" toggleable="true"
-				visible="#{pacientemb.paciente.idpaciente != null}">
-				<h:form>
-					<h:inputHidden value="#{pacientemb.paciente.idpaciente}" />
-					<p:outputLabel value="Patologias:" for="cadpato"></p:outputLabel>
-					<p:selectManyCheckbox id="cadpato" layout="responsive" columns="1"
-						rendered="true" value="#{pacientemb.selected_patologias}">
-						<f:selectItems value="#{pacientemb.patologias}" var="patologia"
-							itemLabel="#{patologia}" itemValue="#{patologia}" />
-					</p:selectManyCheckbox>
-					<p:commandButton value="#{bundle.save}"
-						actionListener="#{pacientemb.savePatologias}"
-						update="@parent:@parent">
-						<f:param name="idpaciente" value="#{pacientemb.paciente.idpaciente}"/></p:commandButton>
-				</h:form>
-			</p:panel>
-
-			<p:panel header="#{bundle.responsaveis}" toggleable="true"
-				visible="#{pacientemb.paciente.idpaciente != null}">
-				<h:form id="cadresponsavel" prependId="false">
-					<h:inputHidden value="#{pacientemb.paciente.idpaciente}" />
-					<p:commandButton value="#{bundle.addresponsavel}"
-						action="/app/paciente/responsavel/responsavel.xhtml">
-						<f:param name="idpaciente" value="#{pacientemb.paciente.idpaciente}"/></p:commandButton>
-				</h:form>
-				<h:form id="listresponsavel" prependId="false">
-					<p:dataGrid id="responsavelList" value="#{pacientemb.responsaveis}"
-						var="responsavel" emptyMessage="#{bundle.responsavelnorecord}"
-						layout="grid" columns="4">
-						<p:panel header="#{responsavel.nome}">
-							<p:panelGrid columns="1" layout="grid">
-							
-												<p:commandLink action="/app/paciente/responsavel/responsavel.xhtml">
-									<p:graphicImage
-										url="/rs/images/responsavel/#{responsavel.idresponsavel}"
-										cache="false">
-									</p:graphicImage>
-									<f:param name="idpaciente" value="#{pacientemb.paciente.idpaciente}"/>
-									<f:param name="idresponsavel" value="#{responsavel.idresponsavel}"/>
-								</p:commandLink>
-
+			<div class="ui-g">
+				<div class="ui-g-12 ui-md-12 ui-lg-6">
+					<p:panel header="#{bundle.cadpaciente}" toggleable="true">
+						<h:form id="datapaciente">
+							<h:inputHidden value="#{pacientemb.paciente.idpaciente}" />
+							<p:panelGrid columns="2" layout="grid"
+								columnClasses="twenty-percent,eighty-percent">
+								<p:outputLabel value="#{bundle.form_nome}" for="nome"></p:outputLabel>
+								<p:inputText id="nome" value="#{pacientemb.paciente.nome}"
+									title="#{bundle.nome}" required="true"
+									styleClass="fifty-percent"
+									requiredMessage="#{bundle.requiredmessage_nome}"></p:inputText>
+								<p:outputLabel value="#{bundle.form_apelido}" for="apelido" />
+								<p:inputText id="apelido" value="#{pacientemb.paciente.apelido}"
+									title="#{bundle.apelido}" styleClass="fifty-percent" />
+								<p:outputLabel value="#{bundle.form_genero}" for="genero" />
+								<p:selectOneRadio id="genero"
+									value="#{pacientemb.paciente.genero}" required="true"
+									layout="responsive" columns="1"
+									requiredMessage="#{bundle.EditUsuarioRequiredMessage_genero}">
+									<f:selectItem itemLabel="Feminino" itemValue="false" />
+									<f:selectItem itemLabel="Masculino" itemValue="true" />
+								</p:selectOneRadio>
+								<p:outputLabel value="#{bundle.form_datanascimento}"
+									for="datanascimento" />
+								<p:calendar id="datanascimento" pattern="dd/MM/yyyy"
+									navigator="true" mode="popup" yearRange="c-120:c+0"
+									value="#{pacientemb.paciente.datanascimento}"
+									title="#{bundle.datanascimento}" showOn="button" />
 							</p:panelGrid>
-							<f:facet name="footer">
+							<p:button value="#{bundle.cancel}"
+								outcome="/app/paciente/pacientes.xhtml"
+								rendered="#{usuariomb.usuario.idusuario != null}" />
+
+							<p:commandButton value="#{bundle.delete}"
+								action="#{pacientemb.delPaciente}"
+								rendered="#{pacientemb.paciente.idpaciente != null}">
+								<f:param name="idpaciente"
+									value="#{pacientemb.paciente.idpaciente}" />
+							</p:commandButton>
+							<p:commandButton actionListener="#{pacientemb.savePaciente}"
+								value="#{bundle.save}" update="createpaciente" />
+
+						</h:form>
+					</p:panel>
+				</div>
+				<div class="ui-g-12 ui-md-12 ui-lg-6">
+					<p:panel header="#{bundle.foto}"
+						visible="#{pacientemb.paciente.idpaciente != null}"
+						toggleable="true">
+						<h:form id="fotopaciente" prependId="false">
+							<p:panelGrid columns="2" layout="grid"
+								columnClasses="thirty-percent,seventy-percent">
+								<p:outputPanel id="userimage">
+									<p:graphicImage
+										url="/rs/images/paciente/#{pacientemb.paciente.idpaciente}"
+										cache="false"></p:graphicImage>
+								</p:outputPanel>
+
+
+								<p:fileUpload id="photo" cancelLabel="#{bundle.cancel}"
+									multiple="false" uploadLabel="#{bundle.save}"
+									label="#{bundle.alter}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+									invalidFileMessage="São permitidas somente imagens (gif, jpeg, jpg e png)"
+									fileUploadListener="#{pacientemb.handleFileUpload}"
+									mode="advanced" update="userimage">
+									<h:inputHidden value="#{pacientemb.paciente.idpaciente}"
+										id="iduserphoto" />
+								</p:fileUpload>
+							</p:panelGrid>
+						</h:form>
+					</p:panel>
+				</div>
+				<div class="ui-g-12 ui-md-12 ui-lg-6">
+					<p:panel header="#{bundle.patologias}" toggleable="true"
+						visible="#{pacientemb.paciente.idpaciente != null}">
+						<h:form>
+							<h:inputHidden value="#{pacientemb.paciente.idpaciente}" />
+							<p:outputLabel value="Patologias:" for="cadpato"></p:outputLabel>
+							<p:selectManyCheckbox id="cadpato" layout="responsive"
+								columns="1" rendered="true"
+								value="#{pacientemb.selected_patologias}">
+								<f:selectItems value="#{pacientemb.patologias}" var="patologia"
+									itemLabel="#{patologia}" itemValue="#{patologia}" />
+							</p:selectManyCheckbox>
+							<p:commandButton value="#{bundle.save}"
+								actionListener="#{pacientemb.savePatologias}"
+								update="@parent:@parent">
+								<f:param name="idpaciente"
+									value="#{pacientemb.paciente.idpaciente}" />
+							</p:commandButton>
+						</h:form>
+					</p:panel>
+				</div>
+				<div class="ui-g-12 ui-md-12 ui-lg-6">
+					<p:panel header="#{bundle.responsaveis}" toggleable="true"
+						visible="#{pacientemb.paciente.idpaciente != null}">
+						<h:form id="cadresponsavel" prependId="false">
+							<h:inputHidden value="#{pacientemb.paciente.idpaciente}" />
+							<p:commandButton value="#{bundle.addresponsavel}"
+								action="/app/paciente/responsavel/responsavel.xhtml">
+								<f:param name="idpaciente"
+									value="#{pacientemb.paciente.idpaciente}" />
+							</p:commandButton>
+						</h:form>
+						<h:form id="listresponsavel" prependId="false">
+							<p:dataGrid id="responsavelList"
+								value="#{pacientemb.responsaveis}" var="responsavel"
+								emptyMessage="#{bundle.responsavelnorecord}" layout="grid"
+								columns="3">
+								<p:panel header="#{responsavel.nome}">
+									<p:panelGrid columns="1" layout="grid">
+
+										<p:commandLink
+											action="/app/paciente/responsavel/responsavel.xhtml">
+											<p:graphicImage
+												url="/rs/images/responsavel/#{responsavel.idresponsavel}"
+												cache="false">
+											</p:graphicImage>
+											<f:param name="idpaciente"
+												value="#{pacientemb.paciente.idpaciente}" />
+											<f:param name="idresponsavel"
+												value="#{responsavel.idresponsavel}" />
+										</p:commandLink>
+
+									</p:panelGrid>
+									<f:facet name="footer">
 					Email: #{responsavel.email}
 					</f:facet>
-						</p:panel>
-					</p:dataGrid>
-				</h:form>
-			</p:panel>
+								</p:panel>
+							</p:dataGrid>
+						</h:form>
+					</p:panel>
+				</div>
+				<div class="ui-g-12 ui-md-12 ui-lg-6">
+					<p:panel header="#{bundle.agenda}" toggleable="true"
+						visible="#{pacientemb.paciente.idpaciente != null}">
+						<p:commandButton action="/app/paciente/listagenda.xhtml" value="#{bundle.view_agenda}">
+						<f:param name="idpaciente" value="#{pacientemb.paciente.idpaciente}"></f:param>
+						</p:commandButton>
+					</p:panel>
+				</div>
+			</div>
 		</p:outputPanel>
+
 	</ui:define>
 </ui:composition>
 </html>

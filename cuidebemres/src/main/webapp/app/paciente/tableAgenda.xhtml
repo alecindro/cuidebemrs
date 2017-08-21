@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<p:dataTable var="horario" value="#{agendamatrix.rowNames}" rowIndexVar="rowId">
+<f:facet name="header">#{bundle.agenda_sete_dias}</f:facet>
+<p:column  >
+<f:facet name="header">#{bundle.horario}</f:facet>
+<h:outputText value="#{horario}" />
+</p:column>
+<p:columns var="dia" value="#{agendamatrix.colNames}" columnIndexVar="colId" headerText="#{dia}" styleClass="ui-widget-header">
+	<ui:repeat var="row" value="#{agendamatrix.tableAgenda[horario][dia]}" >
+	<ui:repeat var="agenda" value="#{row}">
+	#{agenda.grupoEvento} <br/>#{agenda.subGrupoEvento}
+	</ui:repeat>
+
+</ui:repeat>
+</p:columns>
+</p:dataTable>
+
+</html>

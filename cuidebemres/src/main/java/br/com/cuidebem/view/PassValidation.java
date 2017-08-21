@@ -17,7 +17,7 @@ public class PassValidation implements Validator {
 
 	@Override
 	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-		AgendaDefView agendaDefView = (AgendaDefView) context.getCurrentInstance().getApplication().evaluateExpressionGet(context, "#{agendadefmb}", AgendaDefView.class);
+		AgendaDefView agendaDefView = (AgendaDefView) context.getApplication().evaluateExpressionGet(context, "#{agendadefmb}", AgendaDefView.class);
 		agendaDefView.getSubGrupoEvento().add((String)value);
 	}
 
