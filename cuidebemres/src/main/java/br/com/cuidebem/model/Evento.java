@@ -74,6 +74,7 @@ public class Evento implements Serializable {
 	private String respeventos;
 	private Usuario idusuario;
 	private Paciente idpaciente;
+	private Integer peso;
 	@Transient
 	private String hour;
 	@Transient
@@ -196,6 +197,14 @@ public class Evento implements Serializable {
 
 	public void setIdpaciente(Paciente idpaciente) {
 		this.idpaciente = idpaciente;
+	}
+	
+	public Integer getPeso() {
+		return peso;
+	}
+
+	public void setPeso(Integer peso) {
+		this.peso = peso;
 	}
 
 	public String getHour() {

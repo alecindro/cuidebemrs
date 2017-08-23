@@ -16,7 +16,6 @@ import br.com.cuidebem.controller.def.RolesEnum;
 import br.com.cuidebem.controller.exception.ControllerException;
 import br.com.cuidebem.model.Residencia;
 import br.com.cuidebem.model.Usuario;
-import br.com.cuidebem.translate.Bundle;
 import br.com.cuidebem.view.util.JsfUtil;
 import br.com.cuidebem.view.util.UtilSecurity;
 
@@ -29,6 +28,7 @@ public class IndexView {
 	private UsuarioResidenciaFacade usuarioResidenciaFacade;
 	private Integer idresidencia;
 	private Residencia residencia;
+	private static final String NO_PERMISSION_URL="/resources/nopermission.xhtml";
 	
 	@PostConstruct
 	public void authorize(){
@@ -36,11 +36,25 @@ public class IndexView {
 		try {
 			Usuario usuario = usuarioFacade.find(user);
 			if(usuario == null){
-				JsfUtil.addErrorMessage(Bundle.getValue("user_notpermission"));
+				try{
+					UtilSecurity.logout();
+					JsfUtil.redirect(NO_PERMISSION_URL);
+					return;
+				}catch(IOException e){
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				return;
 			}
 			if(!UtilSecurity.hasRole(RolesEnum.ADMINRESDIDENCIA.getValue())){
-				JsfUtil.addErrorMessage(Bundle.getValue("user_notpermission"));
+				try {
+					UtilSecurity.logout();
+					JsfUtil.redirect(NO_PERMISSION_URL);
+					return;
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				return;
 			}
 			//Todo refazer para mais de uma empresa
@@ -50,7 +64,15 @@ public class IndexView {
 			if(UtilSecurity.containsPermission(String.valueOf(_idresidencia))){
 				idresidencia = _idresidencia;
 			}else{
-				JsfUtil.addErrorMessage(Bundle.getValue("user_notpermission"));
+				try {
+					UtilSecurity.logout();
+					JsfUtil.redirect(NO_PERMISSION_URL);
+					return;
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 			
 		} catch (ControllerException e) {

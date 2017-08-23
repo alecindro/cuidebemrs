@@ -8,11 +8,11 @@
 <ui:composition template="/resources/template.xhtml">
 	<ui:define name="content">
 		<div class="ui-g">
-			<div class="ui-lg-3"></div>
-			<div class="ui-g-12 ui-md-12 ui-lg-6">
+			
+			<div class="ui-g-12 ui-md-12 ui-lg-9">
 				<p:panel>
 					<f:facet name="header">
-	Eventos do Paciente: 
+	Eventos do Paciente: #{eventopacientemb.paciente.apelido}
 	</f:facet>
 					<section class="timeline">
 					<ul>
@@ -30,7 +30,9 @@
 					</section>
 				</p:panel>
 			</div>
-			<div class="ui-lg-3"></div>
+			<div class="ui-g-12 ui-md-12 ui-lg-3">
+			<ui:include src="/app/paciente/tableAgendaDiaria.xhtml" />
+			</div>
 		</div>
 	</ui:define>
 </ui:composition>

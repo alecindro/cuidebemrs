@@ -142,12 +142,15 @@
 						</h:form>
 					</p:panel>
 				</div>
-				<div class="ui-g-12 ui-md-12 ui-lg-6">
+				<div class="ui-g-12 ui-md-12 ui-lg-12">
 					<p:panel header="#{bundle.agenda}" toggleable="true"
 						visible="#{pacientemb.paciente.idpaciente != null}">
-						<p:commandButton action="/app/paciente/listagenda.xhtml" value="#{bundle.view_agenda}">
+						<p:commandButton action="/app/paciente/listagenda.xhtml" value="#{bundle.agendamento}">
 						<f:param name="idpaciente" value="#{pacientemb.paciente.idpaciente}"></f:param>
 						</p:commandButton>
+						
+				<ui:include src="/app/paciente/tableAgenda.xhtml" />
+			
 					</p:panel>
 				</div>
 			</div>

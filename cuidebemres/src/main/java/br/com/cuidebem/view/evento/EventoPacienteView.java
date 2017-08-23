@@ -13,6 +13,7 @@ import br.com.cuidebem.controller.EventoFacade;
 import br.com.cuidebem.controller.PacienteFacade;
 import br.com.cuidebem.controller.exception.ControllerException;
 import br.com.cuidebem.model.Evento;
+import br.com.cuidebem.model.Paciente;
 import br.com.cuidebem.view.IndexView;
 import br.com.cuidebem.view.util.JsfUtil;
 
@@ -27,6 +28,7 @@ public class EventoPacienteView extends IndexView {
 	@EJB
 	private PacienteFacade pacienteFacade;
 	private Integer idpaciente;
+	private Paciente paciente;
 
 	@PostConstruct
 	private void init() {
@@ -34,10 +36,15 @@ public class EventoPacienteView extends IndexView {
 		String _id = JsfUtil.getRequestParameter("idpaciente");
 		if (_id != null) {
 			idpaciente = Integer.valueOf(_id);
+			loadPaciente();
 			loadEventos();
 		} else {
 			JsfUtil.addErrorMessage("error.loadeventos");
 		}
+	}
+	
+	private void loadPaciente(){
+		paciente = pacienteFacade.find(idpaciente);
 	}
 
 	private void loadEventos() {
@@ -57,5 +64,14 @@ public class EventoPacienteView extends IndexView {
 	public void setEventos(ListDataModel<Evento> eventos) {
 		this.eventos = eventos;
 	}
+
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+	
 
 }

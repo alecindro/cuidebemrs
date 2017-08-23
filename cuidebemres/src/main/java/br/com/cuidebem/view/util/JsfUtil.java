@@ -1,8 +1,10 @@
 package br.com.cuidebem.view.util;
 
+import java.io.IOException;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
@@ -59,6 +61,11 @@ public class JsfUtil {
     public static Object getObjectFromRequestParameter(String requestParameterName, Converter converter, UIComponent component) {
         String theId = JsfUtil.getRequestParameter(requestParameterName);
         return converter.getAsObject(FacesContext.getCurrentInstance(), component, theId);
+    }
+    
+    public static void redirect(String url) throws IOException{
+    	ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+    	ec.redirect(url);
     }
 
     public static enum PersistAction {
