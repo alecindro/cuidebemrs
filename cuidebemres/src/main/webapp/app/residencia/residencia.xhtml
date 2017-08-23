@@ -107,6 +107,7 @@
 						<p:column>
 							<p:commandButton value="Excluir"
 								action="#{residenciamb.delPhone}" update="@form:listel">
+								<p:confirm header="#{bundle.confirmation}" message="#{bundle.message_delete}" icon="ui-icon-alert" />
 							</p:commandButton>
 						</p:column>
 					</p:dataTable>

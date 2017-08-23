@@ -38,12 +38,16 @@ public class AgendasView extends IndexView{
 		Integer idpaciente = Integer.valueOf(_idpaciente);
 		try {
 			paciente = pacienteFacade.find(idpaciente);
-			listAgendadef = new ListDataModel<>(agendadefFacade.findByPaciente(idpaciente));
+			loadAgendas();
 		} catch (ControllerException e) {
 			JsfUtil.addErrorMessage(Bundle.getValue("error.loadagenda"));
 
 		}
 		
+	}
+	
+	private void loadAgendas() throws ControllerException{
+		listAgendadef = new ListDataModel<>(agendadefFacade.findByPaciente(paciente.getIdpaciente()));
 	}
 	
 	public ListDataModel<Agendadef> getListAgendadef() {
@@ -60,6 +64,18 @@ public class AgendasView extends IndexView{
 
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
+	}
+	
+	public String delete(){
+		try {
+			agendadefFacade.delete(listAgendadef.getRowData());
+			loadAgendas();
+			JsfUtil.addSuccessMessage(Bundle.getValue("del.sucess"));
+		} catch (ControllerException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		
+		return "";
 	}
 	
 	

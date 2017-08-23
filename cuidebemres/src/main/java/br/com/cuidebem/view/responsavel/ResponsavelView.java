@@ -64,6 +64,18 @@ public class ResponsavelView extends IndexView {
 		}
 	}
 	
+	public String deleteResponsavel(){
+		try {
+			responsavelFacade.delResponsavel(responsavel);
+			JsfUtil.addSuccessMessage(Bundle.getValue("delsucesso"));
+			return "/app/paciente/paciente.xhtml?idpaciente="+paciente.getIdpaciente();
+		} catch (ControllerException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		return null;
+		
+	}
+	
 	public void saveResponsavel() {
 		try {
 			if (responsavel.getNome() == null) {

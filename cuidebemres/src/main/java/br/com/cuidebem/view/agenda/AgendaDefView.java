@@ -82,15 +82,7 @@ public class AgendaDefView extends IndexView {
 		return "/app/paciente/listagenda.xhtml?idpaciente="+paciente.getIdpaciente();
 	}
 	
-	public String delete(){
-		try {
-			agendaDefFacade.delete(agendadef);
-		} catch (ControllerException e) {
-			JsfUtil.addErrorMessage(e.getMessage());
-		}
-		
-		return "";
-	}
+	
 	
 	public void grupEventoChanged(ValueChangeEvent  e) {
 		subGrupoEvento = Rotinas.getSubGrupoEventos(e.getNewValue().toString());

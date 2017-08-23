@@ -43,6 +43,14 @@
 						<f:param name="idpaciente"
 							value="#{responsavelmb.paciente.idpaciente}"></f:param>
 					</p:commandButton>
+					<p:commandButton value="#{bundle.delete}"
+								action="#{responsavelmb.deleteResponsavel}"
+								rendered="#{responsavelmb.responsavel.idresponsavel != null}">
+								<p:confirm header="#{bundle.confirmation}" message="#{bundle.message_delete}" icon="ui-icon-alert" />
+								<f:param name="idpaciente"
+									value="#{responsavelmb.paciente.idpaciente}" />
+									<f:param name="idresponsavel" value="#{responsavelmb.responsavel.idresponsavel}"/>
+							</p:commandButton>
 					<p:commandButton value="#{bundle.save}"
 						action="#{responsavelmb.saveResponsavel}" update="createuser">
 						<f:param name="idpaciente"
@@ -140,8 +148,9 @@
 							<h:outputText value="#{telefone.operadora}" />
 						</p:column>
 						<p:column>
-							<p:commandButton value="Excluir"
+							<p:commandButton value="#{bundle.delete}"
 								action="#{responsavelmb.delPhone}" update="@form:listel">
+								<p:confirm header="#{bundle.confirmation}" message="#{bundle.message_delete}" icon="ui-icon-alert" />
 								<f:param name="idresponsavel"
 									value="#{responsavelmb.responsavel.idresponsavel}" />
 								<f:param name="idpaciente"

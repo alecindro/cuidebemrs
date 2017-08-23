@@ -61,6 +61,7 @@
 						
 					<p:commandButton value="#{bundle.delete}"
 						action="#{usuariomb.delete}" rendered="#{usuariomb.usuario.idusuario != null}" immediate="true">
+						<p:confirm header="#{bundle.confirmation}" message="#{bundle.message_delete}" icon="ui-icon-alert" />
 						<f:param name="idusuario" value="#{usuariomb.usuario.idusuario}"></f:param>
 						</p:commandButton>
 					<p:commandButton actionListener="#{usuariomb.edit}" rendered="#{usuariomb.usuario.idusuario != null}"
@@ -149,7 +150,8 @@
 						</p:column>
 						<p:column>
 						
-						<p:commandButton value="Excluir"  action="#{usuariomb.delPhone}" update="@form:listel">
+						<p:commandButton value="#{bundle.delete}"  action="#{usuariomb.delPhone}" update="@form:listel">
+							<p:confirm header="#{bundle.confirmation}" message="#{bundle.message_delete}" icon="ui-icon-alert" />
 						<f:param name="idusuario" value="#{usuariomb.usuario.idusuario}"></f:param>
 						</p:commandButton>		
 						</p:column>

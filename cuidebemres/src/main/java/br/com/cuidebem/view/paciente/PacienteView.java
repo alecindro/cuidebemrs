@@ -107,15 +107,6 @@ public class PacienteView extends IndexView {
 		}
 	}
 
-
-
-	public String cancelResponsavel() {
-		paciente = pacienteFacade.find(paciente.getIdpaciente());
-		loadResponsaveis();
-		loadPatologias();
-		return "/app/paciente/paciente.xhtml";
-	}
-
 	
 
 	private void loadResponsaveis() {

@@ -23,8 +23,8 @@
 					<h:form>
 						<h:inputHidden value="#{agendasmb.paciente.idpaciente}" />
 						<p:fieldset legend="#{bundle.agendamento_realizado}">
-							<p:dataTable value="#{agendasmb.listAgendadef}" var="agendadef"
-								emptyMessage="#{bundle.no_agendamento}">
+							<p:dataTable value="#{agendasmb.listAgendadef}" var="agendadef" reflow="true"
+								id="agendas" emptyMessage="#{bundle.no_agendamento}">
 								<p:column headerText="#{bundle.data_inicio}">
 									<h:outputText value="#{agendadef.datainicio}">
 										<f:convertDateTime pattern="dd/MM/yyyy" />
@@ -50,14 +50,27 @@
 								<p:column headerText="#{bundle.rotina}">
 									<h:outputText value="#{agendadef.subgrupoevento}" />
 								</p:column>
-								<p:column>
+								<p:column style="text-align:center">
 									<f:facet name="header">
 
 									</f:facet>
-									<p:button
-										outcome="/app/paciente/agendadef.xhtml?idagendadef=#{agendadef.idagendadef}"
-										value="#{bundle.alterar}">
-									</p:button>
+									<div class="ui-g">
+										<div class="ui-g-6 ui-md-6 ui-lg-6">
+											<p:commandButton value="#{bundle.delete}"
+												action="#{agendasmb.delete}" update="@form:agendas">
+												<p:confirm header="#{bundle.confirmation}"
+													message="#{bundle.message_delete}" icon="ui-icon-alert" />
+												<f:param name="idpaciente"
+													value="#{agendasmb.paciente.idpaciente}"></f:param>
+											</p:commandButton>
+										</div>
+										<div class="ui-g-6 ui-md-6 ui-lg-6">
+											<p:button
+												outcome="/app/paciente/agendadef.xhtml?idagendadef=#{agendadef.idagendadef}"
+												value="#{bundle.alterar}">
+											</p:button>
+										</div>
+									</div>
 								</p:column>
 							</p:dataTable>
 						</p:fieldset>
@@ -65,7 +78,7 @@
 					</h:form>
 				</p:panel>
 			</div>
-			
+
 		</div>
 
 	</ui:define>

@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<p:dataTable var="horario" value="#{agendamatrix.rowNames}" rowIndexVar="rowId">
+<p:dataTable var="horario" value="#{agendamatrix.rowNames}" rowIndexVar="rowId" emptyMessage="#{bundle.no_agendamento}">
 <f:facet name="header">#{bundle.agenda_sete_dias}</f:facet>
 <p:column  >
 <f:facet name="header">#{bundle.horario}</f:facet>
