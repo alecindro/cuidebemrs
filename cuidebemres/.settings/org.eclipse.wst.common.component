@@ -13,6 +13,12 @@
         <dependent-module archiveName="emailsvc-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/emailsvc/emailsvc">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="cuidebemmodel-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/cuidebemmodel/cuidebemmodel">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="cuidebemsvc-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/cuidebemsvc/cuidebemsvc">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/cuidebemres/target/classes"/>
         <property name="context-root" value="cuidebemres"/>
     </wb-module>

@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import br.com.cuidebem.controller.UsuarioFacade;
 import br.com.cuidebem.controller.UsuarioResidenciaFacade;
-import br.com.cuidebem.controller.def.RolesEnum;
 import br.com.cuidebem.controller.exception.ControllerException;
 import br.com.cuidebem.model.Residencia;
 import br.com.cuidebem.model.Usuario;
+import br.com.cuidebem.model.def.RolesEnum;
 import br.com.cuidebem.view.util.JsfUtil;
 import br.com.cuidebem.view.util.UtilSecurity;
 

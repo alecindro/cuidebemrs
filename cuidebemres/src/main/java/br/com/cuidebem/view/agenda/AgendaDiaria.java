@@ -14,8 +14,8 @@ import javax.inject.Named;
 
 import br.com.cuidebem.controller.AgendaFacade;
 import br.com.cuidebem.controller.exception.ControllerException;
-import br.com.cuidebem.controller.util.DateUtil;
 import br.com.cuidebem.model.Agenda;
+import br.com.cuidebem.model.util.DateUtil;
 import br.com.cuidebem.view.IndexView;
 import br.com.cuidebem.view.util.JsfUtil;
 

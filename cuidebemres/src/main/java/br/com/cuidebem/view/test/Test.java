@@ -13,13 +13,13 @@ import javax.inject.Named;
 
 import br.com.cuidebem.controller.UsersFacade;
 import br.com.cuidebem.controller.UsuarioFacade;
-import br.com.cuidebem.controller.def.TipoTelefone;
 import br.com.cuidebem.controller.exception.ControllerException;
 import br.com.cuidebem.model.Telefone;
 import br.com.cuidebem.model.Users;
 import br.com.cuidebem.model.Usuario;
 import br.com.cuidebem.model.UsuarioPhoto;
 import br.com.cuidebem.model.UsuarioTelefone;
+import br.com.cuidebem.model.def.TipoTelefone;
 
 @Named("test")
 @RequestScoped
