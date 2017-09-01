@@ -39,6 +39,13 @@ public class TesteLocal {
 		
 	}
 	
+	public void litLocales(){
+		  Locale[] ll = Locale.getAvailableLocales();
+		    for (int i = 0; i < ll.length; i++){
+		      System.out.println(ll[i]);
+		  }
+	}
+	
 	public void testSqlData(){
 		java.util.Date utilDate = new java.util.Date("2015/08/12 23:09:00");
 	    java.sql.Timestamp sqlDate = new java.sql.Timestamp(utilDate.getTime());
@@ -60,7 +67,7 @@ public class TesteLocal {
 	
 	public static void main(String[] args) {
 		TesteLocal tt = new TesteLocal();
-		tt.testSqlData();
+		tt.litLocales();
 		
 
 	}

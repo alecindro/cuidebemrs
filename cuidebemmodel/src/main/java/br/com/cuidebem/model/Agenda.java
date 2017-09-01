@@ -20,7 +20,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(catalog = "cuidebemres", schema = "")
+@Table(catalog = "cuidebemres", schema = "", name="agenda")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Agenda.findAll", query = "SELECT a FROM Agenda a")
@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Agenda.findByObservacao", query = "SELECT a FROM Agenda a WHERE a.observacao = :observacao")
     , @NamedQuery(name = "Agenda.countByAgendaDef", query = "SELECT COUNT(a) FROM Agenda a WHERE a.idagendadef = :idagendadef")})
 @NamedNativeQueries({
-	@NamedNativeQuery(name="Agenda.next",query="select * from agenda where idpaciente=?1 and data>now() order by data asc limit 1",resultClass=Agenda.class)
+	@NamedNativeQuery(name="Agenda.next",query="select * from agenda where idpaciente=?1 and data > date_sub(now(), interval 4 hour) and dataregistro is null order by data asc limit 1",resultClass=Agenda.class)
 	
 })
 public class Agenda implements Serializable {
@@ -63,7 +63,7 @@ public class Agenda implements Serializable {
     private String observacao;
     private Integer idagendadef;
     private Integer idpaciente;
-
+	private Integer idevento;
 
 	
 	
@@ -132,6 +132,14 @@ public class Agenda implements Serializable {
 		this.dataregistro = dataregistro;
 	}
 	
+	public Integer getIdevento() {
+		return idevento;
+	}
+
+	public void setIdevento(Integer idevento) {
+		this.idevento = idevento;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

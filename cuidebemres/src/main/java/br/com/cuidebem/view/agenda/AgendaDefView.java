@@ -9,7 +9,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.event.ValueChangeEvent;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.cuidebem.controller.AgendaDefFacade;
@@ -30,9 +29,8 @@ public class AgendaDefView extends IndexView {
 	private AgendaDefFacade agendaDefFacade;
 	@EJB
 	private PacienteFacade pacienteFacade;
-	@Inject
 	private Agendadef agendadef;
-	@Inject
+	
 	private Paciente paciente;
 	
 
@@ -42,6 +40,8 @@ public class AgendaDefView extends IndexView {
 
 	@PostConstruct
 	private void init() {
+		agendadef = new Agendadef();
+		paciente = new Paciente();
 		grupoEvento = Rotinas.getGrupoEventos();
 		subGrupoEvento = new ArrayList<String>();
 		String _idagendadef = JsfUtil.getRequestParameter("idagendadef");

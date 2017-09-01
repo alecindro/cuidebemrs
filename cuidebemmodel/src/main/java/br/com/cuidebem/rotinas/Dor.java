@@ -3,15 +3,23 @@ package br.com.cuidebem.rotinas;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum Dor{
+import br.com.cuidebem.model.Evento;
 
-	DOR("Dor");
+public enum Dor implements IRotina{
+
+	DOR("Dor","/app/evento/blank.xhtml")
+	{public void genResumo(Evento evento){
+		evento.setRespeventos(
+				evento.getObsevento());
+	}};
 	
 	private String descricao;
-
+	private String page;
+	public abstract void genResumo(Evento evento);
 	
-	private Dor(String descricao) {
+	private Dor(String descricao, String page) {
 		this.descricao = descricao;
+		this.page = page;
 	}
 
 	public String getDescricao() {
@@ -27,6 +35,20 @@ public enum Dor{
 			descricaos.add(dor.getDescricao());
 		}
 		return descricaos;
+	}
+	
+	@Override
+	public IRotina fromDescricao(String descricao) {
+		for (Dor _enum : Dor.values()) {
+			if (_enum.getDescricao().equals(descricao)) {
+				return _enum;
+			}
+		}
+		return null;
+	}
+	@Override
+	public String getPage() {
+		return page;
 	}
 	
 }

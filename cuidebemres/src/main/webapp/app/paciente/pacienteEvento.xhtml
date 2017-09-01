@@ -16,13 +16,16 @@
 	</f:facet>
 					<section class="timeline">
 					<ul>
+					<p:outputPanel rendered="#{eventopacientemb.eventos.rowCount == 0}" style="color:#000">
+					#{bundle.noevento_register}
+					</p:outputPanel>
 						<ui:repeat var="evento" value="#{eventopacientemb.eventos}">
 							<li class="in-view">
 								<div>
 								<time>#{evento.hour}</time>
 									#{evento.data} <br/>
 									#{evento.grupoevento} <br /> #{evento.subgrupoevento} <br />
-									#{evento.respeventos} <br /> Cuidador : #{evento.idusuario.apelido}
+									#{evento.respeventos} <br /> Cuidador : #{evento.usuario.apelido}
 								</div> <span class="ui-btn-timeline"> </span>
 							</li>
 						</ui:repeat>

@@ -9,12 +9,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import br.com.cuidebem.controller.exception.ControllerException;
+import br.com.cuidebem.model.Agenda;
 import br.com.cuidebem.model.Evento;
 import br.com.cuidebem.model.Paciente;
 import br.com.cuidebem.model.Usuario;
+import br.com.cuidebem.translate.Bundle;
 
 /**
  *
@@ -23,6 +26,10 @@ import br.com.cuidebem.model.Usuario;
 @Stateless
 public class EventoFacade extends AbstractFacade<Evento> {
 
+	
+	@EJB
+	private AgendaFacade agendaFacade;
+	
 	public EventoFacade() {
 		super(Evento.class);
 	}
@@ -55,8 +62,8 @@ public class EventoFacade extends AbstractFacade<Evento> {
 				usuario.setIdusuario((Integer) o[12]);
 				usuario.setNome((String) o[13]);
 				usuario.setApelido((String) o[14]);
-				evento.setIdusuario(usuario);
-				evento.setIdpaciente(paciente);
+				evento.setUsuario(usuario);
+				evento.setPaciente(paciente);
 				eventos.add(evento);
 			}
 			return eventos;
@@ -85,8 +92,8 @@ public class EventoFacade extends AbstractFacade<Evento> {
 				usuario.setIdusuario((Integer) o[12]);
 				usuario.setNome((String) o[13]);
 				usuario.setApelido((String) o[14]);
-				evento.setIdusuario(usuario);
-				evento.setIdpaciente(paciente);
+				evento.setUsuario(usuario);
+				evento.setPaciente(paciente);
 				eventos.add(evento);
 			}
 			return eventos;
@@ -115,8 +122,8 @@ public class EventoFacade extends AbstractFacade<Evento> {
 				usuario.setIdusuario((Integer) o[12]);
 				usuario.setNome((String) o[13]);
 				usuario.setApelido((String) o[14]);
-				evento.setIdusuario(usuario);
-				evento.setIdpaciente(paciente);
+				evento.setUsuario(usuario);
+				evento.setPaciente(paciente);
 				eventos.add(evento);
 			}
 			return eventos;
@@ -145,14 +152,29 @@ public class EventoFacade extends AbstractFacade<Evento> {
 				usuario.setIdusuario((Integer) o[12]);
 				usuario.setNome((String) o[13]);
 				usuario.setApelido((String) o[14]);
-				evento.setIdusuario(usuario);
-				evento.setIdpaciente(paciente);
+				evento.setUsuario(usuario);
+				evento.setPaciente(paciente);
 				eventos.add(evento);
 			}
 			return eventos;
 		} catch (Exception e) {
 			throw new ControllerException(e.getMessage(), e);
 		}
+	}
+	
+	public Evento save(Evento evento, Integer idagenda) throws ControllerException{
+		evento = edit(evento);
+		if(idagenda != null){
+			Agenda agenda = agendaFacade.find(idagenda);
+			if(agenda.getDataregistro()!= null){
+				evento = new Evento();
+				throw new ControllerException(Bundle.getValue("evento_saved_before"));
+			}
+			agenda.setIdevento(evento.getIdevento());
+			agenda.setData(evento.getDataregistro());
+			agendaFacade.edit(agenda);
+		}
+		return evento;
 	}
 
 }

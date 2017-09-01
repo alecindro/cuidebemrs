@@ -4,7 +4,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.model.ListDataModel;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.cuidebem.controller.ResidenciaFacade;
@@ -27,11 +26,11 @@ public class ResidenciaView extends IndexView {
 	@EJB
 	private TelefoneFacade telefoneFacade;
 	private ListDataModel<Telefone> telefones;
-	@Inject
 	private Telefone telefone;
 
 	@PostConstruct
 	private void init() {
+		telefone = new Telefone();
 		loadTelefones();
 	}
 

@@ -5,20 +5,31 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<p:dataTable var="horario" value="#{agendadiaria.rowNames}" rowIndexVar="rowId">
-<f:facet name="header">#{bundle.agenda}</f:facet>
-<p:column  >
-<f:facet name="header">#{bundle.horario}</f:facet>
-<h:outputText value="#{horario}" />
-</p:column>
-<p:columns var="dia" value="#{agendadiaria.colNames}" columnIndexVar="colId" headerText="#{dia}" styleClass="ui-widget-header">
-	<ui:repeat var="row" value="#{agendadiaria.tableAgenda[horario][dia]}" >
-	<ui:repeat var="agenda" value="#{row}">
-	#{agenda.grupoEvento} <br/>#{agenda.subGrupoEvento}
-	</ui:repeat>
+				<p:dataTable var="agenda" value="#{agendadiaria.agendas}"
+					reflow="true" emptyMessage="#{bundle.no_agendamento}">
+					<f:facet name="header">#{bundle.agenda}</f:facet>
+					<p:column>
+						<f:facet name="header">#{bundle.horario}</f:facet>
+						<h:outputText value="#{agenda.data}">
+							<f:convertDateTime pattern="HH:mm dd/MM" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">#{bundle.evento}</f:facet>
+							#{agenda.grupoEvento} <br />#{agenda.subGrupoEvento}
+								</p:column>
+					<p:column>
+						<f:facet name="header">#{bundle.data_registro}</f:facet>
+						<h:outputText value="#{agenda.dataregistro}"
+							rendered="#{agenda.dataregistro != null}">
+							<f:convertDateTime pattern="HH:mm" />
+						</h:outputText>
+						<h:outputText value="#{bundle.no_register}"
+							rendered="#{agenda.dataregistro eq null}">
+						</h:outputText>
+						
+					</p:column>
+				</p:dataTable>
 
-</ui:repeat>
-</p:columns>
-</p:dataTable>
 
 </html>

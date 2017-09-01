@@ -10,7 +10,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.component.html.HtmlInputHidden;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.event.FileUploadEvent;
@@ -32,7 +31,7 @@ import br.com.cuidebem.view.util.JsfUtil;
 @RequestScoped
 public class PacienteView extends IndexView {
 
-	@Inject
+	
 	private Paciente paciente;
 	private String[] selected_patologias;
 	private List<SelectItem> patologias;
@@ -48,6 +47,7 @@ public class PacienteView extends IndexView {
 
 	@PostConstruct
 	private void init() {
+		paciente = new Paciente();
 		loadPatologias();
 		String _id = JsfUtil.getRequestParameter("idpaciente");
 		if (_id != null) {

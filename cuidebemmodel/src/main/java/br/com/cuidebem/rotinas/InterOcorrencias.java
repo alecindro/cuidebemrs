@@ -3,14 +3,23 @@ package br.com.cuidebem.rotinas;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum InterOcorrencias{
+import br.com.cuidebem.model.Evento;
 
-	INTEROCORRENCIAS("Interocorrências");
+public enum InterOcorrencias implements IRotina {
+
+	INTEROCORRENCIAS("Interocorrências","/app/evento/blank.xhtml")
+	{public void genResumo(Evento evento){
+		evento.setRespeventos(
+				evento.getObsevento());
+	}};
 	
 	private String descricao;
+	private String page;
+	public abstract void genResumo(Evento evento);
 	
-	private InterOcorrencias(String descricao) {
+	private InterOcorrencias(String descricao,String page) {
 		this.descricao = descricao;
+		this.page = page;
 	}
 
 	public String getDescricao() {
@@ -27,6 +36,21 @@ public enum InterOcorrencias{
 			descricaos.add(interOcorrencias.getDescricao());
 		}
 		return descricaos;
+	}
+	
+	@Override
+	public IRotina fromDescricao(String descricao) {
+		for (InterOcorrencias _enum : InterOcorrencias.values()) {
+			if (_enum.getDescricao().equals(descricao)) {
+				return _enum;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public String getPage() {
+		return page;
 	}
 
 }

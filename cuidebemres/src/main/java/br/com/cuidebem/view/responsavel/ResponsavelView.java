@@ -7,7 +7,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.html.HtmlInputHidden;
 import javax.faces.model.ListDataModel;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.event.FileUploadEvent;
@@ -30,11 +29,9 @@ import br.com.cuidebem.view.util.JsfUtil;
 
 public class ResponsavelView extends IndexView {
 
-	@Inject
+	
 	private Responsavel responsavel;
-	@Inject
 	private Telefone telefone;
-	@Inject
 	private Paciente paciente;
 	
 	private ListDataModel<Telefone> telefones;
@@ -51,6 +48,9 @@ public class ResponsavelView extends IndexView {
 
 	@PostConstruct
 	private void init(){
+		responsavel = new Responsavel();
+		telefone = new Telefone();
+		paciente = new Paciente();
 		telefones = new ListDataModel<>();
 		String _idpaciente = JsfUtil.getRequestParameter("idpaciente");
 		if(_idpaciente == null){

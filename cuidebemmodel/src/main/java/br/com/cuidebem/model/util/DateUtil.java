@@ -48,6 +48,10 @@ public class DateUtil {
 		return Date.from(date.toInstant().plus(minutes, ChronoUnit.MINUTES));
 	}
 	
+	public static Date minHour(Date date, Integer hour){
+		return Date.from(date.toInstant().minus(hour, ChronoUnit.HOURS));
+	}
+	
 	public static Date getZeroHour(Date date){
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);

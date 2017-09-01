@@ -22,7 +22,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(catalog = "cuidebemres", schema = "")
+@Table(catalog = "cuidebemres", schema = "",name="agendadef")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Agendadef.findAll", query = "SELECT a FROM Agendadef a")

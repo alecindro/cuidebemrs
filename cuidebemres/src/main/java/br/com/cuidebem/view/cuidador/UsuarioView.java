@@ -9,7 +9,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.html.HtmlInputHidden;
 import javax.faces.model.ListDataModel;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.event.FileUploadEvent;
@@ -47,12 +46,9 @@ public class UsuarioView extends IndexView {
 	private RolesFacade rolesFacade;
 	@EJB
 	private UsuarioPhotoFacade usuarioPhotoFacade;
-
-	@Inject
 	private Usuario usuario;
 
 	private ListDataModel<Telefone> telefones;
-	@Inject
 	private Telefone telefone;
 
 	private String password;
@@ -62,6 +58,8 @@ public class UsuarioView extends IndexView {
 
 	@PostConstruct
 	private void init() {
+		usuario = new Usuario();
+		telefone = new Telefone();
 		String _idusuario = JsfUtil.getRequestParameter("idusuario");
 		telefones = new ListDataModel<>();
 		if (_idusuario != null) {
@@ -86,16 +84,16 @@ public class UsuarioView extends IndexView {
 
 	public void create() {
 		try {
-				Roles role = rolesFacade.find(usuario.getTipoUsuario());
-				usersFacade.create(role, usuario.getEmail(), password);
-				usuario = usuarioFacade.create(getIdresidencia(), usuario);
+			Roles role = rolesFacade.find(usuario.getTipoUsuario());
+			usersFacade.create(role, usuario.getEmail(), password);
+			usuario = usuarioFacade.create(getIdresidencia(), usuario);
 			JsfUtil.addSuccessMessage(Bundle.getValue("cadsucesso"));
 		} catch (ControllerException e) {
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
 	}
-	
-	public void edit(){
+
+	public void edit() {
 		try {
 			usuario = usuarioFacade.editUsuario(getResidencia(), usuario);
 			JsfUtil.addSuccessMessage(Bundle.getValue("cadsucesso"));
@@ -121,14 +119,14 @@ public class UsuarioView extends IndexView {
 	}
 
 	public void savePhone() {
-			try {
-				telefoneFacade.save(telefone, usuario);
-				loadTelefones();
-				telefone = new Telefone();
-				JsfUtil.addSuccessMessage(Bundle.getValue("cadsucesso"));
-			} catch (ControllerException e) {
-				JsfUtil.addErrorMessage(e.getMessage());
-			}
+		try {
+			telefoneFacade.save(telefone, usuario);
+			loadTelefones();
+			telefone = new Telefone();
+			JsfUtil.addSuccessMessage(Bundle.getValue("cadsucesso"));
+		} catch (ControllerException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
 	}
 
 	private void loadTelefones() {

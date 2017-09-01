@@ -1,8 +1,8 @@
 package br.com.cuidebem.view;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.cuidebem.controller.ResidenciaFacade;
@@ -16,13 +16,19 @@ import br.com.cuidebem.view.util.JsfUtil;
 @RequestScoped
 public class CadResidencia {
 
-	@Inject
+	
 	private Residencia residencia;
-	@Inject
+	
 	private Users user;
 	@EJB
 	private ResidenciaFacade residenciaFacade;
 	private String nomeUsuario;
+	
+	@PostConstruct
+	private void init(){
+		residencia = new Residencia();
+		user = new Users();
+	}
 	
 	public String save(){
 		try {

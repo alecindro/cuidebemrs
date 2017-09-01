@@ -22,7 +22,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 import br.com.cuidebem.model.util.DateUtil;
 
@@ -31,7 +30,7 @@ import br.com.cuidebem.model.util.DateUtil;
  * @author aleci
  */
 @Entity
-@Table(catalog = "cuidebemres", schema = "")
+@Table(catalog = "cuidebemres", schema = "", name="evento")
 @XmlRootElement
 
 @NamedQueries({ @NamedQuery(name = "Evento.findAll", query = "SELECT e FROM Evento e"),
@@ -72,13 +71,24 @@ public class Evento implements Serializable {
 	private String grupoevento;
 	private String subgrupoevento;
 	private String respeventos;
-	private Usuario idusuario;
-	private Paciente idpaciente;
+	private Integer idusuario;
+	private Integer idpaciente;
 	private Integer peso;
 	@Transient
 	private String hour;
 	@Transient
     private String data;
+	@Transient
+	private Usuario usuario;
+	@Transient
+	private Paciente paciente;
+	
+	private String quantidade;
+	private String aspecto;
+	private String descricao;
+	private Integer value;
+	private Integer pressaoInicial;
+	private Integer pressaoFinal;
 
 	public Evento() {
 	}
@@ -181,21 +191,20 @@ public class Evento implements Serializable {
 		this.respeventos = respeventos;
 	}
 
-	@XmlTransient
-	public Usuario getIdusuario() {
+	
+	public Integer getIdusuario() {
 		return idusuario;
 	}
 
-	public void setIdusuario(Usuario idusuario) {
+	public void setIdusuario(Integer idusuario) {
 		this.idusuario = idusuario;
 	}
 
-	@XmlTransient
-	public Paciente getIdpaciente() {
+	public Integer getIdpaciente() {
 		return idpaciente;
 	}
 
-	public void setIdpaciente(Paciente idpaciente) {
+	public void setIdpaciente(Integer idpaciente) {
 		this.idpaciente = idpaciente;
 	}
 	
@@ -205,6 +214,70 @@ public class Evento implements Serializable {
 
 	public void setPeso(Integer peso) {
 		this.peso = peso;
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+	
+	public String getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(String quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public String getAspecto() {
+		return aspecto;
+	}
+
+	public void setAspecto(String aspecto) {
+		this.aspecto = aspecto;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Integer getPressaoInicial() {
+		return pressaoInicial;
+	}
+
+	public void setPressaoInicial(Integer pressaoInicial) {
+		this.pressaoInicial = pressaoInicial;
+	}
+
+	public Integer getPressaoFinal() {
+		return pressaoFinal;
+	}
+
+	public void setPressaoFinal(Integer pressaoFinal) {
+		this.pressaoFinal = pressaoFinal;
+	}
+	
+	public Integer getValue() {
+		return value;
+	}
+
+	public void setValue(Integer value) {
+		this.value = value;
 	}
 
 	public String getHour() {
