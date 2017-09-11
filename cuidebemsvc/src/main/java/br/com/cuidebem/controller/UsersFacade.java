@@ -8,7 +8,8 @@ import javax.ejb.Stateless;
 import br.com.cuidebem.controller.exception.ControllerException;
 import br.com.cuidebem.model.Roles;
 import br.com.cuidebem.model.Users;
-import br.com.security.quali.password.UtilPassword;
+import br.com.cuidebem.view.util.UtilSecurity;
+
 
 @Stateless
 public class UsersFacade extends AbstractFacade<Users> {
@@ -24,7 +25,7 @@ public class UsersFacade extends AbstractFacade<Users> {
     	user.setBlocked(Boolean.FALSE);
     	user.setEmail(email);
     	user.setEnabled(Boolean.TRUE);
-    	user.setPassword(UtilPassword.genPassword(password));
+    	user.setPassword(UtilSecurity.gerarSenha(password));
     	user.setActivation(date);
     	user.getRolesList().add(role);
     	create(user);
@@ -43,13 +44,24 @@ public class UsersFacade extends AbstractFacade<Users> {
     	user.setDatacadastro(date);
     	user.setBlocked(Boolean.FALSE);
     	user.setEnabled(Boolean.TRUE);
-    	user.setPassword(UtilPassword.genPassword(user.getPassword()));
+    	user.setPassword(UtilSecurity.gerarSenha(user.getPassword()));
     	user.setActivation(date);
     	user.setAlterLogin(date);
     	user.getRolesList().add(role);
     	create(user);
 		}
  	}
+	
+	public void updatePassword(Users user,String newPassword,String repeatPassword) throws ControllerException{
+		if(newPassword == null || repeatPassword == null){
+			throw new ControllerException("password_empty");
+		}
+		if(!newPassword.equals(repeatPassword)){
+			throw new ControllerException("password_match");
+		}
+		user.setPassword(UtilSecurity.gerarSenha(newPassword));
+		edit(user);
+	}
 	
 	
 }

@@ -6,6 +6,7 @@
 package br.com.cuidebem.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Basic;
@@ -294,6 +295,7 @@ public class Evento implements Serializable {
 
 	public void setHour(String hour) {
 		this.hour = hour;
+		dataevento = DateUtil.convertHour(Calendar.getInstance().getTime(), hour);
 	}
 	
 	public String getData() {
