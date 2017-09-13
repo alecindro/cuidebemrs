@@ -176,5 +176,12 @@ public class EventoFacade extends AbstractFacade<Evento> {
 		}
 		return evento;
 	}
+	
+	public void delete(Integer idevento) throws ControllerException{
+		Evento evento = find(idevento);
+		evento.setEnabled(false);
+		edit(evento);
+	}
+	
 
 }

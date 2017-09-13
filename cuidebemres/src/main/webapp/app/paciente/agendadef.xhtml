@@ -21,11 +21,11 @@
 								<p:outputLabel value="#{bundle.form_data_inicio}" for="dtinicio" />
 								<p:calendar id="dtinicio" pattern="dd/MM/yyyy" required="true" locale="pt"
 									value="#{agendadefmb.agendadef.datainicio}" navigator="true"
-									mode="popup" yearRange="c-1:c+0" showOn="button" />
+									mode="popup" yearRange="c+0:c+1" showOn="button" />
 								<p:outputLabel value="#{bundle.form_data_fim}" for="dtfim" />
 								<p:calendar id="dtfim" pattern="dd/MM/yyyy" required="true" locale="pt"
 									value="#{agendadefmb.agendadef.datafim}" navigator="true"
-									mode="popup" yearRange="c-1:c+0" showOn="button" />
+									mode="popup" yearRange="c+0:c+1" showOn="button" />
 								<p:outputLabel for="time" value="#{bundle.form_horario}" />
 
 								<p:inputText id="time" type="time" placeholder="hh:mm"

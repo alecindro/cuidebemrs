@@ -17,7 +17,7 @@ import br.com.cuidebem.controller.exception.ControllerException;
 import br.com.cuidebem.model.Agendadef;
 import br.com.cuidebem.model.Paciente;
 import br.com.cuidebem.model.util.DateUtil;
-import br.com.cuidebem.rotinas.Rotinas;
+import br.com.cuidebem.rotinas.RotinaAgenda;
 import br.com.cuidebem.view.IndexView;
 import br.com.cuidebem.view.util.JsfUtil;
 
@@ -42,7 +42,7 @@ public class AgendaDefView extends IndexView {
 	private void init() {
 		agendadef = new Agendadef();
 		paciente = new Paciente();
-		grupoEvento = Rotinas.getGrupoEventos();
+		grupoEvento = RotinaAgenda.getGrupoEventos();
 		subGrupoEvento = new ArrayList<String>();
 		String _idagendadef = JsfUtil.getRequestParameter("idagendadef");
 		if(_idagendadef != null){
@@ -57,7 +57,7 @@ public class AgendaDefView extends IndexView {
 	
 	private void editAgendaDef(Integer idagendadef){
 			agendadef = agendaDefFacade.find(idagendadef);
-			subGrupoEvento = Rotinas.getSubGrupoEventos(agendadef.getGrupoevento());
+			subGrupoEvento = RotinaAgenda.getSubGrupoEventos(agendadef.getGrupoevento());
 			paciente = pacienteFacade.find(agendadef.getIdpaciente());
 	}
 	
@@ -85,7 +85,7 @@ public class AgendaDefView extends IndexView {
 	
 	
 	public void grupEventoChanged(ValueChangeEvent  e) {
-		subGrupoEvento = Rotinas.getSubGrupoEventos(e.getNewValue().toString());
+		subGrupoEvento = RotinaAgenda.getSubGrupoEventos(e.getNewValue().toString());
 	}
 
 	public List<String> getGrupoEvento() {

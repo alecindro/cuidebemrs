@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Agenda.findAll", query = "SELECT a FROM Agenda a")
     , @NamedQuery(name = "Agenda.findByIdagenda", query = "SELECT a FROM Agenda a WHERE a.idagenda = :idagenda")
-    , @NamedQuery(name = "Agenda.findByIdPaciente", query = "SELECT a FROM Agenda a WHERE a.idpaciente = :idpaciente and a.data between :data1 and :data2")
+    , @NamedQuery(name = "Agenda.findByIdPaciente", query = "SELECT a FROM Agenda a WHERE a.idpaciente = :idpaciente and a.data between :data1 and :data2 order by a.data asc")
     , @NamedQuery(name = "Agenda.findByData", query = "SELECT a FROM Agenda a WHERE a.data = :data")
     , @NamedQuery(name = "Agenda.findByDataregistro", query = "SELECT a FROM Agenda a WHERE a.dataregistro = :dataregistro")
     , @NamedQuery(name = "Agenda.findByGrupoEvento", query = "SELECT a FROM Agenda a WHERE a.grupoEvento = :grupoEvento")
