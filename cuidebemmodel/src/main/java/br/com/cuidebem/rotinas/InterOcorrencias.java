@@ -7,7 +7,7 @@ import br.com.cuidebem.model.Evento;
 
 public enum InterOcorrencias implements IRotina {
 
-	INTEROCORRENCIAS("Interocorrências","/app/evento/blank.xhtml")
+	INTEROCORRENCIAS(" --- ","/app/evento/blank.xhtml")
 	{public void genResumo(Evento evento){
 		evento.setRespeventos(
 				evento.getObsevento());

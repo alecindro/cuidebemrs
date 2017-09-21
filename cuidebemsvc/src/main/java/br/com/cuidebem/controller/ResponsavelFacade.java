@@ -14,6 +14,7 @@ import br.com.cuidebem.controller.exception.ControllerException;
 import br.com.cuidebem.model.Paciente;
 import br.com.cuidebem.model.Responsavel;
 import br.com.cuidebem.model.ResponsavelPaciente;
+import br.com.cuidebem.model.Telefone;
 
 /**
  *
@@ -24,7 +25,8 @@ public class ResponsavelFacade extends AbstractFacade<Responsavel>  {
 	
 	@EJB
 	private ResponsavelPacienteFacade responsavelPacienteFacade;
-
+	@EJB 
+	private TelefoneFacade telefoneFacade;
     public ResponsavelFacade() {
         super(Responsavel.class);
     }
@@ -55,7 +57,12 @@ public class ResponsavelFacade extends AbstractFacade<Responsavel>  {
     	
     }
     public List<Responsavel> loadByPaciente(Integer idpaciente) throws ControllerException{
-    	return findByNativeQuery("Responsavel.findByPaciente", idpaciente);
+    	List<Responsavel> responsaveis = findByNativeQuery("Responsavel.findByPaciente", idpaciente);
+    	for(Responsavel responsavel : responsaveis){
+    		List<Telefone> telefones = telefoneFacade.findByNativeQuery("Telefone.findByIdResponsavel", responsavel.getIdresponsavel());
+    		responsavel.setTelefones(telefones);
+    	}
+    	return responsaveis;
     	
     }
     

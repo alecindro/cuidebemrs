@@ -67,6 +67,9 @@ public class Paciente implements Serializable {
 	@JoinColumn(name = "idresidencia", referencedColumnName = "idresidencia")
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private Residencia idresidencia;
+	@Basic(optional = false)
+	private boolean tpestadia;
+	
 
 	public Paciente() {
 	}
@@ -136,6 +139,15 @@ public class Paciente implements Serializable {
 
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+	
+
+	public boolean isTpestadia() {
+		return tpestadia;
+	}
+
+	public void setTpestadia(boolean tpestadia) {
+		this.tpestadia = tpestadia;
 	}
 
 	@XmlTransient

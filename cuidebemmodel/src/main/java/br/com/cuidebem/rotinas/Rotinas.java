@@ -16,7 +16,8 @@ public enum Rotinas {
 	ELIMINACOES("Eliminações", Eliminacoes.getDescricaos(),Eliminacoes.values()), 
 	DOR("Dor", Dor.getDescricaos(),Dor.values()), 
 	CONSULTAS("Consultas",Consultas.getDescricaos(),Consultas.values()), 
-	BEMESTAR("Bem Estar", BemEstar.getDescricaos(),BemEstar.values());
+	BEMESTAR("Bem Estar", BemEstar.getDescricaos(),BemEstar.values()),
+	ATIVIDADES("Atividades",Atividades.getDescricaos(),Atividades.values());
 
 	private String descricao;
 	private List<String> subGrupoEventos;

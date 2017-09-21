@@ -13,7 +13,8 @@ public enum RotinaAgenda {
 	MEDICACAO("Medicação", Patologias.getDescricaos(),Patologias.values()), 
 	HIGIENE("Higiene", Higiene.getDescricaos(),Higiene.values()), 
 	CONSULTAS("Consultas",Consultas.getDescricaos(),Consultas.values()), 
-	BEMESTAR("Bem Estar", BemEstar.getDescricaos(),BemEstar.values());
+	BEMESTAR("Bem Estar", BemEstar.getDescricaos(),BemEstar.values()),
+	ATIVIDADES("Atividades",Atividades.getDescricaos(),Atividades.values());
 
 	private String descricao;
 	private List<String> subGrupoEventos;

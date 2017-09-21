@@ -30,6 +30,100 @@
 							requiredMessage="#{bundle.requiredmessage_email}">
 							<p:keyFilter mask="email"></p:keyFilter>
 						</p:inputText>
+						<p:outputLabel value="#{bundle.form_genero}" for="genero" />
+								<p:selectOneRadio id="genero"
+									value="#{responsavelmb.responsavel.genero}" required="true"
+									layout="responsive" columns="1"
+									requiredMessage="#{bundle.EditUsuarioRequiredMessage_genero}">
+									<f:selectItem itemLabel="#{bundle.feminino}" itemValue="false" />
+									<f:selectItem itemLabel="#{bundle.masculino}" itemValue="true" />
+								</p:selectOneRadio>
+						<p:outputLabel value="#{bundle.form_vinculo}" for="vinculo"/>
+								<p:selectOneMenu  id="vinculo" required="true" requiredMessage="#{bundle.vinculo_requeridmessage}"
+									value="#{responsavelmb.responsavel.vinculo}"
+									>
+									<f:selectItem itemLabel="#{bundle.select_vinculo}" itemValue="" />
+									<f:selectItem itemLabel="#{bundle.esposo}" itemValue="#{bundle.esposo}" />
+									<f:selectItem itemLabel="#{bundle.filho}" itemValue="#{bundle.filho}" />
+									<f:selectItem itemLabel="#{bundle.genro}" itemValue="#{bundle.genro}" />
+									<f:selectItem itemLabel="#{bundle.neto}" itemValue="#{bundle.neto}" />
+									<f:selectItem itemLabel="#{bundle.sobrinho}" itemValue="#{bundle.sobrinho}" />
+									<f:selectItem itemLabel="#{bundle.amigo}" itemValue="#{bundle.amigo}" />
+									<f:selectItem itemLabel="#{bundle.outro}" itemValue="#{bundle.outro}" />
+								</p:selectOneMenu>
+						<p:outputLabel value="#{bundle.form_tpresponsavel}" for="tpresponsavel" />
+								<p:selectOneRadio id="tpresponsavel"
+									value="#{responsavelmb.responsavel.tpresponsavel}" required="true"
+									layout="responsive" columns="1"
+									requiredMessage="#{bundle.tpresponsavel_requiredmessage}">
+									<f:selectItem itemLabel="#{bundle.contato}" itemValue="true" />
+									<f:selectItem itemLabel="#{bundle.financeiro}" itemValue="false" />
+								</p:selectOneRadio>
+									<p:outputLabel value="#{bundle.form_cpf}" for="cpf" />
+						<p:inputText id="cpf" 
+							value="#{responsavelmb.responsavel.cpf}"
+							title="#{bundle.cpf}" styleClass="fifty-percent"
+							><p:keyFilter mask="pint"></p:keyFilter>
+						</p:inputText>
+								<p:outputLabel value="#{bundle.form_rg}" for="rg" />
+						<p:inputText id="rg" 
+							value="#{responsavelmb.responsavel.rg}"
+							title="#{bundle.rg}" styleClass="fifty-percent"
+							><p:keyFilter mask="pint"></p:keyFilter>
+						</p:inputText>
+						<p:outputLabel value="#{bundle.form_endereco}" for="endereco" />
+						<p:inputText id="endereco" maxlength="255"
+							value="#{responsavelmb.responsavel.endereco}"
+							title="#{bundle.endereco}" styleClass="fifty-percent"
+							>
+						</p:inputText>
+						<p:outputLabel value="#{bundle.form_cep}" for="cep" />
+						<p:inputText id="cep" maxlength="8"
+							value="#{responsavelmb.responsavel.cep}"
+							title="#{bundle.cep}" styleClass="fifty-percent"
+							>
+							<p:keyFilter mask="pint"></p:keyFilter>
+						</p:inputText>
+						<p:outputLabel value="#{bundle.form_cidade}" for="cidade" />
+						<p:inputText id="cidade" maxlength="255"
+							value="#{responsavelmb.responsavel.cidade}"
+							title="#{bundle.cidade}" styleClass="fifty-percent"
+							>
+						</p:inputText>
+						<p:outputLabel value="#{bundle.form_estado}" for="estado"/>
+								<p:selectOneMenu  id="estado" editable="true"
+									value="#{responsavelmb.responsavel.estado}"
+									>
+									<f:selectItem itemLabel="#{bundle.select_estado}" itemValue="" />
+									<f:selectItem itemLabel="Acre" itemValue="Acre" />
+									<f:selectItem itemLabel="Alagoas" itemValue="Alagoas" />
+									<f:selectItem itemLabel="Amapá" itemValue="Amapá" />
+									<f:selectItem itemLabel="Amazonas" itemValue="Amazonas" />
+									<f:selectItem itemLabel="Bahia" itemValue="Bahia" />
+									<f:selectItem itemLabel="Ceará" itemValue="Ceará"/>
+									<f:selectItem itemLabel="Distrito Federal" itemValue="Distrito Federal" />
+									<f:selectItem itemLabel="Espírito Santo" itemValue="Espírito Santo" />
+									<f:selectItem itemLabel="Goiás" itemValue="Goiás" />
+									<f:selectItem itemLabel="Maranhão" itemValue="Maranhão" />
+									<f:selectItem itemLabel="Mato Grosso" itemValue="Mato Grosso" />
+									<f:selectItem itemLabel="Mato Grosso do Sul" itemValue="Mato Grosso do Sul" />
+									<f:selectItem itemLabel="Minas Gerais" itemValue="Minas Gerais" />
+									<f:selectItem itemLabel="Pará" itemValue="Pará" />
+									<f:selectItem itemLabel="Paraíba" itemValue="Paraíba" />
+									<f:selectItem itemLabel="Paraná" itemValue="Paraná" />
+									<f:selectItem itemLabel="Pernambuco" itemValue="Pernambuco" />
+									<f:selectItem itemLabel="Piauí" itemValue="Distrito Federal" />
+									<f:selectItem itemLabel="Rio de Janeiro" itemValue="Rio de Janeiro" />
+									<f:selectItem itemLabel="Rio Grande do Norte" itemValue="Rio Grande do Norte" />
+									<f:selectItem itemLabel="Rio Grande do Sul" itemValue="Rio Grande do Sul" />
+									<f:selectItem itemLabel="Rondônia" itemValue="Rondônia" />
+									<f:selectItem itemLabel="Roraima" itemValue="Roraima" />
+									<f:selectItem itemLabel="Santa Catarina" itemValue="Santa Catarina" />
+									<f:selectItem itemLabel="São Paulo" itemValue="São Paulo" />
+									<f:selectItem itemLabel="Sergipe" itemValue="Sergipe" />
+									<f:selectItem itemLabel="Tocantis" itemValue="Tocantis" />
+								
+								</p:selectOneMenu>
 							<p:outputLabel value="#{bundle.form_datanascimento}"
 							for="datanascimento" />
 						<p:calendar id="datanascimento" pattern="dd/MM/yyyy"

@@ -28,8 +28,16 @@
 									value="#{pacientemb.paciente.genero}" required="true"
 									layout="responsive" columns="1"
 									requiredMessage="#{bundle.EditUsuarioRequiredMessage_genero}">
-									<f:selectItem itemLabel="Feminino" itemValue="false" />
-									<f:selectItem itemLabel="Masculino" itemValue="true" />
+									<f:selectItem itemLabel="#{bundle.feminino}" itemValue="false" />
+									<f:selectItem itemLabel="#{bundle.masculino}" itemValue="true" />
+								</p:selectOneRadio>
+								<p:outputLabel value="#{bundle.form_tpestadia}" for="tpestadia" />
+								<p:selectOneRadio id="tpestadia"
+									value="#{pacientemb.paciente.tpestadia}" required="true"
+									layout="responsive" columns="1"
+									requiredMessage="#{bundle.tpestadia_requiredmessage}">
+									<f:selectItem itemLabel="#{bundle.periodico}" itemValue="false" />
+									<f:selectItem itemLabel="#{bundle.permanente}" itemValue="true" />
 								</p:selectOneRadio>
 								<p:outputLabel value="#{bundle.form_datanascimento}"
 									for="datanascimento" />
@@ -136,7 +144,12 @@
 
 									</p:panelGrid>
 									<f:facet name="footer">
-					Email: #{responsavel.email}
+					Email: #{responsavel.email}<br/>
+					Vínculo: #{responsavel.vinculo}
+					<p:dataList value="#{responsavel.telefones}" var="telefone"  type="definition">
+					<f:facet name="header">Telefones</f:facet>
+					#{telefone.ddd} - #{telefone.telefone} 
+					</p:dataList>
 					</f:facet>
 								</p:panel>
 							</p:dataGrid>

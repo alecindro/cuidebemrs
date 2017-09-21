@@ -25,6 +25,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -59,10 +60,22 @@ public class Responsavel implements Serializable {
 	private boolean enabled;
     @Temporal(TemporalType.DATE)
 	private Date datanascimento;
+    private String vinculo;
+    private boolean tpresponsavel;
+    private String cpf;
+    private String rg;
+    private String endereco;
+    private String cidade;
+    private String estado;
+    private boolean genero;
+    private String cep;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idresponsavel", fetch = FetchType.LAZY)
     private List<ResponsavelPaciente> responsavelPacienteList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idresponsavel", fetch = FetchType.LAZY)
     private List<ResponsavelTelefone> responsavelTelefoneList;
+    @Transient
+    private List<Telefone> telefones;
 
     public Responsavel() {
     }
@@ -118,6 +131,79 @@ public class Responsavel implements Serializable {
 	public void setDatanascimento(Date datanascimento) {
 		this.datanascimento = datanascimento;
 	}
+	
+
+	public String getVinculo() {
+		return vinculo;
+	}
+
+	public void setVinculo(String vinculo) {
+		this.vinculo = vinculo;
+	}
+
+	public boolean isTpresponsavel() {
+		return tpresponsavel;
+	}
+
+	public void setTpresponsavel(boolean tpresponsavel) {
+		this.tpresponsavel = tpresponsavel;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public boolean isGenero() {
+		return genero;
+	}
+
+	public void setGenero(boolean genero) {
+		this.genero = genero;
+	}
+	
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
 
 	@XmlTransient
     public List<ResponsavelPaciente> getResponsavelPacienteList() {
@@ -143,8 +229,20 @@ public class Responsavel implements Serializable {
     public void setResponsavelTelefoneList(List<ResponsavelTelefone> responsavelTelefoneList) {
         this.responsavelTelefoneList = responsavelTelefoneList;
     }
+    
+    @XmlTransient
+    public List<Telefone> getTelefones() {
+    	if(telefones == null){
+    		telefones = new ArrayList<Telefone>();
+    	}
+		return telefones;
+	}
 
-    @Override
+	public void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (idresponsavel != null ? idresponsavel.hashCode() : 0);

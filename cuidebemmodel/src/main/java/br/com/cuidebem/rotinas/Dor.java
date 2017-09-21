@@ -7,7 +7,7 @@ import br.com.cuidebem.model.Evento;
 
 public enum Dor implements IRotina{
 
-	DOR("Dor","/app/evento/blank.xhtml")
+	DOR(" --- ","/app/evento/blank.xhtml")
 	{public void genResumo(Evento evento){
 		evento.setRespeventos(
 				evento.getObsevento());
