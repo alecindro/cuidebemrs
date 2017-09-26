@@ -7,10 +7,30 @@
 
 <ui:composition template="/resources/template.xhtml">
 	<ui:define name="content">
+	<div class="ui-g">
+	<div class="ui-g-3 ui-md-2 ui-lg-1">
+		<h:form id="menuresp">
+			<p:menubar>
+		<p:menuitem value=	"#{bundle.cadresponsavel}" url="#caduser"/>
+		<p:menuitem value="#{bundle.foto}" url="#photo" style="#{responsavelmb.responsavel.idresponsavel eq null ?'display:none':'display:'} "/>
+		<p:menuitem value="#{bundle.telefones}" url="#telefone" style="#{responsavelmb.responsavel.idresponsavel eq null ?'display:none':'display:'} ">
+				</p:menuitem>
+		<p:menuitem value="#{bundle.return}" action="/app/paciente/paciente.xhtml" >
+		<f:param name="idpaciente"
+							value="#{responsavelmb.paciente.idpaciente}"></f:param>
+					
+		</p:menuitem>		
+				</p:menubar>
+
+		</h:form>
+		<p:sticky target="menuresp"></p:sticky>
+		</div>
+			<div class="ui-g-9 ui-md-10 ui-lg-11">
+	
 		<p:outputPanel id="createuser">
-			<p:panel
+			<p:panel id="caduser"
 				header="#{bundle.cadresponsavel} do paciente #{responsavelmb.paciente.nome}"
-				toggleable="true">
+				>
 				<h:form>
 					<h:inputHidden value="#{responsavelmb.responsavel.idresponsavel}" />
 					<p:panelGrid columns="2" layout="grid"
@@ -132,11 +152,7 @@
 							title="#{bundle.datanascimento}" showOn="button" />
 					
 					</p:panelGrid>
-					<p:commandButton value="#{bundle.return}"
-						action="/app/paciente/paciente.xhtml">
-						<f:param name="idpaciente"
-							value="#{responsavelmb.paciente.idpaciente}"></f:param>
-					</p:commandButton>
+					
 					<p:commandButton value="#{bundle.delete}"
 								action="#{responsavelmb.deleteResponsavel}"
 								rendered="#{responsavelmb.responsavel.idresponsavel != null}">
@@ -146,16 +162,16 @@
 									<f:param name="idresponsavel" value="#{responsavelmb.responsavel.idresponsavel}"/>
 							</p:commandButton>
 					<p:commandButton value="#{bundle.save}"
-						action="#{responsavelmb.saveResponsavel}" update="createuser">
+						action="#{responsavelmb.saveResponsavel}" update="menuresp,createuser">
 						<f:param name="idpaciente"
 							value="#{responsavelmb.paciente.idpaciente}" />
 						
 						</p:commandButton>
 				</h:form>
 			</p:panel>
-			<p:panel header="#{bundle.foto}"
+			<p:panel header="#{bundle.foto}" id="photo"
 				visible="#{responsavelmb.responsavel.idresponsavel != null}"
-				toggleable="true">
+				>
 
 				<h:form>
 					<h:inputHidden value="#{responsavelmb.responsavel.idresponsavel}" />
@@ -181,9 +197,9 @@
 					</p:panelGrid>
 				</h:form>
 			</p:panel>
-			<p:panel header="#{bundle.telefones}"
+			<p:panel header="#{bundle.telefones}" id="telefone"
 				visible="#{responsavelmb.responsavel.idresponsavel != null}"
-				toggleable="true">
+				>
 				<h:form>
 					<p:panelGrid columns="2" layout="grid"
 						columnClasses="twenty-percent,eighty-percent">
@@ -257,7 +273,8 @@
 
 			</p:panel>
 		</p:outputPanel>
-
+</div>
+</div>
 	</ui:define>
 </ui:composition>
 </html>
