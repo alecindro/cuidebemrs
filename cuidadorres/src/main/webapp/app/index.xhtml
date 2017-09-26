@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/resources/template.xhtml">
+	<ui:define name="content">
+		<div class="ui-g">
+			<div class="ui-g-12 ui-md-12 ui-lg-12">
+			
+			<div id="atual" class="ui-panel ui-widget ui-widget-content ui-corner-all" data-widget="widget_atual">
+			<div id="atual_header" class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all">
+			<span class="ui-panel-title">
+			<p:commandLink id="bt_atual" update="@this,datalist">
+			#{bundle.form_ultima_atualizacao} <h:outputText
+							value="#{eventoatualmb.dataAtualizacao}">
+<f:convertDateTime pattern="HH:mm:ss dd/MM/yyyy"/>
+						</h:outputText>
+			</p:commandLink>
+			<p:tooltip value="Clique aqui para atualizar" for="bt_atual"></p:tooltip>
+			</span></div></div>
+		
+			</div>
+			<div class="ui-g-12 ui-md-12 ui-lg-12">
+				<h:form prependId="false" id="datalist">
+				<div class="ui-g">
+				<ui:repeat var="pacienteEvento" value="#{eventoatualmb.pacientesEvento}">
+				<div class="ui-g-12 ui-md-6 ui-lg-2">
+		<p:panel header="#{pacienteEvento.apelido}">
+								<p:commandLink action="/app/agenda/tableAgendaDiaria.xhtml">
+									<p:graphicImage styleClass="hundred-percent"
+										url="/rs/images/paciente/#{pacienteEvento.idpaciente}"
+										cache="false">
+									</p:graphicImage>
+									<f:param name="idpaciente" value="#{pacienteEvento.idpaciente}" />
+								</p:commandLink>
+<f:facet name="footer">
+						<p:panelGrid columns="1" layout="grid"
+									columnClasses="hundred-percent"  styleClass="hundred-percent" style="text-align:center">
+									<f:facet name="header">#{bundle.proximoagenda}</f:facet>
+									<h:outputText value="#{pacienteEvento.agenda.data}"
+					rendered="#{pacienteEvento.agenda.idagenda != null}"					id="nextagenda">
+										<f:convertDateTime pattern="dd/MM HH:mm" />
+									</h:outputText>
+								<p:button outcome="/app/evento/evento.xhtml"
+									value="#{pacienteEvento.agenda.grupoEvento} - #{pacienteEvento.agenda.subGrupoEvento}"
+									rendered="#{pacienteEvento.agenda.idagenda != null}"
+									>
+									<f:param name="idagenda"
+										value="#{pacienteEvento.agenda.idagenda}" />
+									<f:param name="idpaciente" value="#{pacienteEvento.idpaciente}" />
+								</p:button>
+									<h:outputText value="#{bundle.no_agendamento}"
+										rendered="#{pacienteEvento.agenda.idagenda eq null}" />
+								</p:panelGrid>
+									
+							
+
+</f:facet>
+						</p:panel>
+
+				</div>
+				</ui:repeat>
+				</div>
+									</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/resources/template.xhtml">
+	<ui:define name="content">
+	<div class="ui-g">
+	<div class="ui-g-12 ui-md-12 ui-lg-12">
+	<h:form>
+	<p:editor value="#{memomb.memorando.descricao}" style="width:100%"></p:editor>
+	<h:inputHidden value="#{memomb.memorando.idmemorando}" />
+	<h:inputHidden value="#{memomb.memorando.idpaciente}" />
+	<h:inputHidden value="#{memomb.memorando.dataregistro}">
+	<f:convertDateTime />
+	</h:inputHidden>
+
+	<p:panelGrid columns="2" layout="grid">
+	<p:button value="#{bundle.return}" outcome="/app/agenda/tableAgendaDiaria.xhtml" >
+	<f:param name="idpaciente" value="#{memomb.memorando.idpaciente}" />
+	</p:button>
+	<p:commandButton action="#{memomb.save}" value="#{bundle.save}">
+	<f:param name="idpaciente" value="#{memomb.memorando.idpaciente}" />
+	</p:commandButton> 
+	</p:panelGrid>
+		</h:form>
+	</div>
+	</div>
+		</ui:define>
+	</ui:composition>
+</html>

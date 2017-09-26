@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<div class="ui-g">
+	<div class="ui-g-6 ui-md-7 ui-lg-3">
+		<p:outputLabel value="Descrição:" for="opCAFE"></p:outputLabel>
+	</div>
+	<div class="ui-g-6 ui-md-5 ui-lg-9">
+		<p:selectOneRadio id="opCAFE" value="#{eventomb.evento.descricao}" required="true" columns="1" layout="responsive">
+			<f:selectItem itemLabel="#{bundle.aceitou_bem}"
+				itemValue="#{bundle.aceitou_bem}" />
+			<f:selectItem itemLabel="#{bundle.aceitou_parcial}"
+				itemValue="#{bundle.aceitou_parcial}" />
+			<f:selectItem itemLabel="#{bundle.nao_aceitou}"
+				itemValue="#{bundle.nao_aceitou}" />
+		</p:selectOneRadio>
+	</div>
+</div>
+</html>

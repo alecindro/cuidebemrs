@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Cuide Bem</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<style type="text/css">
+body {
+	margin: 0px;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	background-color: #20272a;
+	font-family: 'latoregular', "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color: #5C666A;
+}
+
+.banner-title {
+	background-color: #C2D5D3 !important;
+	text-align: center;
+	width: 100%;
+	height: auto;
+}
+.hundred-percent {
+     width: 100%;
+}
+.eighty-percent {
+     width: 80%;
+}
+
+</style>
+
+	<h:outputScript library="js" name="jsfcrud.js" />
+</h:head>
+<h:body>
+	<p:growl autoUpdate="true" showDetail="true" showSummary="true" widgetVar="growl"></p:growl>
+	<ui:insert name="header">
+		<div class="banner-title">
+			<div class="ui-corner-all">
+				<div class="ui-g">
+					<div class="ui-g-3 ui-md-3 ui-lg-4"></div>
+					<div class="ui-g-6 ui-md-6 ui-lg-4">
+					<a href="/app/index.xhtml">
+						<img src="/resources/img/titulo50.png"
+							style="height: auto; width: 100%" /></a>
+					</div>
+					<div class="ui-g-3 ui-md-3 ui-lg-4"></div>
+				</div>
+			</div>
+		</div>
+		
+		
+	</ui:insert>
+
+	<div class="ui-g">
+		<div class="ui-g-1 ui-md-1 ui-lg-4">
+		
+		</div>
+		<div class="ui-g-10 ui-md-10 ui-lg-4">
+			<ui:insert name="content"></ui:insert>
+		</div>
+		<div class="ui-g-1 ui-md-1 ui-lg-4"></div>
+	</div>
+
+	<ui:insert name="footer">
+		
+	</ui:insert>
+</h:body>
+</html>

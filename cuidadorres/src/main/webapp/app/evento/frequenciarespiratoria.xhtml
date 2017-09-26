@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<div class="ui-g">
+	<div class="ui-g-6 ui-md-7 ui-lg-3">
+		<p:inputText id="fqp" type="NUMBER"
+			value="#{eventomb.evento.value}" styleClass="ninety-percent" required="true">
+			<p:keyFilter mask="pint"></p:keyFilter></p:inputText>
+	</div>
+	<div class="ui-g-6 ui-md-5 ui-lg-9">
+		<p:outputLabel value="vezes/min" style="float:left;margin-top:10px"
+			for="fqp" />
+	</div>
+</div>
+
+</html>

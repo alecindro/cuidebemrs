@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<div class="ui-g">
+	<div class="ui-g-6 ui-md-7 ui-lg-3">
+		<p:outputLabel value="#{bundle.form_size}" for="qtFEZES"></p:outputLabel>
+	</div>
+	<div class="ui-g-6 ui-md-5 ui-lg-9">
+		<p:selectOneRadio id="qtFEZES" value="#{eventomb.evento.quantidade}" required="true">
+			<f:selectItem itemLabel="#{bundle.pouco}" itemValue="#{bundle.pouco}" />
+			<f:selectItem itemLabel="#{bundle.normal}"
+				itemValue="#{bundle.normal}" />
+			<f:selectItem itemLabel="#{bundle.grande}"
+				itemValue="#{bundle.grande}" />
+		</p:selectOneRadio>
+	</div>
+	<div class="ui-g-6 ui-md-7 ui-lg-3">
+		<p:outputLabel value="#{bundle.form_aspect}" for="aspecFEZES"></p:outputLabel>
+	</div>
+	<div class="ui-g-6 ui-md-5 ui-lg-9">
+		<p:selectOneRadio id="aspecFEZES" value="#{eventomb.evento.aspecto}">
+			<f:selectItem itemLabel="#{bundle.liquido}"
+				itemValue="#{bundle.liquido}" />
+			<f:selectItem itemLabel="#{bundle.pastoso}"
+				itemValue="#{bundle.pastoso}" />
+			<f:selectItem itemLabel="#{bundle.endurecido}"
+				itemValue="#{bundle.endurecido}" />
+			<f:selectItem itemLabel="#{bundle.fecaloma}"
+				itemValue="#{bundle.fecaloma}" />
+
+		</p:selectOneRadio>
+	</div>
+</div>
+</html>

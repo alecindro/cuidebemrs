@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/resources/template.xhtml">
+<ui:define name="content">
+<div class="ui-g">
+<div class="ui-g-3 ui-md-2 ui-lg-1">
+		<h:form id="menuagenda">
+			<p:menubar>
+		<p:menuitem value="#{bundle.caduser}" url="#caduser"/>
+		<p:menuitem value="#{bundle.foto}" url="#photo"/>
+		<p:menuitem value="#{bundle.telefones}" url="#telefone">
+				</p:menuitem>
+		<p:menuitem value="#{bundle.updatePassword}" url="#alterpassw"/>
+</p:menubar>
+
+		</h:form>
+		<p:sticky target="menuagenda"></p:sticky>
+		</div>
+			<div class="ui-g-9 ui-md-10 ui-lg-11">
+	<p:panel header="#{bundle.caduser}" toggleable="true" id="caduser">
+		<h:form id="UsuarioCreateForm">
+			<h:inputHidden value="#{usuariomb.usuario.tipoUsuario}" />
+			<p:panelGrid columns="2" layout="grid"
+				columnClasses="twenty-percent,eighty-percent">
+				<p:outputLabel value="#{bundle.form_email}" for="email" />
+				<p:inputText id="email" autocomplete="off" 
+					value="#{usuariomb.usuario.email}" title="#{bundle.email}"
+					required="true" type="email" 
+					requiredMessage="#{bundle.requiredmessage_email}">
+					<p:keyFilter mask="email"></p:keyFilter>
+				</p:inputText>
+				<p:outputLabel value="#{bundle.form_nome}" for="nome" />
+				<p:inputText id="nome" value="#{usuariomb.usuario.nome}"
+					title="#{bundle.nome}" required="true" 
+					requiredMessage="#{bundle.requiredmessage_nome}" />
+				<p:outputLabel value="#{bundle.form_apelido}" for="apelido" />
+				<p:inputText id="apelido" value="#{usuariomb.usuario.apelido}"
+					title="#{bundle.apelido}" />
+				<p:outputLabel value="#{bundle.form_genero}" for="genero" />
+				<p:selectOneRadio id="genero" value="#{usuariomb.usuario.genero}"
+					required="true" layout="responsive" columns="1"
+					requiredMessage="#{bundle.EditUsuarioRequiredMessage_genero}">
+					<f:selectItem itemLabel="Feminino" itemValue="false" />
+					<f:selectItem itemLabel="Masculino" itemValue="true" />
+				</p:selectOneRadio>
+				<p:outputLabel value="#{bundle.form_datanascimento}"
+					for="datanascimento" />
+				<p:calendar id="datanascimento" pattern="dd/MM/yyyy" locale="pt"
+					navigator="true" mode="popup" yearRange="c-80:c+0"
+					value="#{usuariomb.usuario.datanascimento}"
+					title="#{bundle.datanascimento}" showOn="button" />
+			</p:panelGrid>
+			<p:button value="#{bundle.cancel}" outcome="/app/index.xhtml"
+				immediate="true" />
+			<p:commandButton action="#{usuariomb.edit}" value="#{bundle.save}">
+			</p:commandButton>
+
+		</h:form>
+	</p:panel>
+	</div>
+	<div class="ui-g-3 ui-md-2 ui-lg-1"></div>
+		<div class="ui-g-9 ui-md-10 ui-lg-11">
+	<p:panel header="#{bundle.foto}" toggleable="true" id="photo">
+		<h:form>
+			<p:panelGrid columns="2" layout="grid"
+				columnClasses="thirty-percent,seventy-percent">
+				<p:outputPanel id="userimage">
+					<p:graphicImage
+						url="/rs/images/usuario/#{usuariomb.usuario.idusuario}"
+						cache="false"></p:graphicImage>
+				</p:outputPanel>
+
+
+				<p:fileUpload id="photo" cancelLabel="#{bundle.cancel}"
+					multiple="false" fileLimit="1" uploadLabel="#{bundle.save}"
+					label="#{bundle.alter}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+					invalidFileMessage="São permitidas somente imagens (gif, jpeg, jpg e png)"
+					fileLimitMessage="#{bundle.limitfoto}"
+					fileUploadListener="#{usuariomb.handleFileUpload}" mode="advanced"
+					update="userimage">
+				</p:fileUpload>
+			</p:panelGrid>
+		</h:form>
+	</p:panel>
+	</div>
+	<div class="ui-g-3 ui-md-2 ui-lg-1"></div>
+	<div class="ui-g-9 ui-md-10 ui-lg-11">
+	<p:panel header="#{bundle.telefones}" toggleable="true" id="telefone">
+		<h:form>
+			<p:panelGrid columns="2" layout="grid"
+				columnClasses="twenty-percent,eighty-percent">
+				<p:outputLabel value="#{bundle.form_tipotelefone}"
+					for="tipotelefone" />
+				<p:selectOneMenu value="#{usuariomb.telefone.tipo}"
+					id="tipotelefone" title="#{bundle.tipotelefone}">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{usuariomb.tipoTelefones}"
+						var="tipotelefone" itemLabel="#{tipotelefone.name()}"
+						itemValue="#{tipotelefone.name()}"></f:selectItems>
+				</p:selectOneMenu>
+				<p:outputLabel value="#{bundle.form_operadora}" for="operadora" />
+				<p:selectOneMenu value="#{usuariomb.telefone.operadora}"
+					id="operadora" title="#{bundle.operadora}">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{usuariomb.operadoras}" var="operadora"
+						itemLabel="#{operadora.name()}" itemValue="#{operadora.name()}"></f:selectItems>
+				</p:selectOneMenu>
+				<p:outputLabel value="#{bundle.form_ddd}" for="ddd" />
+				<p:inputText id="ddd" value="#{usuariomb.telefone.ddd}"
+					title="#{bundle.ddd}" required="true" 
+					maxlength="2" requiredMessage="#{bundle.requiredmessage_ddd}">
+					<p:keyFilter mask="pint"></p:keyFilter>
+				</p:inputText>
+				<p:outputLabel value="#{bundle.form_telefone}" for="telefone" />
+				<p:inputText id="telefone" value="#{usuariomb.telefone.telefone}"
+					title="#{bundle.telefone}" required="true"
+					requiredMessage="#{bundle.requiredmessage_telefone}">
+					<p:keyFilter mask="pint"></p:keyFilter>
+				</p:inputText>
+			</p:panelGrid>
+			<p:commandButton value="#{bundle.add}"
+				action="#{usuariomb.savePhone()}" update="@parent:@parent">
+				<f:param name="idusuario" value="#{usuariomb.usuario.idusuario}"></f:param>
+			</p:commandButton>
+		</h:form>
+
+
+		<h:form>
+
+			<p:dataTable value="#{usuariomb.telefones}" var="telefone" reflow="true"
+				id="listel" selection="#{usuariomb.telefone}" paginator="true"
+				rows="10" selectionMode="single" rowKey="#{telefone.idtelefone}">
+				<p:column headerText="#{bundle.telefone}">
+					<h:outputText value="(#{telefone.ddd}) #{telefone.telefone}" />
+				</p:column>
+				<p:column headerText="#{bundle.tipotelefone}">
+					<h:outputText value="#{telefone.tipo}" />
+				</p:column>
+				<p:column headerText="#{bundle.operadora}">
+					<h:outputText value="#{telefone.operadora}" />
+				</p:column>
+				<p:column>
+
+					<p:commandButton value="#{bundle.delete}"
+						action="#{usuariomb.delPhone}" update="@form:listel">
+						<p:confirm header="#{bundle.confirmation}"
+							message="#{bundle.message_delete}" icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+
+	</p:panel>
+	</div>
+	<div class="ui-g-3 ui-md-2 ui-lg-1"></div>
+	<div class="ui-g-9 ui-md-10 ui-lg-11">
+	<p:panel header="#{bundle.updatePassword}" toggleable="true" id="alterpassw">
+		<h:form>
+			<p:panelGrid columns="2" layout="grid"
+				columnClasses="twenty-percent,eighty-percent">
+				<p:outputLabel value="#{bundle.form_password}" for="password" />
+				<p:password id="password" value="#{usuariomb.newPassword}"
+					autocomplete="off" title="#{bundle.password}" required="true"
+					requiredMessage="#{bundle.requiredmessage_password}" />
+
+				<p:outputLabel value="#{bundle.form_passwordrepit}"
+					for="repit_password" />
+				<p:password id="repit_password" value="#{usuariomb.repeatPassword}"
+					autocomplete="off" title="#{bundle.password}" required="true"
+					requiredMessage="#{bundle.requiredmessage_password}" />
+			</p:panelGrid>
+			<p:commandButton action="#{usuariomb.updatePassword}" value="#{bundle.save}"></p:commandButton>
+		</h:form>
+	</p:panel>
+	</div>
+	</div>
+	</ui:define>
+</ui:composition>
+</html>

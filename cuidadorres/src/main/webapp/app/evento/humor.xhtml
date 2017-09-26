@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<div class="ui-g">
+	<div class="ui-g-6 ui-md-7 ui-lg-3">
+		<p:outputLabel value="#{bundle.form_size}" for="opHUMOR"></p:outputLabel>
+	</div>
+	<div class="ui-g-6 ui-md-5 ui-lg-9">
+		<p:selectOneRadio id="opHUMOR" value="#{eventomb.evento.descricao}" required="true">
+			<f:selectItem itemLabel="#{bundle.alegre}"
+				itemValue="#{bundle.alegre}" />
+			<f:selectItem itemLabel="#{bundle.calmo}" itemValue="#{bundle.calmo}" />
+			<f:selectItem itemLabel="#{bundle.apatico}"
+				itemValue="#{bundle.apatico}" />
+		<f:selectItem itemLabel="#{bundle.depressivo}"
+			itemValue="#{bundle.depressivo}" />
+		<f:selectItem itemLabel="#{bundle.agressivo}"
+			itemValue="#{bundle.agressivo}" />
+		<f:selectItem itemLabel="#{bundle.agitado}"
+			itemValue="#{bundle.agitado}" />
+		</p:selectOneRadio>
+	</div>
+</div>
+</html>

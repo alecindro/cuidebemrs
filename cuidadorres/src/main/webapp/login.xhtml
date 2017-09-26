@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/resources/templatelogin.xhtml">
+	<ui:define name="content">
+		<form class="form-horizontal" method="post">
+			<div class="ui-g-2 ui-md-2 ui-lg-2">Usuário:</div>
+			<div class="ui-g-10 ui-md-10 ui-lg-10">
+				<input type="email" class="hundred-percent" name="user"
+					placeholder="e-mail" required="true" />
+			</div>
+			<div class="ui-g-2 ui-md-2 ui-lg-2">Senha:</div>
+			<div class="ui-g-10 ui-md-10 ui-lg-10">
+				<input type="password" class="hundred-percent" name="pass"
+					id="exampleInputPassword1" placeholder="Senha" required="true" />
+			</div>
+			<div class="ui-g-2 ui-md-2 ui-lg-2"></div>
+			<div class="ui-g-10 ui-md-10 ui-lg-10">
+				<button class="ui-button ui-widget ui-state-default ui-corner-all eighty-percent" type="submit" style="height: 40px">Entrar</button>
+			</div>
+			
+		</form>
+	
+		<form class="form-horizontal">
+			<div clas="ui-g-12 ui-md-12 ui-lg-12">
+				<p>
+					Esqueceu a senha? <a class="btn btn-danger form-control"
+						href="/resources/recuperasenha.xhtml" role="button">Clique
+						aqui para recuperar</a>
+				</p>
+			</div>
+		</form>
+		<form class="form-horizontal">
+			<div clas="ui-g-12 ui-md-12 ui-lg-12">
+				<p>
+					Não Possui uma conta? <a class="btn btn-info form-control"
+						href="/resources/cadastro.xhtml" role="button">Clique aqui
+						para se cadastrar!</a>
+				</p>
+			</div>
+		</form>
+	</ui:define>
+
+</ui:composition>
+</html>

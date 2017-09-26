@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<div class="ui-g">
+	<div class="ui-g-6 ui-md-7 ui-lg-3">
+<p:outputLabel value="#{bundle.form_description}" for="opNEBU"></p:outputLabel>
+					</div>
+					<div class="ui-g-6 ui-md-5 ui-lg-9"> 
+						<p:selectOneRadio id="opNEBU"  value="#{eventomb.evento.descricao}" required="true" columns="2" layout="responsive">
+								<f:selectItem
+								itemLabel="#{bundle.oral}" itemValue="#{bundle.oral}" />
+						<f:selectItem
+								itemLabel="#{bundle.nasal}" itemValue="#{bundle.nasal}" />
+						</p:selectOneRadio>
+						</div>
+						<div class="ui-g-6 ui-md-7 ui-lg-3">
+						<p:outputLabel value="#{bundle.form_size}" for="qtNEBU"></p:outputLabel>
+						</div>
+						<div class="ui-g-6 ui-md-5 ui-lg-9">
+						<p:selectOneRadio id="qtNEBU"  value="#{eventomb.evento.quantidade}" columns="1" layout="responsive">
+							<f:selectItem
+								itemLabel="#{bundle.pouco}" itemValue="#{bundle.pouco}" />
+								<f:selectItem
+								itemLabel="#{bundle.normal}" itemValue="#{bundle.normal}" />
+								<f:selectItem
+								itemLabel="#{bundle.grande}" itemValue="#{bundle.grande}" />
+						</p:selectOneRadio>
+						</div>
+							<div class="ui-g-6 ui-md-7 ui-lg-3">
+						<p:outputLabel value="#{bundle.form_aspect}" for="aspecNEBU"></p:outputLabel>
+						</div>
+						<div class="ui-g-6 ui-md-5 ui-lg-9">
+						<p:selectOneRadio id="aspecNEBU" value="#{eventomb.evento.aspecto}" columns="1" layout="responsive">
+							<f:selectItem
+								itemLabel="#{bundle.ceroide}" itemValue="#{bundle.ceroide}" />
+								<f:selectItem
+								itemLabel="#{bundle.mucosa}" itemValue="#{bundle.mucosa}" />
+				<f:selectItem
+								itemLabel="#{bundle.purulenta}" itemValue="#{bundle.purulenta}" />
+						</p:selectOneRadio>
+						</div>
+		</div>				
+	
+</html>

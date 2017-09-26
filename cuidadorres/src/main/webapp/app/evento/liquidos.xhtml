@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<div class="ui-g">
+	<div class="ui-g-6 ui-md-7 ui-lg-3">
+		<p:outputLabel value="#{bundle.form_description}" for="opLIQ"></p:outputLabel>
+	</div>
+	<div class="ui-g-6 ui-md-5 ui-lg-9">
+		<p:selectOneRadio id="opLIQ" value="#{eventomb.evento.descricao}" required="true" columns="1" layout="responsive">
+			<f:selectItem itemLabel="#{bundle.pouco}" itemValue="#{bundle.pouco}" />
+			<f:selectItem itemLabel="#{bundle.moderada}"
+				itemValue="#{bundle.moderada}" />
+			<f:selectItem itemLabel="#{bundle.grande}"
+				itemValue="#{bundle.grande}" />
+
+		</p:selectOneRadio>
+	</div>
+</div>
+</html>

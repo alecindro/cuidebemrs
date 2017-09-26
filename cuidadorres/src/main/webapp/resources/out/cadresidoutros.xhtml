@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/resources/out/template.xhtml">
+	
+	<ui:define name="content">
+		<p:panel header="#{bundle.dadoscomplementares}">
+			<h:form>
+			<h:inputHidden value="#{cadResidencia.residencia.idresidencia}" />
+			<h:inputHidden value="#{cadResidencia.residencia.razao}" />
+			<p:panelGrid columns="2" layout="grid" columnClasses="twenty-percent, eighty-percent">
+			<p:outputLabel value="#{bundle.fantasia}" for="fantasia"></p:outputLabel>
+			<p:inputText id="fantasia" styleClass="hundred-percent" value="#{cadResidencia.residencia.fantasia}"></p:inputText>
+			<p:outputLabel value="#{bundle.cnpjorcpf}" for="cnpj"></p:outputLabel>
+			<h:panelGroup>
+			<p:inputText id="cnpj" required="true" placeholder="00000000000000" styleClass="twenty-percent align_right" maxlength="14" value="#{cadResidencia.residencia.cnpj}">
+			<p:keyFilter mask="int" ></p:keyFilter>
+			</p:inputText>
+			<h:outputText value="#{bundle.somentenumeros}" />
+			</h:panelGroup>
+			<p:outputLabel value="#{bundle.cep}" for="cep"></p:outputLabel>
+			<h:panelGroup>	
+			<p:inputText id="cep" placeholder="00000000000" styleClass="twenty-percent align_right" maxlength="8" value="#{cadResidencia.residencia.cep}">
+			<p:keyFilter mask="int" ></p:keyFilter>
+			</p:inputText>
+			<h:outputText value="#{bundle.somentenumeros}" />
+			</h:panelGroup>
+			<p:outputLabel value="#{bundle.endereco}" for="endereco"></p:outputLabel>
+			<p:inputText id="endereco" styleClass="hundred-percent" value="#{cadResidencia.residencia.endereco}"></p:inputText>
+			</p:panelGrid>
+			<p:commandButton value="#{bundle.save}" styleClass="float_right twenty-percent" action="#{cadResidencia.edit}"></p:commandButton>
+			</h:form>
+			</p:panel>
+	</ui:define>
+	</ui:composition>
+</html>

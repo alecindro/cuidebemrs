@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:form prependId="false">
+	<p:panel id="timeline" style="width:100%">
+		<f:facet name="header">
+	#{bundle.timeline_de} #{eventopacientemb.paciente.apelido}
+	</f:facet>
+		<section class="timeline">
+		<ul>
+			<p:outputPanel rendered="#{eventopacientemb.eventos.rowCount == 0}"
+				style="color:#000">
+					#{bundle.noevento_register}
+					</p:outputPanel>
+			<ui:repeat var="evento" value="#{eventopacientemb.eventos}">
+				<li class="in-view">
+					<div>
+						<h:inputHidden value="#{evento.idevento}" />
+						<time>#{evento.hour}</time>
+						#{evento.data} <br /> #{evento.grupoevento} <br />
+						#{evento.subgrupoevento} <br /> #{evento.respeventos} <br />
+						Cuidador : #{evento.usuario.apelido}
+					</div> <p:commandButton icon="fa fa-fw fa-remove" styleClass="ui-btn-timeline"
+						action="#{eventopacientemb.excluirEvento}"
+						rendered="#{evento.usuario.idusuario eq eventopacientemb.usuario.idusuario}"
+						update="timeline">	<p:confirm header="#{bundle.confirmation}" message="#{bundle.message_delete}" icon="ui-icon-alert" />
+							
+						
+						<f:param name="idpaciente"
+							value="#{eventopacientemb.paciente.idpaciente}" />
+					</p:commandButton> <span class="ui-btn-timeline" style="#{evento.usuario.idusuario eq eventopacientemb.usuario.idusuario?'display:none':'display:'}"> </span>
+				</li>
+			</ui:repeat>
+		</ul>
+		</section>
+	</p:panel>
+</h:form>
+</html>
