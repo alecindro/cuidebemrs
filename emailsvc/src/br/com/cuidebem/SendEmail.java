@@ -5,6 +5,7 @@ import java.io.File;
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.annotation.Resource;
+import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
 import javax.mail.Address;
 import javax.mail.Message;
@@ -20,7 +21,7 @@ public class SendEmail {
 	 @Resource(mappedName="java:/cuidebemmail")
 	    private Session mailSession;
 	 
-	 
+	 @Asynchronous
 	 public void send(String to_email, String subject, String content, String type_content){
 		 try    {
              MimeMessage m = new MimeMessage(mailSession);

@@ -9,8 +9,26 @@
 	<ui:define name="content">
 		<p:outputPanel id="createpaciente">
 			<div class="ui-g">
-				<div class="ui-g-12 ui-md-12 ui-lg-6">
-					<p:panel header="#{bundle.cadpaciente}" toggleable="true">
+
+				<div class="ui-g-3 ui-md-2 ui-lg-2">
+				<p:panel header="Menu" visible="#{pacientemb.paciente.idpaciente != null}" id="menupanel">
+					<h:form id="menupaciente">
+						<p:menu style="width:100%">
+							<p:menuitem value="#{bundle.cadastro}" url="#paneldatapaciente" />
+							<p:menuitem value="#{bundle.foto}" url="#fotopanel" />
+							<p:menuitem value="#{bundle.patologias}" url="#panelpatologias" />
+							<p:menuitem value="#{bundle.responsaveis}" url="#panelresp" />
+							<p:menuitem value="#{bundle.agenda}" url="#panelagenda" />
+							<p:menuitem value="#{bundle.return}" outcome="/app/paciente/pacientes.xhtml" />
+						</p:menu>
+
+					</h:form>
+					</p:panel>
+					<p:sticky target="menupanel"></p:sticky>
+				</div>
+				<div class="ui-g-9 ui-md-10 ui-lg-10">
+
+					<p:panel header="#{bundle.cadpaciente}" id="paneldatapaciente">
 						<h:form id="datapaciente">
 							<h:inputHidden value="#{pacientemb.paciente.idpaciente}" />
 							<p:panelGrid columns="2" layout="grid"
@@ -47,13 +65,13 @@
 									title="#{bundle.datanascimento}" showOn="button" />
 							</p:panelGrid>
 							<p:button value="#{bundle.cancel}"
-								outcome="/app/paciente/pacientes.xhtml"
-								/>
+								outcome="/app/paciente/pacientes.xhtml" />
 
 							<p:commandButton value="#{bundle.delete}"
 								action="#{pacientemb.delPaciente}"
 								rendered="#{pacientemb.paciente.idpaciente != null}">
-								<p:confirm header="#{bundle.confirmation}" message="#{bundle.message_delete}" icon="ui-icon-alert" />
+								<p:confirm header="#{bundle.confirmation}"
+									message="#{bundle.message_delete}" icon="ui-icon-alert" />
 								<f:param name="idpaciente"
 									value="#{pacientemb.paciente.idpaciente}" />
 							</p:commandButton>
@@ -63,10 +81,10 @@
 						</h:form>
 					</p:panel>
 				</div>
-				<div class="ui-g-12 ui-md-12 ui-lg-6">
-					<p:panel header="#{bundle.foto}"
-						visible="#{pacientemb.paciente.idpaciente != null}"
-						toggleable="true">
+				<div class="ui-g-3 ui-md-2 ui-lg-2"></div>
+				<div class="ui-g-9 ui-md-10 ui-lg-10">
+					<p:panel header="#{bundle.foto}" id="fotopanel"
+						visible="#{pacientemb.paciente.idpaciente != null}">
 						<h:form id="fotopaciente" prependId="false">
 							<p:panelGrid columns="2" layout="grid"
 								columnClasses="thirty-percent,seventy-percent">
@@ -90,8 +108,9 @@
 						</h:form>
 					</p:panel>
 				</div>
-				<div class="ui-g-12 ui-md-12 ui-lg-6">
-					<p:panel header="#{bundle.patologias}" toggleable="true"
+				<div class="ui-g-3 ui-md-2 ui-lg-2"></div>
+				<div class="ui-g-9 ui-md-10 ui-lg-10">
+					<p:panel header="#{bundle.patologias}" id="panelpatologias"
 						visible="#{pacientemb.paciente.idpaciente != null}">
 						<h:form>
 							<h:inputHidden value="#{pacientemb.paciente.idpaciente}" />
@@ -111,8 +130,9 @@
 						</h:form>
 					</p:panel>
 				</div>
-				<div class="ui-g-12 ui-md-12 ui-lg-6">
-					<p:panel header="#{bundle.responsaveis}" toggleable="true"
+				<div class="ui-g-3 ui-md-2 ui-lg-2"></div>
+				<div class="ui-g-9 ui-md-10 ui-lg-10">
+					<p:panel header="#{bundle.responsaveis}" id="panelresp"
 						visible="#{pacientemb.paciente.idpaciente != null}">
 						<h:form id="cadresponsavel" prependId="false">
 							<h:inputHidden value="#{pacientemb.paciente.idpaciente}" />
@@ -144,28 +164,32 @@
 
 									</p:panelGrid>
 									<f:facet name="footer">
-					Email: #{responsavel.email}<br/>
+					Email: #{responsavel.email}<br />
 					Vínculo: #{responsavel.vinculo}
-					<p:dataList value="#{responsavel.telefones}" var="telefone"  type="definition">
-					<f:facet name="header">Telefones</f:facet>
+					<p:dataList value="#{responsavel.telefones}" var="telefone"
+											type="definition">
+											<f:facet name="header">Telefones</f:facet>
 					#{telefone.ddd} - #{telefone.telefone} 
 					</p:dataList>
-					</f:facet>
+									</f:facet>
 								</p:panel>
 							</p:dataGrid>
 						</h:form>
 					</p:panel>
 				</div>
-				<div class="ui-g-12 ui-md-12 ui-lg-12">
-					<p:panel header="#{bundle.agenda}" toggleable="true"
+				<div class="ui-g-3 ui-md-2 ui-lg-2"></div>
+				<div class="ui-g-9 ui-md-10 ui-lg-10">
+					<p:panel header="#{bundle.agenda}" id="panelagenda"
 						visible="#{pacientemb.paciente.idpaciente != null}">
-						
-						<p:commandButton action="/app/paciente/listagenda.xhtml" value="#{bundle.agendamento}">
-						<f:param name="idpaciente" value="#{pacientemb.paciente.idpaciente}"></f:param>
+
+						<p:commandButton action="/app/paciente/listagenda.xhtml"
+							value="#{bundle.agendamento}">
+							<f:param name="idpaciente"
+								value="#{pacientemb.paciente.idpaciente}"></f:param>
 						</p:commandButton>
-						
-				<ui:include src="/app/paciente/tableAgenda.xhtml" />
-			
+
+						<ui:include src="/app/paciente/tableAgenda.xhtml" />
+
 					</p:panel>
 				</div>
 			</div>

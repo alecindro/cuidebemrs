@@ -183,7 +183,7 @@ private static String bodyActivation = "<div style='text-align:center'>"+
 	@EJB
 	private SendEmail sendEmail;
 	
-	@Asynchronous
+	
 	public void confirmarEmail(String email, String name){
 		String confirma = "";
 		confirma = content_email.replace(bodyEmail, bodyActivation);
@@ -193,7 +193,7 @@ private static String bodyActivation = "<div style='text-align:center'>"+
 		sendEmail.send(email, subject_email, confirma, content_type);
 	}
 	
-	@Asynchronous
+	
 	public void desbloquearEmail(String email){
 		String desbloquea = "";
 		desbloquea = content_email.replace(bodyEmail, bodyDesblocked);
@@ -203,7 +203,7 @@ private static String bodyActivation = "<div style='text-align:center'>"+
 		sendEmail.send(email, desbloqued_subject_email, desbloquea, content_type);
 	}
 	
-	@Asynchronous
+	
 	public void convidarCuidador(String nomeResponsavel, String email, String nomePaciente, int idconvite){
 		String confirma = "";
 		confirma = content_email.replace(bodyEmail, conviteCuidador);
@@ -215,7 +215,7 @@ private static String bodyActivation = "<div style='text-align:center'>"+
 		confirma = confirma.replace(replace_user, email);		
 		sendEmail.send(email, subject_email_cuidador, confirma, content_type);
 	}
-	@Asynchronous
+	
 	public void alteraSenha(String email,String emailEncrypt, String nomeUsuario){
 		String altera = "";
 		altera = content_email.replace(bodyEmail, alterarSenha);
@@ -225,7 +225,7 @@ private static String bodyActivation = "<div style='text-align:center'>"+
 		sendEmail.send(email, "Alterar Senha", altera, content_type);
 	}
 	
-	@Asynchronous
+	
 	public void cadastroCuidador(String nomeResponsavel, String email, String nomePaciente, int idconvite){
 		String confirma = "";
 		confirma = content_email.replace(bodyEmail, Emailsvc.cadastroCuidador);
@@ -238,7 +238,7 @@ private static String bodyActivation = "<div style='text-align:center'>"+
 		sendEmail.send(email, subject_email, confirma, content_type);
 	}
 	
-	@Asynchronous
+	
 	public void relatorio(File file, String nomeResponsavel, String email){
 		String report = "";
 		report = content_email.replace(bodyEmail, Emailsvc.reportPaciente);

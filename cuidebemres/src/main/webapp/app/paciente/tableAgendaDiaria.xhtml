@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-				<p:dataTable var="agenda" value="#{agendadiaria.agendas}"
+				<p:dataTable var="agenda" value="#{agendadiaria.agendas}" id="tableAgenda"
 					reflow="true" emptyMessage="#{bundle.no_agendamento}">
 					<f:facet name="header">#{bundle.agenda}</f:facet>
 					<p:column>

@@ -1,0 +1,12 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<p:panel id="memorando" style="width:100%" header="#{bundle.memorando}">
+<h:outputText value="#{memomb.memorando.descricao}" style="width:100%" escape="false"/>
+<h:outputText rendered="#{memomb.memorando.descricao == null}"  style="width:100%" value="#{bundle.no_memorando}"/>
+
+</p:panel>
+</html>

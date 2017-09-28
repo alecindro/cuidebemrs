@@ -8,8 +8,24 @@
 <ui:composition template="/resources/template.xhtml">
 	<ui:define name="content">
 		<p:outputPanel id="createuser">
+<div class="ui-g">
 
-			<p:panel header="#{bundle.caduser}" toggleable="true">
+				<div class="ui-g-3 ui-md-2 ui-lg-2">
+				<p:panel header="Menu" id="menupanel" visible="#{usuariomb.usuario.idusuario != null}">
+					<h:form id="menupaciente">
+						<p:menu style="width:100%">
+							<p:menuitem value="#{bundle.cadastro}" url="#paneluser" />
+							<p:menuitem value="#{bundle.foto}" url="#fotopanel" />
+							<p:menuitem value="#{bundle.telefones}" url="#panelTelefone" />
+							<p:menuitem value="#{bundle.return}" outcome="/app/usuario/usuarios.xhtml" />
+						</p:menu>
+
+					</h:form>
+					</p:panel>
+					<p:sticky target="menupanel"></p:sticky>
+				</div>
+				<div class="ui-g-9 ui-md-10 ui-lg-10">
+			<p:panel header="#{bundle.caduser}" id="paneluser">
 				<h:form id="UsuarioCreateForm">
 					<h:inputHidden value="#{usuariomb.usuario.idusuario}" />
 					<h:inputHidden value="#{usuariomb.usuario.enabled}" />
@@ -74,7 +90,10 @@
 
 				</h:form>
 			</p:panel>
-			<p:panel header="#{bundle.foto}" visible="#{usuariomb.usuario.idusuario != null}" toggleable="true">
+			</div>
+				<div class="ui-g-3 ui-md-2 ui-lg-2"></div>
+				<div class="ui-g-9 ui-md-10 ui-lg-10">
+			<p:panel header="#{bundle.foto}" visible="#{usuariomb.usuario.idusuario != null}" id="fotopanel">
 				<h:form>
 				<p:panelGrid columns="2" layout="grid" columnClasses="thirty-percent,seventy-percent">
 					<p:outputPanel id="userimage">
@@ -94,8 +113,11 @@
 					</p:panelGrid>
 				</h:form>
 			</p:panel>
-			<p:panel header="#{bundle.telefones}"
-				visible="#{usuariomb.usuario.idusuario != null}" toggleable="true">
+			</div>
+			<div class="ui-g-3 ui-md-2 ui-lg-2"></div>
+			<div class="ui-g-9 ui-md-10 ui-lg-10">
+			<p:panel header="#{bundle.telefones}" id="panelTelefone"
+				visible="#{usuariomb.usuario.idusuario != null}">
 				<h:form>
 					<h:inputHidden value="#{usuariomb.usuario.idusuario}" />
 					<p:panelGrid columns="2" layout="grid"
@@ -160,6 +182,8 @@
 				
 				
 			</p:panel>
+	</div>
+	</div>
 		</p:outputPanel>
 	</ui:define>
 
