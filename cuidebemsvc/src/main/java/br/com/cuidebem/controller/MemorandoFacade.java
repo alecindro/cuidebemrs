@@ -1,5 +1,6 @@
 package br.com.cuidebem.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -22,5 +23,15 @@ public class MemorandoFacade extends AbstractFacade<Memorando>{
 		}
 		return memorandos.get(0);
 	}
+	
+	public Memorando loadbyDateAtual(Integer idpaciente, Date date) throws ControllerException{
+		Memorando memorando = new Memorando();
+		List<Memorando> memorandos = findByNativeQuery("Memorando.findByDate", date,idpaciente);
+		if(memorandos == null || memorandos.isEmpty()){
+			return memorando;	
+		}
+		return memorandos.get(0);
+	}
+
 
 }

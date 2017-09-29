@@ -26,9 +26,9 @@ public class SendEmail {
 		 try    {
              MimeMessage m = new MimeMessage(mailSession);
              //Address from = new InternetAddress(from_email);
-             Address[] to = new InternetAddress[] {new InternetAddress(to_email) };
+             //Address[] to = new InternetAddress[] {new InternetAddress(to_email) };
              //m.setFrom(from);
-             m.setRecipients(Message.RecipientType.TO, to);
+             m.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to_email));
              m.setSubject(subject);
              m.setSentDate(new java.util.Date());
              m.setContent(content,type_content);
@@ -40,7 +40,7 @@ public class SendEmail {
             
          }
 	 }
-	 
+	 @Asynchronous
 	 public void send(String to_email, String subject, String content, String type_content, File file){
 		 try    {
              MimeMessage m = new MimeMessage(mailSession);

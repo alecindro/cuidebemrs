@@ -11,11 +11,12 @@ public class EventoEmailModel {
 
 	private Date data;
 	private String paciente;
-	private byte[] photo;
+	private Integer idpaciente;
 	private String memorando;
 	private List<Evento> eventos;
 	private List<Responsavel> responsaveis;
 	private String residencia;
+	
 	public Date getData() {
 		return data;
 	}
@@ -28,11 +29,13 @@ public class EventoEmailModel {
 	public void setPaciente(String paciente) {
 		this.paciente = paciente;
 	}
-	public byte[] getPhoto() {
-		return photo;
+	
+	
+	public Integer getIdpaciente() {
+		return idpaciente;
 	}
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
+	public void setIdpaciente(Integer idpaciente) {
+		this.idpaciente = idpaciente;
 	}
 	public String getMemorando() {
 		return memorando;

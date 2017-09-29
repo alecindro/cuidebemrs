@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+
+	<!-- <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true">
+	-->
+	<h:form>
+	<h:inputHidden value="#{eventoemailmb.idpaciente}" />
+	<p:panelGrid columns="2" layout="grid">
+	<p:outputLabel value="#{bundle.form_data}" for="dtinicio" />
+								<p:calendar id="dtinicio" pattern="dd/MM/yyyy" required="true" locale="pt"
+									value="#{eventoemailmb.date}" navigator="true"
+									mode="popup" yearRange="c-1:c+0" showOn="button" />
+	<p:outputLabel value="#{bundle.form_responsaveis}" for="resp" />
+	<p:selectCheckboxMenu value="#{eventoemailmb.idresponsaveis}" id="resp" multiple="true" styleClass="hundred-percent"
+                              filter="true" filterMatchMode="startsWith">
+            <f:selectItems value="#{eventoemailmb.selectResponsaveis}" />
+        </p:selectCheckboxMenu>
+    </p:panelGrid>
+	 <p:commandButton action="#{eventoemailmb.sendEmail}" value="Enviar" oncomplete="PF('eventoemail').hide();">
+     <f:param name="idpaciente" value="#{eventoemailmb.idpaciente}"></f:param>
+     </p:commandButton>    
+	</h:form>
+	<!-- 
+	</p:dialog> -->
+	
+</html>

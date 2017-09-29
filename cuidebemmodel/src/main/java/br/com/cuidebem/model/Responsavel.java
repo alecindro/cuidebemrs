@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlTransient;
 	,@NamedQuery(name = "Responsavel.findByEnabled", query = "SELECT r FROM Responsavel r WHERE r.enabled = :enabled")
     , @NamedQuery(name = "Responsavel.findByEmail", query = "SELECT r FROM Responsavel r WHERE r.email = :email")})
 @NamedNativeQueries({
-	@NamedNativeQuery(name="Responsavel.findByPaciente", query="select * from responsavel r where r.idresponsavel in (select rp.idresponsavel from responsavel_paciente rp where rp.idpaciente = ?1) and r.enabled = 1", resultClass=Responsavel.class)
+	@NamedNativeQuery(name="Responsavel.findByPaciente", query="select r.* from responsavel r inner join responsavel_paciente rp on r.idresponsavel = rp.idresponsavel where rp.idpaciente = ?1 and r.enabled = 1", resultClass=Responsavel.class)
 })
 public class Responsavel implements Serializable {
 

@@ -1,7 +1,5 @@
 package br.com.cuidebem.view.memorando;
 
-import java.util.Date;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;

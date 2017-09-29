@@ -22,7 +22,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Memorando.findByDataRegistro", query = "SELECT m FROM Memorando m where m.dataregistro = :dataregistro and m.idpaciente = :idpaciente")
 })
 @NamedNativeQueries({
-	@NamedNativeQuery(name="Memorando.findAtual",query="SELECT * from memorando m where m.dataregistro >= curdate() and m.idpaciente = ?1",resultClass=Memorando.class)
+	@NamedNativeQuery(name="Memorando.findAtual",query="SELECT * from memorando m where m.dataregistro >= curdate() and m.idpaciente = ?1",resultClass=Memorando.class),
+	@NamedNativeQuery(name="Memorando.findByDate",query="SELECT * from memorando m where date(m.dataregistro) = date(?1) and m.idpaciente = ?2",resultClass=Memorando.class)
 })
 public class Memorando implements Serializable{
 
