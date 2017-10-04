@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Telefone.findByTipo", query = "SELECT t FROM Telefone t WHERE t.tipo = :tipo")
     , @NamedQuery(name = "Telefone.findByOperadora", query = "SELECT t FROM Telefone t WHERE t.operadora = :operadora")})
 @NamedNativeQueries({
-	@NamedNativeQuery(name = "Telefone.findByIdResponsavel", query="Select * from Telefone t inner join responsavel_telefone rt on t.idtelefone = rt.idtelefone where rt.idresponsavel = ?1", resultClass=Telefone.class)
+	@NamedNativeQuery(name = "Telefone.findByIdResponsavel", query="Select * from telefone t inner join responsavel_telefone rt on t.idtelefone = rt.idtelefone where rt.idresponsavel = ?1", resultClass=Telefone.class)
 })
 public class Telefone implements Serializable {
 

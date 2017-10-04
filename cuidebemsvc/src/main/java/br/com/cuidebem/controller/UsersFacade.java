@@ -63,5 +63,17 @@ public class UsersFacade extends AbstractFacade<Users> {
 		edit(user);
 	}
 	
+	 public void confirmaAceite(String email) throws ControllerException{
+	    	Users user = find(email);
+	    	if(user == null){
+	    		throw new ControllerException("Usuário não encontrado: "+email);
+	    	}
+	    	if (!user.getBlocked()){
+	    		throw new ControllerException("usuário já foi desbloqueado");
+	    	}
+	    	user.setBlocked(false);
+	    	user.setActivation(new Date());
+	    	edit(user);
+	    }
 	
 }

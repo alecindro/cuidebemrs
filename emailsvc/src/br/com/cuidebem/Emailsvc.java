@@ -2,7 +2,6 @@ package br.com.cuidebem;
 
 import java.io.File;
 
-import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -87,7 +86,7 @@ private static String bodyActivation = "<div style='text-align:center'>"+
 		"<a href='#{link}' class='btn btn-success'>Aceito os termos do acordo</a>"+
 		"</footer>"+
 		"<div style='text-align:center'>"+
-		"<img src='http://www.cuidebemapp.com/resources/img/logo.png'/>"+
+		"<img src='http://lar.cuidebemapp.com/resources/img/logo.png'/>"+
 		"</div>"+
 		"</blockquote>";	
 	
@@ -98,10 +97,10 @@ private static String bodyActivation = "<div style='text-align:center'>"+
 "</div>"+
 "<p>Seu usu\u00e1rio est\u00E1 bloqueado. Para desbloque\u00e1-lo, favor clicar no bot\u00e3o abaixo:</p>"+
 "<footer style='text-align:center'>"+
-"<a href='#{link}' class='btn btn-success'>Desbloquear Usu\u00e1rio</a>"+
+"<a href='{0}' class='btn btn-success'>Desbloquear Usu\u00e1rio</a>"+
 "</footer>"+
 "<div style='text-align:center'>"+
-"<img src='http://www.cuidebemapp.com/resources/img/logo.png'/>"+
+"<img src='http://www.lar.cuidebemapp.com/resources/img/logo.png'/>"+
 "</div>"+
 "</blockquote>";
 	
@@ -118,7 +117,7 @@ private static String bodyActivation = "<div style='text-align:center'>"+
 			"<a href='#{link}' class='btn btn-success'>Aceito</a>"+
 			"</footer>"+
 			"<div style='text-align:center'>"+
-			"<img src='http://www.cuidebemapp.com/resources/img/logo.png'/>"+
+			"<img src='http://lar.cuidebemapp.com/resources/img/logo.png'/>"+
 			"</div>"+
 			"</blockquote>";
 	
@@ -134,7 +133,7 @@ private static String bodyActivation = "<div style='text-align:center'>"+
 			"<a href='#{link}' class='btn btn-success'>Aceito</a>"+
 			"</footer>"+
 			"<div style='text-align:center'>"+
-			"<img src='http://www.cuidebemapp.com/resources/img/logo.png'/>"+
+			"<img src='http://lar.cuidebemapp.com/resources/img/logo.png'/>"+
 			"</div>"+
 			"</blockquote>";
 	
@@ -149,7 +148,7 @@ private static String bodyActivation = "<div style='text-align:center'>"+
 			"<a href='#{link}' class='btn btn-success'>Alterar a senha</a>"+
 			"</footer>"+
 			"<div style='text-align:center'>"+
-			"<img src='http://www.cuidebemapp.com/resources/img/logo.png'/>"+
+			"<img src='http://lar.cuidebemapp.com/resources/img/logo.png'/>"+
 			"</div>"+
 			"</blockquote>";	
 	
@@ -162,24 +161,25 @@ private static String bodyActivation = "<div style='text-align:center'>"+
 			"<footer style='text-align:center'>"+
 			"</footer>"+
 			"<div style='text-align:center'>"+
-			"<img src='http://www.cuidebemapp.com/resources/img/logo.png'/>"+
+			"<img src='http://lar.cuidebemapp.com/resources/img/logo.png'/>"+
 			"</div>"+
 			"</blockquote>";	
 	
 	
 	private static final String link = "#{link}";
+	private static final String _app = "#{app}";
 	private static final String replace_user = "#{user}";
 	private static final String idconvite = "#{idconvite}";
 	private static final String nomeResponsavel = "#{nomeResponsavel}";
-	private static final String confirma_link = "http://cuidebemapp.com/rest/confirma/#{user}";
-	private static final String desbloqueio_link = "http://cuidebemapp.com/rest/desbloqueio/#{user}";
-	private static final String convite_cuidador_link = "http://cuidebemapp.com/rest/confirmaCuidador/#{idconvite}/#{user}";
-	private static final String cadastro_cuidador_link = "http://cuidebemapp.com/resources/cadastroCuidador.xhtml?email=#{user}&idconvite=#{idconvite}";
+	private static final String confirma_link = "http://lar.cuidebemapp.com/rest/confirma/#{user}";
+	private static final String desbloqueio_link = "http://lar.cuidebemapp.com/rest/desbloqueio/#{user}/#{app}";
+	private static final String convite_cuidador_link = "http://lar.cuidebemapp.com/rest/confirmaCuidador/#{idconvite}/#{user}";
+	private static final String cadastro_cuidador_link = "http://lar.cuidebemapp.com/resources/cadastroCuidador.xhtml?email=#{user}&idconvite=#{idconvite}";
 	private static String content_type = "text/html;charset=UTF-8";
 	private static final String bodyEmail = "#{bodyemail}";
 	private static final String username = "#{username}";
 	private static final String paciente = "#{paciente}";
-	private static final String alterarsenha_link = "http://cuidebemapp.com/resources/alterasenha.xhtml?email=#{user}";
+	private static final String alterarsenha_link = "http://lar.cuidebemapp.com/resources/alterasenha.xhtml?email=#{user}";
 	@EJB
 	private SendEmail sendEmail;
 	
@@ -194,12 +194,12 @@ private static String bodyActivation = "<div style='text-align:center'>"+
 	}
 	
 	
-	public void desbloquearEmail(String email){
+	public void desbloquearEmail(String email,String app){
 		String desbloquea = "";
 		desbloquea = content_email.replace(bodyEmail, bodyDesblocked);
 		desbloquea = desbloquea.replace(link, desbloqueio_link);
+		desbloquea = desbloquea.replace(_app, app);
 		desbloquea = desbloquea.replace(replace_user, email);
-		
 		sendEmail.send(email, desbloqued_subject_email, desbloquea, content_type);
 	}
 	
