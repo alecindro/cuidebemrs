@@ -19,7 +19,11 @@ import javax.validation.constraints.Size;
 @Embeddable
 public class RolesPermissionsPK implements Serializable {
 
-    @Basic(optional = false)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
     private String rolename;

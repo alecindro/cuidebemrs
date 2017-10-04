@@ -6,9 +6,11 @@
 package br.com.cuidebem.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -70,8 +72,8 @@ public class Users implements Serializable {
     @JoinTable(name = "usersrole", joinColumns = {
         @JoinColumn(name = "email", referencedColumnName = "email")}, inverseJoinColumns = {
         @JoinColumn(name = "role", referencedColumnName = "name")})
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<Roles> rolesList;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Roles> rolesList;
 
     public Users() {
     }
@@ -144,14 +146,14 @@ public class Users implements Serializable {
     }
 
     @XmlTransient
-    public List<Roles> getRolesList() {
+    public Set<Roles> getRolesList() {
     	if(rolesList == null){
-    		rolesList = new ArrayList<Roles>();
+    		rolesList = new HashSet<Roles>();
     	}
         return rolesList;
     }
 
-    public void setRolesList(List<Roles> rolesList) {
+    public void setRolesList(Set<Roles> rolesList) {
         this.rolesList = rolesList;
     }
 

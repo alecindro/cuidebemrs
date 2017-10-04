@@ -6,6 +6,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.model.ListDataModel;
 import javax.inject.Named;
 
+import br.com.cuidebem.controller.UsersFacade;
 import br.com.cuidebem.controller.UsuarioFacade;
 import br.com.cuidebem.controller.exception.ControllerException;
 import br.com.cuidebem.model.Usuario;
@@ -18,6 +19,8 @@ public class UsuariosExcluidosView extends IndexView {
 
 	@EJB
 	private UsuarioFacade usuarioFacade;
+	@EJB
+	private UsersFacade usersFacade;
 	private ListDataModel<Usuario> usuarios = null;
 	private Usuario usuario;
 
@@ -43,6 +46,7 @@ public class UsuariosExcluidosView extends IndexView {
 
 	public String reactive() {
 		try {
+			usersFacade.enabled(usuario.getEmail(), true);
 			usuarioFacade.reativar(usuario);
 			JsfUtil.addSuccessMessage("reactive.sucess");
 			return "/app/usuario/usuarios.xhtml";

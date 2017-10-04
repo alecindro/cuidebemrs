@@ -25,7 +25,10 @@
 							
 					</p:panelGrid>
 					<f:facet name="footer">
-					#{bundle[usuario.tipoUsuario]}
+					<ui:repeat var="tipo" value="#{usuario.roles}">
+					#{bundle[tipo]}<br/>
+					</ui:repeat>
+								
 					</f:facet>
 				</p:panel>
 			</p:dataGrid>

@@ -50,11 +50,11 @@
 							requiredMessage="#{bundle.requiredmessage_nome}" />
 						<p:outputLabel value="#{bundle.form_tipousuario}"
 							for="tipousuario" />
-						<p:selectOneRadio id="tipousuario" required="true"
-							value="#{usuariomb.usuario.tipoUsuario}" layout="responsive" columns="1">
+						<p:selectManyCheckbox  id="tipousuario" required="true"
+							value="#{usuariomb.usuario.roles}" layout="responsive" columns="1">
 							<f:selectItems value="#{usuariomb.tiposUsuarios}" var="tipo"
 								itemLabel="#{bundle[tipo.value]}" itemValue="#{tipo.value}" />
-						</p:selectOneRadio>
+						</p:selectManyCheckbox>
 						<p:outputLabel value="#{bundle.form_apelido}" for="apelido" />
 						<p:inputText id="apelido" value="#{usuariomb.usuario.apelido}"
 							title="#{bundle.apelido}" styleClass="fifty-percent" />
@@ -87,7 +87,10 @@
 					<p:commandButton actionListener="#{usuariomb.create}" rendered="#{usuariomb.usuario.idusuario == null}"
 						value="#{bundle.save}" update="createuser">
 						</p:commandButton>
-
+<p:commandButton actionListener="#{usuariomb.desbloquear()}" rendered="#{usuariomb.bloqueado}" immediate="true"
+						value="#{bundle.desbloquear}" update="createuser">
+							<f:param name="idusuario" value="#{usuariomb.usuario.idusuario}"></f:param>
+						</p:commandButton>
 				</h:form>
 			</p:panel>
 			</div>

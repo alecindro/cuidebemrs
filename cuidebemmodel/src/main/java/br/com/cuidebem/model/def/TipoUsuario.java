@@ -3,8 +3,7 @@ package br.com.cuidebem.model.def;
 public enum TipoUsuario {
 
 	ADMINRESDIDENCIA("adminResidencia"),
-	CUIDADOR("cuidador"),
-	MEDICO("medico");
+	CUIDADOR("cuidador");
 	
 	private String value;
 

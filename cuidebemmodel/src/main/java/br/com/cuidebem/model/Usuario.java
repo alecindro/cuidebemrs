@@ -25,6 +25,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -75,6 +76,9 @@ public class Usuario implements Serializable {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario", fetch = FetchType.EAGER)
 	private List<UsuarioTelefone> usuarioTelefoneList;
+	
+	@Transient
+	private String[] roles;
 
 	public Usuario() {
 	}
@@ -155,6 +159,25 @@ public class Usuario implements Serializable {
 		this.tipoUsuario = tipoUsuario;
 	}
 	
+	
+	@XmlTransient
+	public String[] getRoles() {
+		if(tipoUsuario != null){
+			roles = tipoUsuario.split(",");
+		}
+		return roles;
+	}
+
+	public void setRoles(String[] roles) {
+		if(roles != null && roles.length >0){
+			tipoUsuario = roles[0];
+			for(int i=1;i<roles.length;i++){
+				tipoUsuario=tipoUsuario.concat(",").concat(roles[i]);
+			}	
+		}
+		this.roles = roles;
+	}
+
 	@XmlTransient
 	public List<UsuarioResidencia> getUsuarioResidenciaList() {
 		if (usuarioResidenciaList == null) {

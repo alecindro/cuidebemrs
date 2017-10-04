@@ -13,14 +13,12 @@ import javax.inject.Named;
 
 import org.primefaces.event.FileUploadEvent;
 
-import br.com.cuidebem.controller.RolesFacade;
 import br.com.cuidebem.controller.TelefoneFacade;
 import br.com.cuidebem.controller.UsersFacade;
 import br.com.cuidebem.controller.UsuarioFacade;
 import br.com.cuidebem.controller.UsuarioPhotoFacade;
 import br.com.cuidebem.controller.UsuarioTelefoneFacade;
 import br.com.cuidebem.controller.exception.ControllerException;
-import br.com.cuidebem.model.Roles;
 import br.com.cuidebem.model.Telefone;
 import br.com.cuidebem.model.Usuario;
 import br.com.cuidebem.model.def.Operadoras;
@@ -42,14 +40,15 @@ public class UsuarioView extends IndexView {
 	private UsersFacade usersFacade;
 	@EJB
 	private TelefoneFacade telefoneFacade;
-	@EJB
-	private RolesFacade rolesFacade;
+
 	@EJB
 	private UsuarioPhotoFacade usuarioPhotoFacade;
 	private Usuario usuario;
 
 	private ListDataModel<Telefone> telefones;
 	private Telefone telefone;
+	
+	private boolean bloqueado;
 
 	private String password;
 
@@ -64,6 +63,7 @@ public class UsuarioView extends IndexView {
 		telefones = new ListDataModel<>();
 		if (_idusuario != null) {
 			usuario = usuarioFacade.find(Integer.valueOf(_idusuario));
+			bloqueado = usersFacade.find(usuario.getEmail()).getBlocked();
 			loadTelefones();
 		}
 	}
@@ -71,6 +71,7 @@ public class UsuarioView extends IndexView {
 	public String delete() {
 		if (usuario.getIdusuario() != null) {
 			try {
+				usersFacade.enabled(usuario.getEmail(), false);
 				usuarioFacade.delete(usuario);
 				JsfUtil.addSuccessMessage(Bundle.getValue("del.sucess"));
 				return "/app/usuario/usuarios.xhtml";
@@ -84,8 +85,7 @@ public class UsuarioView extends IndexView {
 
 	public void create() {
 		try {
-			Roles role = rolesFacade.find(usuario.getTipoUsuario());
-			usersFacade.create(role, usuario.getEmail(), password);
+			usersFacade.create(Arrays.asList(usuario.getRoles()), usuario.getEmail(), password);
 			usuario = usuarioFacade.create(getIdresidencia(), usuario);
 			JsfUtil.addSuccessMessage(Bundle.getValue("cadsucesso"));
 		} catch (ControllerException e) {
@@ -95,8 +95,19 @@ public class UsuarioView extends IndexView {
 
 	public void edit() {
 		try {
+			usersFacade.edit(Arrays.asList(usuario.getRoles()), usuario.getEmail(), password);
 			usuario = usuarioFacade.editUsuario(getResidencia(), usuario);
 			JsfUtil.addSuccessMessage(Bundle.getValue("cadsucesso"));
+		} catch (ControllerException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+	
+	public void desbloquear(){
+		try {
+			usersFacade.desbloquear(usuario.getEmail());
+			bloqueado = false;
+			JsfUtil.addSuccessMessage(Bundle.getValue("user_desbloqued"));
 		} catch (ControllerException e) {
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
@@ -192,5 +203,15 @@ public class UsuarioView extends IndexView {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+	public boolean isBloqueado() {
+		return bloqueado;
+	}
+
+	public void setBloqueado(boolean bloqueado) {
+		this.bloqueado = bloqueado;
+	}
+	
+	
 
 }
