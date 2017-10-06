@@ -13,13 +13,14 @@
 </ui:define>
 	<ui:define name="content">
 	
+	
 		<div class="ui-g">
 		
 			<div class="ui-g-3 ui-md-2 ui-lg-2">
 			<p:panel header="Menu" id="menupanel">
 		<h:form id="menuevento">
 			<p:menu style="width:100%">
-			
+			<p:menuitem value="#{bundle.find}" url="#finddate"/>
 		<p:menuitem value="#{bundle.timeline}" url="#timeline"/>
 			<p:menuitem value="#{bundle.memorando}" url="#memorando"/>
 		<p:menuitem value="#{bundle.agenda}" url="#tableAgenda"/>
@@ -34,7 +35,26 @@
 		<p:sticky target="menupanel"></p:sticky>
 		</div>
 			<div class="ui-g-9 ui-md-10 ui-lg-10">
-				<p:panel id="timeline">
+			<p:panel id="finddate">
+			<f:facet name="header">
+			#{bundle.find}
+			</f:facet>
+			<p:panelGrid columns="2" layout="grid" columnClasses="twenty-percent,eighty-percent">
+			<h:outputScript name="jsf.js" library="javax.faces" target="head"/>
+			<p:outputLabel value="#{bundle.form_data}" for="dataevento"></p:outputLabel>
+			<p:calendar id="dataevento" pattern="dd/MM/yyyy" value="#{eventopacientemb.dataEvento}" locale="pt"   widgetVar="dataevento"
+							 navigator="true" mode="popup" yearRange="c-1:c+0">
+					 </p:calendar>
+					 
+			</p:panelGrid>
+			<p:button value="#{bundle.find}" onmousedown="datesel(#{eventopacientemb.paciente.idpaciente})"></p:button>
+			
+			
+			</p:panel>
+			<ui:include src="/app/memorando/memorando.xhtml" />
+			
+			
+						<p:panel id="timeline">
 					<f:facet name="header">
 		#{bundle.timeline_de} #{eventopacientemb.paciente.apelido}
 	</f:facet>
@@ -56,17 +76,18 @@
 					</ul>
 					</section>
 				</p:panel>
-			</div>
-			<div class="ui-g-3 ui-md-2 ui-lg-2"></div>
-			<div class="ui-g-9 ui-md-10 ui-lg-10">
-			<ui:include src="/app/memorando/memorando.xhtml" />
-			</div>
-			<div class="ui-g-3 ui-md-2 ui-lg-2"></div>
-			<div class="ui-g-9 ui-md-10 ui-lg-10">
+			
 			<ui:include src="/app/paciente/tableAgendaDiaria.xhtml" />
 			</div>
 		</div>
-		
+<script type="text/javascript">
+
+function datesel(_idpaciente){
+jsf.ajax.request(this, event, {idpaciente:_idpaciente,dataevento:jQuery('#dataevento_input').val(),render:'@all'});
+event.stopPropagation();
+return false;
+};
+</script>
 	</ui:define>
 </ui:composition>
 </html>

@@ -74,8 +74,11 @@ public class DateUtil {
 		Calendar calendar = Calendar.getInstance();
 		String[] values = dateinput.split("/");
 		calendar.set(Calendar.YEAR, Integer.valueOf(values[2]));
-		calendar.set(Calendar.MONTH, Integer.valueOf(values[1]));
+		calendar.set(Calendar.MONTH, Integer.valueOf(values[1])-1);
 		calendar.set(Calendar.DAY_OF_MONTH, Integer.valueOf(values[0]));
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
 		return calendar.getTime();
 	}
 

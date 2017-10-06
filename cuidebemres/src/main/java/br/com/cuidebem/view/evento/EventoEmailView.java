@@ -17,6 +17,7 @@ import br.com.cuidebem.controller.ResponsavelFacade;
 import br.com.cuidebem.controller.email.EventoEmailService;
 import br.com.cuidebem.controller.exception.ControllerException;
 import br.com.cuidebem.model.Responsavel;
+import br.com.cuidebem.model.util.DateUtil;
 import br.com.cuidebem.translate.Bundle;
 import br.com.cuidebem.view.IndexView;
 import br.com.cuidebem.view.util.JsfUtil;
@@ -39,6 +40,15 @@ public class EventoEmailView extends IndexView{
 	@PostConstruct
 	private void init(){
 		date= Calendar.getInstance().getTime();
+		String _data = JsfUtil.getRequestParameter("dataevento");
+		if(_data != null){
+			try {
+				date = DateUtil.convertDate(_data);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		String _id = JsfUtil.getRequestParameter("idpaciente");
 		if (_id == null) {
 			message = Bundle.getValue("error.loadreponsaveis");

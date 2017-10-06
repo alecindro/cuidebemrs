@@ -9,12 +9,14 @@
 	<!-- <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true">
 	-->
 	<h:form>
+	#{eventoemailmb.date}
 	<h:inputHidden value="#{eventoemailmb.idpaciente}" />
+	<h:inputHidden value="#{eventoemailmb.date}">
+	<f:convertDateTime pattern="dd/MM/yyyy"/>
+	</h:inputHidden>
+	
 	<p:panelGrid columns="2" layout="grid">
-	<p:outputLabel value="#{bundle.form_data}" for="dtinicio" />
-								<p:calendar id="dtinicio" pattern="dd/MM/yyyy" required="true" locale="pt"
-									value="#{eventoemailmb.date}" navigator="true"
-									mode="popup" yearRange="c-1:c+0" showOn="button" />
+	
 	<p:outputLabel value="#{bundle.form_responsaveis}" for="resp" />
 	<p:selectCheckboxMenu value="#{eventoemailmb.idresponsaveis}" id="resp" multiple="true" styleClass="hundred-percent"
                               filter="true" filterMatchMode="startsWith">
@@ -23,6 +25,8 @@
     </p:panelGrid>
 	 <p:commandButton action="#{eventoemailmb.sendEmail}" value="Enviar" oncomplete="PF('eventoemail').hide();">
      <f:param name="idpaciente" value="#{eventoemailmb.idpaciente}"></f:param>
+   
+
      </p:commandButton>    
 	</h:form>
 	<!-- 

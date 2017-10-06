@@ -35,14 +35,14 @@ public class EventoMail {
 	private final static String tablepanelEvento = "<table align=\"center\" style=\"font-family: monospace, 'latoregular', Trebuchet MS, Arial, Helvetica, sans-serif;font-size: 14px; background: #C2D5D3;\">";
 	private final static String leftRow = "<tr><td style=\"width:90%; border:1px solid #46A7A3;background:#46A7A3;color:#dddddd;float:right\">"
 			+ "<time style=\"font-size: 1.2rem;display: block;font-weight: bold;margin-bottom: 8px;\">{0}</time>"
-			+ "{1} {2}  {3} {4} {5}</td>" + "<td style=\"text-align:center;width:20%\">" + "</td><td></td></tr>";
+			+ "{1} {2}  {3} {4} {5} {6}</td>" + "<td style=\"text-align:center;width:20%\">" + "</td><td></td></tr>";
 	private final static String centerRow = "<tr style=\"height: 30px\"><td></td><td style=\"vertical-align: baseline;text-align:center;width:20%\">"
 			+ "<span class=\"ui-btn-timeline\" style=\"content: '';position: absolute;transform: translateX(-50%);width: 30px;height: 30px;border-radius: 50%;background: inherit; background: #46A7A3 !important;border-color: #46A7A3 !important;\"> "
 			+ "</span></td><td></td></tr>";
 	private final static String rightRow = "<tr><td ></td>" + "<td style=\"width:20%;text-align:center\">"
 			+ "</td><td style=\"border:1px solid #46A7A3;background:#46A7A3;color:#dddddd;float:left;width:90%\">"
 			+ "<time style=\"font-size: 1.2rem;display: block;font-weight: bold;margin-bottom: 8px;\">{0}</time>"
-			+ "{1} {2}  {3} {4} {5}</td></tr>";
+			+ "{1} {2}  {3} {4} {5} {6}</td></tr>";
 	private final static String endTableEvento = "</table>";
 	private final static String content_type = "text/html;charset=UTF-8";
 	private final static String subject_email = "Relatório diário de eventos - {0}";
@@ -108,7 +108,7 @@ public class EventoMail {
 			} else {
 				row = MessageFormat.format(rightRow, lineEvento(evento.getHour()), lineEvento(evento.getData()),
 						lineEvento(evento.getGrupoevento()), lineEvento(evento.getSubgrupoevento()),
-						lineEvento(evento.getRespeventos()), lineEvento(evento.getObsevento()),
+						lineEvento(evento.getRespeventos()), lineObsEvento(evento.getObsevento(),evento.getRespeventos()),
 						lineCuidador(evento.getUsuario().getApelido()));
 			}
 			_timeline = _timeline.concat(row);
@@ -123,6 +123,17 @@ public class EventoMail {
 			return "";
 		}
 		return descricao.concat("<br/>");
+	}
+	
+	private String lineObsEvento(String obs, String resp) {
+		if (obs == null || obs.trim().length() == 0) {
+			return "";
+		}
+		
+		if (obs.compareTo(resp) == 0 ) {
+			return "";
+		}
+		return obs.concat("<br/>");
 	}
 
 	private String lineCuidador(String descricao) {

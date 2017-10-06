@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.ListDataModel;
 import javax.inject.Named;
 
@@ -14,6 +15,7 @@ import br.com.cuidebem.controller.PacienteFacade;
 import br.com.cuidebem.controller.exception.ControllerException;
 import br.com.cuidebem.model.Evento;
 import br.com.cuidebem.model.Paciente;
+import br.com.cuidebem.model.util.DateUtil;
 import br.com.cuidebem.view.IndexView;
 import br.com.cuidebem.view.util.JsfUtil;
 
@@ -32,7 +34,16 @@ public class EventoPacienteView extends IndexView {
 
 	@PostConstruct
 	private void init() {
+		String _data = JsfUtil.getRequestParameter("dataevento");
 		dataEvento = Calendar.getInstance().getTime();
+		if(_data!= null){
+			try {
+				dataEvento = DateUtil.convertDate(_data);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		String _id = JsfUtil.getRequestParameter("idpaciente");
 		if (_id != null) {
 			idpaciente = Integer.valueOf(_id);
@@ -50,11 +61,24 @@ public class EventoPacienteView extends IndexView {
 	private void loadEventos() {
 		if (idpaciente != null) {
 			try {
-				eventos = new ListDataModel<>(eventoFacade.findEnabledByPaciente(idpaciente, dataEvento));
+				eventos = new ListDataModel<>(eventoFacade.findByPacienteDataregistro(idpaciente, dataEvento));
 			} catch (ControllerException e) {
 				JsfUtil.addErrorMessage(e, "error.loadeventos");
 			}
 		}
+	}
+	
+	 public void onDateSelect(ValueChangeEvent e) {
+		 dataEvento = (Date) e.getNewValue();
+		 loadEventos();
+	 }
+
+	public Date getDataEvento() {
+		return dataEvento;
+	}
+
+	public void setDataEvento(Date dataEvento) {
+		this.dataEvento = dataEvento;
 	}
 
 	public ListDataModel<Evento> getEventos() {
