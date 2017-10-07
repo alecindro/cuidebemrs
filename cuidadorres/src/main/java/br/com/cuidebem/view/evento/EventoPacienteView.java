@@ -14,6 +14,7 @@ import br.com.cuidebem.controller.PacienteFacade;
 import br.com.cuidebem.controller.exception.ControllerException;
 import br.com.cuidebem.model.Evento;
 import br.com.cuidebem.model.Paciente;
+import br.com.cuidebem.model.util.DateUtil;
 import br.com.cuidebem.translate.Bundle;
 import br.com.cuidebem.view.IndexView;
 import br.com.cuidebem.view.util.JsfUtil;
@@ -30,10 +31,26 @@ public class EventoPacienteView extends IndexView {
 	private PacienteFacade pacienteFacade;
 	private Integer idpaciente;
 	private Paciente paciente;
+	private boolean today;
 
 	@PostConstruct
 	private void init() {
 		dataEvento = Calendar.getInstance().getTime();
+		today = true;
+		String _dataevento = JsfUtil.getRequestParameter("dataevento");
+		if(_dataevento != null){
+			try {
+				Date _data = DateUtil.convertDate(_dataevento);
+				if(_data.compareTo(DateUtil.getZeroHour(dataEvento))!=0){
+					today = false;
+				}
+				dataEvento = _data;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		String _id = JsfUtil.getRequestParameter("idpaciente");
 		if (_id != null) {
 			idpaciente = Integer.valueOf(_id);
@@ -51,7 +68,7 @@ public class EventoPacienteView extends IndexView {
 	private void loadEventos() {
 		if (idpaciente != null) {
 			try {
-				eventos = new ListDataModel<>(eventoFacade.findEnabledByPaciente(idpaciente, dataEvento));
+				eventos = new ListDataModel<>(eventoFacade.findByPacienteDataregistro(idpaciente, dataEvento));
 			} catch (ControllerException e) {
 				JsfUtil.addErrorMessage(e, "error.loadeventos");
 			}
@@ -83,6 +100,23 @@ public class EventoPacienteView extends IndexView {
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
 	}
+
+	public Date getDataEvento() {
+		return dataEvento;
+	}
+
+	public void setDataEvento(Date dataEvento) {
+		this.dataEvento = dataEvento;
+	}
+
+	public boolean isToday() {
+		return today;
+	}
+
+	public void setToday(boolean today) {
+		this.today = today;
+	}
+	
 	
 
 }

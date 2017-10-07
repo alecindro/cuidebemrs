@@ -24,8 +24,8 @@
 						#{evento.subgrupoevento} <br /> #{evento.respeventos} <br />
 						Cuidador : #{evento.usuario.apelido}
 					</div> <p:commandButton icon="fa fa-fw fa-remove" styleClass="ui-btn-timeline"
-						action="#{eventopacientemb.excluirEvento}"
-						rendered="#{evento.usuario.idusuario eq eventopacientemb.usuario.idusuario}"
+						action="#{eventopacientemb.excluirEvento}" 
+						rendered="#{evento.usuario.idusuario eq eventopacientemb.usuario.idusuario}" disabled="#{!eventopacientemb.today}"
 						update="timeline">	<p:confirm header="#{bundle.confirmation}" message="#{bundle.message_delete}" icon="ui-icon-alert" />
 							
 						

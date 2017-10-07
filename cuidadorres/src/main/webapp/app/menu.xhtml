@@ -10,6 +10,12 @@
 		<p:menuitem value="#{bundle.home}" outcome="/app/index.xhtml"/>
 		<p:menuitem value="#{bundle.mydata}" outcome="/app/mydata.xhtml"/>
 		<p:menuitem value="#{bundle.logout}" action="#{index.logout}"/>
+		 <f:facet name="options">
+            <button style="pointer-events: none;" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" disabled="disabled" >
+            <span class="ui-button-text ui-c">Olá, #{index.usuario.apelido}</span>
+            </button>
+            
+        </f:facet>
 </p:menubar>
 </h:form>
 

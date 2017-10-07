@@ -36,6 +36,7 @@ public class AgendaDiaria extends IndexView  {
 		}
 		Integer idpaciente = Integer.valueOf(_idpaciente);
 		Date date = Calendar.getInstance().getTime();
+		date = DateUtil.getZeroHour(date);
 		if(_data != null){
 			try {
 				date = DateUtil.convertDate(_data);

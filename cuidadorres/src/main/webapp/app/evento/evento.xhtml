@@ -56,7 +56,7 @@
 	<ui:include src="/app/evento/observacao.xhtml" />		
 				
 			</p:panelGrid>
-			<p:button value="#{bundle.return}" outcome="/app/agenda/tableAgendaDiaria.xhtml?idpaciente=#{eventomb.paciente.idpaciente}"></p:button>
+			<p:button value="#{bundle.return}" outcome="/app/paciente/pacienteevento.xhtml?idpaciente=#{eventomb.paciente.idpaciente}"></p:button>
 			<p:commandButton value="#{bundle.save}" action="#{eventomb.save}">
 		<f:param name="idpaciente" value="#{eventomb.paciente.idpaciente}"></f:param>
 			</p:commandButton>

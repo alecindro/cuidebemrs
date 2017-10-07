@@ -4,42 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<ui:composition template="/resources/template.xhtml">
-	<ui:define name="content">
-		<div class="ui-g">
-		<div class="ui-g-3 ui-md-2 ui-lg-2">
-		<h:form id="menuagenda">
-			<p:menu style="width:100%">
-			<p:menuitem value="#{bundle.memorando}" url="#memorando"/>
-		<p:menuitem value="#{bundle.timeline}" url="#timeline"/>
-		<p:menuitem value="#{bundle.agenda}" url="#tableAgenda"/>
-		<p:menuitem outcome="/app/evento/evento.xhtml"
-			value="#{bundle.add_evento}"
-			rendered="#{agenda.dataregistro eq null}">
-			<f:param name="idpaciente"
-				value="#{eventopacientemb.paciente.idpaciente}" />
-				</p:menuitem>
-				<p:menuitem outcome="/app/memorando/editMemorando.xhtml"
-			value="#{bundle.add_memorando}">
-			<f:param name="idpaciente"
-				value="#{eventopacientemb.paciente.idpaciente}" />
-				</p:menuitem>
-		<p:menuitem value="#{bundle.return}" outcome="/app/index.xhtml"/>
-</p:menu>
 
-		</h:form>
-		<p:sticky target="menuagenda"></p:sticky>
-		</div>
-			<div class="ui-g-9 ui-md-10 ui-lg-10">
-			<ui:include src="/app/evento/pacienteEvento.xhtml" />
 			
-			</div>
-			<div class="ui-g-3 ui-md-2 ui-lg-2"></div>
-			<div class="ui-g-9 ui-md-10 ui-lg-10">
-			<ui:include src="/app/memorando/memorando.xhtml" />
-			</div>
-			<div class="ui-lg-2"></div>
-			<div class="ui-g-12 ui-md-12 ui-lg-10">
 				<p:dataTable var="agenda" value="#{agendadiaria.agendas}" id="tableAgenda" name="tableAgenda"
 					reflow="true" emptyMessage="#{bundle.no_agendamento}">
 					<f:facet name="header">#{bundle.agenda}</f:facet>
@@ -56,21 +22,17 @@
 					<p:column>
 						<f:facet name="header">#{bundle.data_registro}</f:facet>
 						<p:button outcome="/app/evento/evento.xhtml"
-							value="#{bundle.registrar}"
+							value="#{bundle.registrar}" disabled="#{!agendadiaria.today}"
 							rendered="#{agenda.dataregistro eq null}" style="color:#46A7A3">
 							<f:param name="idpaciente" value="#{agenda.idpaciente}" />
 							<f:param name="idagenda" value="#{agenda.idagenda}" />
 						</p:button>
 						<h:outputText value="#{agenda.dataregistro}"
 							rendered="#{agenda.dataregistro != null}">
-							<f:convertDateTime pattern="HH:mm" />
+							<f:convertDateTime pattern="HH:mm dd/MM" />
 						</h:outputText>
 					</p:column>
 				</p:dataTable>
 			
-			</div>
-				
-		</div>
-	</ui:define>
-</ui:composition>
+
 </html>
