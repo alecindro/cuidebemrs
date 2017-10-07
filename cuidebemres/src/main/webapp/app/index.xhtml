@@ -20,7 +20,7 @@
                                  </f:facet>
 						<p:panel header="#{pacienteEvento.apelido}">
 							<p:panelGrid columns="1" layout="grid">
-								<p:commandLink action="/app/paciente/pacienteEvento.xhtml"
+								<p:link outcome="/app/paciente/pacienteEvento.xhtml"
 									>
 									<h:outputText value="#{pacienteEvento.qtdade}"
 										styleClass="qtevento" rendered="#{pacienteEvento.enabled}" />
@@ -30,7 +30,7 @@
 									</p:graphicImage>
 									<f:param name="idpaciente" value="#{pacienteEvento.idpaciente}" />
 
-								</p:commandLink>
+								</p:link>
 
 							</p:panelGrid>
 <f:facet name="footer">
@@ -58,7 +58,7 @@
                                  </f:facet>
 						<p:panel header="#{cuidadorEvento.apelido}">
 							<p:panelGrid columns="1" layout="grid">
-								<p:commandLink action="/app/usuario/cuidadorEvento.xhtml"
+								<p:link outcome="/app/usuario/cuidadorEvento.xhtml"
 									disabled="#{!cuidadorEvento.enabled}">
 									<h:outputText value="#{cuidadorEvento.qtdade}"
 										styleClass="qtevento" rendered="#{cuidadorEvento.enabled}" />
@@ -68,7 +68,7 @@
 									</p:graphicImage>
 									<f:param name="idcuidador" value="#{cuidadorEvento.idcuidador}" />
 
-								</p:commandLink>
+								</p:link>
 
 							</p:panelGrid>
 

@@ -17,12 +17,12 @@
                                  </f:facet>
 				<p:panel header="#{paciente.nome}">
 					<p:panelGrid columns="1" layout="grid">
-					<p:commandLink action="/app/paciente/paciente.xhtml">
+					<p:link outcome="/app/paciente/paciente.xhtml">
 						<p:graphicImage url="/rs/images/paciente/#{paciente.idpaciente}"
 							cache="false" >
 							</p:graphicImage>
 							<f:param name="idpaciente" value="#{paciente.idpaciente}"/>
-							</p:commandLink>
+							</p:link>
 							
 					</p:panelGrid>
 					<f:facet name="footer">

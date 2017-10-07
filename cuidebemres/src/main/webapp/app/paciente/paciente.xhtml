@@ -136,11 +136,11 @@
 						visible="#{pacientemb.paciente.idpaciente != null}">
 						<h:form id="cadresponsavel" prependId="false">
 							<h:inputHidden value="#{pacientemb.paciente.idpaciente}" />
-							<p:commandButton value="#{bundle.addresponsavel}"
-								action="/app/paciente/responsavel/responsavel.xhtml">
+							<p:button value="#{bundle.addresponsavel}"
+								outcome="/app/paciente/responsavel/responsavel.xhtml">
 								<f:param name="idpaciente"
 									value="#{pacientemb.paciente.idpaciente}" />
-							</p:commandButton>
+							</p:button>
 						</h:form>
 						<h:form id="listresponsavel" prependId="false">
 							<p:dataGrid id="responsavelList"
@@ -150,8 +150,8 @@
 								<p:panel header="#{responsavel.nome}">
 									<p:panelGrid columns="1" layout="grid">
 
-										<p:commandLink
-											action="/app/paciente/responsavel/responsavel.xhtml">
+										<p:link
+											outcome="/app/paciente/responsavel/responsavel.xhtml">
 											<p:graphicImage
 												url="/rs/images/responsavel/#{responsavel.idresponsavel}"
 												cache="false">
@@ -160,7 +160,7 @@
 												value="#{pacientemb.paciente.idpaciente}" />
 											<f:param name="idresponsavel"
 												value="#{responsavel.idresponsavel}" />
-										</p:commandLink>
+										</p:link>
 
 									</p:panelGrid>
 									<f:facet name="footer">
@@ -182,11 +182,11 @@
 					<p:panel header="#{bundle.agenda}" id="panelagenda"
 						visible="#{pacientemb.paciente.idpaciente != null}">
 
-						<p:commandButton action="/app/paciente/listagenda.xhtml"
+						<p:button outcome="/app/paciente/listagenda.xhtml"
 							value="#{bundle.agendamento}">
 							<f:param name="idpaciente"
 								value="#{pacientemb.paciente.idpaciente}"></f:param>
-						</p:commandButton>
+						</p:button>
 
 						<ui:include src="/app/paciente/tableAgenda.xhtml" />
 
