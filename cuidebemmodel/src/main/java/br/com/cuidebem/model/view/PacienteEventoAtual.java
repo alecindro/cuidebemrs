@@ -17,8 +17,8 @@ import br.com.cuidebem.model.Agenda;
 @NamedNativeQuery(name="PacienteEventoAtual.findAllByResidencia", query="  select p.idpaciente,p.apelido,  count(s.idpaciente) as qtdade, (count(s.idpaciente) != 0) as enabled  "
 		+ "from paciente p left join "
 		+ "(select e.grupoevento, e.idpaciente, e.idusuario, e.dataevento "
-		+ "from evento e where e.dataevento between DATE_SUB(now(), INTERVAL 1 DAY) "
-		+ "and now()) s on p.idpaciente = s.idpaciente "
+		+ "from evento e where date(e.dataevento) = date(now()) "
+		+ ") s on p.idpaciente = s.idpaciente "
 		+ "where p.idresidencia = ?1 and p.enabled =1 "
 		+ "group by p.idpaciente;", resultSetMapping="eventoatual")
 @XmlRootElement

@@ -16,6 +16,7 @@ public class EventoEmailModel {
 	private List<Evento> eventos;
 	private List<Responsavel> responsaveis;
 	private String residencia;
+	private byte[] fotoPaciente;
 	
 	public Date getData() {
 		return data;
@@ -66,6 +67,12 @@ public class EventoEmailModel {
 	}
 	public void setResponsaveis(List<Responsavel> responsaveis) {
 		this.responsaveis = responsaveis;
+	}
+	public byte[] getFotoPaciente() {
+		return fotoPaciente;
+	}
+	public void setFotoPaciente(byte[] fotoPaciente) {
+		this.fotoPaciente = fotoPaciente;
 	}
 	
 	

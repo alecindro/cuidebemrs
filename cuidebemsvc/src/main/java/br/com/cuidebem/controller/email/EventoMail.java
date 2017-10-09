@@ -23,7 +23,7 @@ public class EventoMail {
 	private final static String headerpanelfoto = "<div  style=\"padding: .2em;border-radius: 3px;border: 1px solid #262626;color: #dddddd;background-color: #4d4d4d;background: -webkit-radial-gradient(50% 75%,circle,#676767,#343434);\">"
 			+ "<div  style=\"padding: .5em 1em .3em;text-align: center;font-weight: normal;border-radius: 3px;background: linear-gradient(#99a699,#778877);outline: 0;border: 1px solid #3c443c;color: #eeffee;\">"
 			+ "<span style=\"margin: .1em 16px .2em 0;\">" + "Diário do dia {0} - {1}</span></div>";
-	private final static String contentpanelfoto = "<div  style=\"border: 0; background: 0; padding: .5em 1em; color: #dddddd; text-align:center\"><img src=\"http://cuidador.cuidebemapp.com/rs/images/paciente/{0}\" style=\"height: auto\"></img>";
+	private final static String contentpanelfoto = "<div  style=\"border: 0; background: 0; padding: .5em 1em; color: #dddddd; text-align:center\"><img src=\"data:image/jpeg;charset=utf-8;base64,{0}\" style=\"height: auto\"></img>";
 	private final static String footerpanel = "</div></div>";
 	private final static String panelAnotacao = "<div  style=\"padding: .2em;border-radius: 3px;border: 1px solid #262626;color: #dddddd;background-color: #4d4d4d;background: -webkit-radial-gradient(50% 75%,circle,#676767,#343434);\">"
 			+ "<div  style=\"padding: .5em 1em .3em;text-align: center;font-weight: normal;border-radius: 3px;background: linear-gradient(#99a699,#778877);outline: 0;border: 1px solid #3c443c;color: #eeffee;\">"
@@ -59,7 +59,7 @@ public class EventoMail {
 	}
 	
 	public String mountContent(EventoEmailModel model){
-		String _panelFoto = mountPanelFoto(model.getData(), model.getPaciente(), model.getIdpaciente());
+		String _panelFoto = mountPanelFoto(model.getData(), model.getPaciente(), model.getFotoPaciente());
 		String _memorando = mountMemo(model.getMemorando());
 		String _timeline = mountTimeline(model.getEventos());
 		String content = header.concat(_panelFoto).concat(_memorando).concat(_timeline).concat(footer);
@@ -75,10 +75,10 @@ public class EventoMail {
 		return _panel;
 	}
 
-	private String mountPanelFoto(Date data, String paciente, Integer idpaciente) {
+	private String mountPanelFoto(Date data, String paciente, byte[] foto) {
 		String date = DateUtil.convertDate(data);
 		String _panelfoto = MessageFormat.format(headerpanelfoto, date, paciente);
-		String _foto = MessageFormat.format(contentpanelfoto, idpaciente);
+		String _foto = MessageFormat.format(contentpanelfoto, new String(foto));
 		_panelfoto = _panelfoto.concat(_foto).concat(footerpanel);
 		return _panelfoto;
 	}

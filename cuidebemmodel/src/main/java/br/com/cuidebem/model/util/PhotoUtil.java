@@ -45,5 +45,9 @@ public class PhotoUtil {
 		BufferedImage resizeImage =resizeImageWithHint(originalImage, type);
 		ImageIO.write( resizeImage, "jpg", baos );
 	}
+	
+	public static byte[] base64(byte[] photo){
+		return java.util.Base64.getEncoder().encode(photo);
+	}
 }
 
