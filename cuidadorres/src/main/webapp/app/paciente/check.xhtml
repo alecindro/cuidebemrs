@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:composition template="/resources/template.xhtml">
+	<ui:define name="content">
+		<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ui-lg-12">
+		<h:form id="evento_form"> 
+			<h:inputHidden value="#{checkmb.evento.idpaciente}" />
+			<h:inputHidden value="#{checkmb.checkin}" />
+			<p:panelGrid columns="2" layout="grid" columnClasses="twenty-percent,fifty-percent">
+				<f:facet name="header">
+				<b>
+				<p:outputLabel value="#{bundle.checkin}" style="margin-right:10px" rendered="#{checkmb.checkin}"></p:outputLabel>
+				<p:outputLabel value="#{bundle.checkout}" style="margin-right:10px" rendered="#{!checkmb.checkin}"></p:outputLabel>
+					<h:outputText value="#{checkmb.paciente.apelido}" /></b>
+				</f:facet>
+				<p:outputLabel for="time-event" value="Horário:"></p:outputLabel>
+						<p:inputText type="time" id="time-event" name="time-event"
+							value="#{checkmb.evento.hour}" required="true"
+							onchange="maxHour(this)" />
+				
+				
+	<p:outputLabel value="Observação:" for="obsevento"></p:outputLabel>
+	
+		<p:inputTextarea id="obsevento" required="false" styleClass="sixty-percent"
+			value="#{checkmb.evento.obsevento}"></p:inputTextarea>
+				
+			</p:panelGrid>
+			<p:button value="#{bundle.return}" outcome="/app/index.xhtml"></p:button>
+			<p:commandButton value="#{bundle.save}" action="#{checkmb.save}">
+					<f:param name="idpaciente" value="#{eventomb.paciente.idpaciente}"></f:param>
+						<f:param name="checkin" value="#{checkmb.checkin}"></f:param>
+			</p:commandButton>
+		</h:form>
+			<script type="text/javascript">
+				
+
+
+					(function() {
+
+					  'use strict';
+    var x = new Date();
+    var y;
+	if(!y){
+      y = x.getHours();
+
+
+    if(y &lt; 10){
+    y= 0+""+y;
+    }
+    var z = x.getMinutes();
+    if(z &lt; 10){
+    z= 0+""+z;
+    }
+    y=y+":"+z;
+	}
+    if (!jQuery("#evento_form\\:time-event").attr('value')){
+    	jQuery("#evento_form\\:time-event").attr('value',y);
+    	jQuery("#evento_form\\:time-event").attr('max',y);
+        }
+
+    function maxHour(comp){
+        var data = new Date();
+        var hour = data.getHours();
+        var min = data.getMinutes();
+        var compData = comp.value.split(':');
+    	if(hour &lt; compData[0]){
+        	comp.value = hour+':'+min;
+        	if(min &lt; compData[1]){
+            	comp.value = hour+':'+min;
+            }
+        }
+    	
+    }
+					})();
+    
+</script>
+</div>
+
+</div>
+	</ui:define>
+</ui:composition>
+</html>

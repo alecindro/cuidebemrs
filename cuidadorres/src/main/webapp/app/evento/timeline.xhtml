@@ -7,7 +7,7 @@
 <h:form prependId="false">
 	<p:panel id="timeline" style="width:100%">
 		<f:facet name="header">
-	#{bundle.timeline_de} #{eventopacientemb.paciente.apelido}
+	#{bundle.timeline} 
 	</f:facet>
 		<section class="timeline">
 		<ul>
@@ -21,7 +21,7 @@
 						<h:inputHidden value="#{evento.idevento}" />
 						<time>#{evento.hour}</time>
 						#{evento.data} <br /> #{evento.grupoevento} <br />
-						#{evento.subgrupoevento} <br /> #{evento.respeventos} <br />
+						#{evento.subgrupoevento} <br /> #{evento.respeventos} <br /> #{evento.obsevento} <br/>
 						Cuidador : #{evento.usuario.apelido}
 					</div> <p:commandButton icon="fa fa-fw fa-remove" styleClass="ui-btn-timeline"
 						action="#{eventopacientemb.excluirEvento}" 

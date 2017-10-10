@@ -13,8 +13,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @SqlResultSetMapping(name = "eventoCuidadoratual", entities = @EntityResult(entityClass = CuidadorEventoAtual.class))
 @NamedNativeQuery(name = "CuidadorEventoAtual.findAllByResidencia", query = "  select p.idusuario as idcuidador, p.apelido as apelido,  count(s.idusuario) as qtdade, (count(s.idusuario) != 0) "
 		+ "as enabled  from usuario p left join (select e.grupoevento, e.idpaciente, e.idusuario, e.dataevento "
-		+ "from evento e where e.dataevento between DATE_SUB(now(), INTERVAL 1 DAY) "
-		+ "and now()) s on p.idusuario = s.idusuario "
+		+ "from evento e where date(e.dataevento) = date(now())) "
+		+ " s on p.idusuario = s.idusuario "
 		+ "inner join usuario_residencia ur on ur.idusuario = p.idusuario "
 		+ "where ur.idresidencia = ?1 and p.enabled =1 and p.tipousuario = 'cuidador' "
 		+ "group by p.idusuario", resultSetMapping = "eventoCuidadoratual")

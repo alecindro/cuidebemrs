@@ -37,12 +37,25 @@
 <p:panelGrid columns="1" layout="grid" columnClasses="hundred-percent">
 <f:facet name="header">#{bundle.proximoagenda}</f:facet>
 
-<h:outputText value="#{pacienteEvento.agenda.data}" id="nextagenda">
+<h:outputText value="#{pacienteEvento.nextdataagenda}" id="nextagenda" rendered="#{pacienteEvento.nextidagenda != null}">
 <f:convertDateTime pattern="HH:mm"/>
 </h:outputText>
-<h:outputText value="#{pacienteEvento.agenda.subGrupoEvento}" />
-
+<h:outputText value="#{pacienteEvento.nextgrupoagenda} - #{pacienteEvento.nextsubgrupoagenda}" rendered="#{pacienteEvento.nextidagenda != null}"/>
+<h:outputText value="#{bundle.no_agendamento}"
+										rendered="#{pacienteEvento.nextidagenda eq null}" />
 </p:panelGrid>
+<p:panelGrid columns="1" layout="grid"
+											columnClasses="hundred-percent" styleClass="hundred-percent"
+											style="text-align:center">
+											<p:outputLabel value="#{bundle.rel_checkout}"
+												rendered="#{pacienteEvento.checkin}"
+												styleClass="hundred-percent">
+												</p:outputLabel>
+											<p:outputLabel  value="#{bundle.rel_checkin}"
+												rendered="#{!pacienteEvento.checkin}"
+												styleClass="hundred-percent">
+												</p:outputLabel>
+										</p:panelGrid>
 </f:facet>
 						</p:panel>
 					</p:dataGrid>
