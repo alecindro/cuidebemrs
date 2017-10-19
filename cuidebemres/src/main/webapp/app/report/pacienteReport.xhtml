@@ -16,10 +16,10 @@
 <f:selectItems value="#{pacienteReport.pacientes}" var="paciente" itemLabel="#{paciente.apelido}" itemValue="#{paciente.idpaciente}"></f:selectItems>
 </p:selectOneMenu>
 <p:outputLabel value="#{bundle.form_data_inicio}" for="dtinicial"></p:outputLabel>
-<p:calendar value="#{pacienteReport.dataInicial}" id="dtinicial"  pattern="dd/MM/yyyy" required="true" navigator="true" locale="pt"
-									mode="popup" yearRange="c-1:c+0" showOn="button"></p:calendar>
+<p:calendar value="#{pacienteReport.dataInicial}" id="dtinicial"  pattern="dd/MM/yyyy" required="true" navigator="true" locale="pt" widgetVar="dtinicial" 
+									mode="popup" yearRange="c-1:c+0" showOn="button" maxdate="new Date()"></p:calendar>
 <p:outputLabel value="#{bundle.form_data_fim}" for="dtfinal"></p:outputLabel>
-<p:calendar value="#{pacienteReport.dataFinal}" id="dtfinal"  pattern="dd/MM/yyyy" locale="pt" required="true" navigator="true" mode="popup" yearRange="c-1:c+0" showOn="button"></p:calendar>
+<p:calendar maxdate="new Date()" value="#{pacienteReport.dataFinal}" id="dtfinal"  widgetVar="dtfinal" pattern="dd/MM/yyyy" locale="pt" required="true" navigator="true" mode="popup" yearRange="c-1:c+0" showOn="button"></p:calendar>
 </p:panelGrid>
 <p:commandButton value="#{bundle.find}" action="#{pacienteReport.search()}" update="tableEventos"></p:commandButton>
 </h:form>

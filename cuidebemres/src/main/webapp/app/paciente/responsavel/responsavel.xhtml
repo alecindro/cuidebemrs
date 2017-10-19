@@ -149,7 +149,7 @@
 								</p:selectOneMenu>
 							<p:outputLabel value="#{bundle.form_datanascimento}"
 							for="datanascimento" />
-						<p:calendar id="datanascimento" pattern="dd/MM/yyyy"
+						<p:calendar id="datanascimento" pattern="dd/MM/yyyy" maxdate="new Date()"
 							navigator="true" mode="popup" yearRange="c-80:c+0"
 							value="#{responsavelmb.responsavel.datanascimento}"
 							title="#{bundle.datanascimento}" showOn="button" />

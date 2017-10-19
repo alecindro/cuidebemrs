@@ -45,8 +45,9 @@ import br.com.cuidebem.model.util.DateUtil;
 		@NamedQuery(name = "Evento.findByRespeventos", query = "SELECT e FROM Evento e WHERE e.respeventos = :respeventos") })
 @NamedNativeQueries({
 		@NamedNativeQuery(name = "Evento.findByPaciente", query = "select * from evento where idpaciente=?1 and dataevento between ?2 and ?3", resultClass = Evento.class),
-		@NamedNativeQuery(name = "Evento.findByDataPaciente", query = "select * from evento where date(dataregistro) = date(?1) and idpaciente = ?2 order by dataregistro asc", resultClass = Evento.class)
-		})
+		@NamedNativeQuery(name = "Evento.findByDataPaciente", query = "select * from evento where date(dataregistro) = date(?1) and idpaciente = ?2 order by dataregistro asc", resultClass = Evento.class),
+		@NamedNativeQuery(name="Evento.check", query="select * from evento where idpaciente = ?1 and (date(dataevento) between date(?2) and date(?3)) and (grupoevento = 'Saiu' or grupoevento =  'Entrou') and enabled = 1 order by dataregistro asc", resultClass = Evento.class)
+})
 
 public class Evento implements Serializable {
 

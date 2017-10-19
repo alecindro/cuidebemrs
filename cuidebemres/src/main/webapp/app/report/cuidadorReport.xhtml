@@ -16,9 +16,9 @@
 <f:selectItems value="#{cuidadorReport.cuidadores}" var="cuidador" itemLabel="#{cuidador.apelido}" itemValue="#{cuidador.idusuario}"></f:selectItems>
 </p:selectOneMenu>
 <p:outputLabel value="#{bundle.form_data_inicio}" for="dtinicial"></p:outputLabel>
-<p:calendar value="#{cuidadorReport.dataInicial}" id="dtinicial" pattern="dd/MM/yyyy" locale="pt" required="true" navigator="true" mode="popup" yearRange="c-1:c+0" showOn="button"></p:calendar>
+<p:calendar value="#{cuidadorReport.dataInicial}" id="dtinicial" pattern="dd/MM/yyyy" locale="pt" required="true" navigator="true" mode="popup" yearRange="c-1:c+0" showOn="button" maxdate="new Date()"></p:calendar>
 <p:outputLabel value="#{bundle.form_data_fim}" for="dtfinal"></p:outputLabel>
-<p:calendar value="#{cuidadorReport.dataFinal}" id="dtfinal" pattern="dd/MM/yyyy" locale="pt" required="true" navigator="true" mode="popup" yearRange="c-1:c+0" showOn="button"></p:calendar>
+<p:calendar value="#{cuidadorReport.dataFinal}" id="dtfinal" pattern="dd/MM/yyyy" locale="pt" required="true" navigator="true" mode="popup" yearRange="c-1:c+0" showOn="button" maxdate="new Date()"></p:calendar>
 </p:panelGrid>
 <p:commandButton value="#{bundle.find}" action="#{cuidadorReport.search()}" update="tableEventos"></p:commandButton>
 </h:form>

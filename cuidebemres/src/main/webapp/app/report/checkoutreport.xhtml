@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/resources/template.xhtml">
+	<ui:define name="content">
+		<p:fieldset legend="#{bundle.search}">
+			<h:form>
+				<p:panelGrid columns="2" layout="grid"
+					columnClasses="twenty-percent,eighty-percent">
+					<p:outputLabel value="#{bundle.form_paciente}" for="selectpaciente"></p:outputLabel>
+					<p:selectOneMenu id="selectpaciente" value="#{checkReport.idpaciente}" required="true">
+					<f:selectItem itemLabel="Selecione" />
+             <f:selectItems value="#{checkReport.pacientes}"/>
+        </p:selectOneMenu>
+					<p:outputLabel value="#{bundle.form_data_inicio}" for="dtinicial"></p:outputLabel>
+<p:calendar value="#{checkReport.datainicio}" id="dtinicial" pattern="dd/MM/yyyy" locale="pt" required="true" navigator="true" maxdate="new Date()" mode="popup" yearRange="c-1:c+0" showOn="button"></p:calendar>
+<p:outputLabel value="#{bundle.form_data_fim}" for="dtfinal"></p:outputLabel>
+<p:calendar value="#{checkReport.datafim}" id="dtfinal" pattern="dd/MM/yyyy" locale="pt" required="true" navigator="true" mode="popup" maxdate="new Date()" yearRange="c-1:c+0" showOn="button"></p:calendar>
+					
+				</p:panelGrid>
+				<p:commandButton value="#{bundle.find}" action="#{checkReport.checkout}" update="checks"></p:commandButton>
+			</h:form>
+		</p:fieldset>
+		<p:dataTable value="#{checkReport.list}" var="checkreport" emptyMessage="#{bundle.noregister}" id="checks" reflow="true">
+		<p:column headerText="#{bundle.saida}">
+		<h:outputText value="#{checkreport.saida}">
+		<f:convertDateTime pattern="HH:mm dd/MM/yyyy"/>
+		</h:outputText>
+		</p:column>
+		<p:column headerText="#{bundle.entrada}" footerText="Total:">
+		<h:outputText value="#{checkreport.entrada}">
+		<f:convertDateTime pattern="HH:mm dd/MM/yyyy"/>
+		</h:outputText>
+		</p:column>
+		
+		<p:column headerText="#{bundle.tempoperm}" footerText="#{checkReport.totalTime}">
+		<h:outputText value="#{checkreport.tempo}" />
+		</p:column>
+		</p:dataTable>
+	</ui:define>
+</ui:composition>
+</html>

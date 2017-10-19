@@ -46,7 +46,7 @@
 			<h:outputScript name="jsf.js" library="javax.faces" target="head"/>
 			<p:outputLabel value="#{bundle.form_data}" for="dataevento"></p:outputLabel>
 			<p:calendar id="dataevento" pattern="dd/MM/yyyy" value="#{eventopacientemb.dataEvento}" locale="pt"   widgetVar="dataevento"
-							 navigator="true" mode="popup" yearRange="c-1:c+0">
+							 navigator="true" mode="popup" yearRange="c-1:c+0" maxdate="new Date()">
 					 </p:calendar>
 					 
 			</p:panelGrid>

@@ -18,6 +18,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class DateUtil {
 
@@ -159,5 +160,32 @@ public class DateUtil {
 		return LocalDateTime.ofInstant(date.toInstant(), ZoneId.of("America/Sao_Paulo")).getDayOfWeek().getValue();
 	}
 	
+	public static long getDifMinutes(Date initial,Date end){
+		LocalDateTime _initial = LocalDateTime.ofInstant(initial.toInstant(), ZoneId.of("America/Sao_Paulo"));
+		LocalDateTime _end = LocalDateTime.ofInstant(end.toInstant(), ZoneId.of("America/Sao_Paulo"));
+		
+		return ChronoUnit.MINUTES.between(_initial, _end);
+	}
+	
+	public static String getDifHourMinute(Date initial,Date end){
+		Duration dur = Duration.between(initial.toInstant(), end.toInstant());
+		 long millis = dur.toMillis();
+		return String.format("%02d:%02d", 
+	             TimeUnit.MILLISECONDS.toHours(millis),
+	             TimeUnit.MILLISECONDS.toMinutes(millis) - 
+	             TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis))
+	             );
+	}
+	
+	public static int toMinutes(String hour){
+		 String[] t = hour.split(":");
+		    return Integer.valueOf(t[0]) * 60 + Integer.valueOf(t[1]);
+	}
+	
+	public static String totalHours(int total) {
+	    int minutes = total % 60;
+	    int hours = ((total - minutes) / 60) % 24;
+	    return String.format("%02d:%02d", hours, minutes);
+	}
 
 }

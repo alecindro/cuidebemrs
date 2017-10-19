@@ -17,6 +17,8 @@ import br.com.cuidebem.model.Agenda;
 import br.com.cuidebem.model.Evento;
 import br.com.cuidebem.model.Paciente;
 import br.com.cuidebem.model.Usuario;
+import br.com.cuidebem.model.view.CheckReport;
+import br.com.cuidebem.model.view.CheckReportFactory;
 import br.com.cuidebem.translate.Bundle;
 
 /**
@@ -212,5 +214,9 @@ public class EventoFacade extends AbstractFacade<Evento> {
 		edit(evento);
 	}
 	
+	public List<CheckReport> reportCheck(Integer idpaciente, Date inicio, Date fim,boolean checkin) throws ControllerException{
+		List<Evento> eventos = findByNativeQuery("Evento.check", idpaciente,inicio,fim);
+		return CheckReportFactory.mountcheck(eventos, checkin);
+	}
 
 }

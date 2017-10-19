@@ -59,7 +59,7 @@
 								</p:selectOneRadio>
 								<p:outputLabel value="#{bundle.form_datanascimento}"
 									for="datanascimento" />
-								<p:calendar id="datanascimento" pattern="dd/MM/yyyy"
+								<p:calendar id="datanascimento" pattern="dd/MM/yyyy" maxdate="new Date()"
 									navigator="true" mode="popup" yearRange="c-120:c+0"
 									value="#{pacientemb.paciente.datanascimento}" locale="pt"
 									title="#{bundle.datanascimento}" showOn="button" />
