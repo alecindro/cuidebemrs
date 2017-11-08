@@ -90,7 +90,7 @@ public class EventoView extends IndexView{
 			evento.setDataregistro(dataevento);
 			evento.setEnabled(true);
 			evento.setIdusuario(getUsuario().getIdusuario());
-			Rotinas.genResumo(evento);
+			//Rotinas.genResumo(evento);
 			eventoFacade.save(evento, idagenda);
 			evento = new Evento();
 		} catch (ControllerException e) {
@@ -98,7 +98,7 @@ public class EventoView extends IndexView{
 			return null;
 		}
 		JsfUtil.addSuccessMessage(Bundle.getValue("evento_sucess"));
-		return "/app/agenda/tableAgendaDiaria.xhtml?idpaciente="+paciente.getIdpaciente();
+		return "/app/paciente/pacienteevento.xhtml?idpaciente="+paciente.getIdpaciente();
 	}
 	
 	public void grupEventoChanged(ValueChangeEvent  e) {

@@ -37,7 +37,7 @@ public class EventoEmailService {
 		List<Evento> eventos = eventoFacade.findByPacienteDataregistro(idpaciente, dataEvento);
 		Paciente paciente = pacienteFacade.find(idpaciente);
 		Memorando memorando = memorandoFacade.loadbyDateAtual(idpaciente, dataEvento);
-		PacientePhoto pacientePhoto = pacientePhotoFacade.find(idpaciente);
+		//PacientePhoto pacientePhoto = pacientePhotoFacade.find(idpaciente);
 		EventoEmailModel model = new EventoEmailModel();
 		model.setData(dataEvento);
 		model.setEventos(eventos);
@@ -46,11 +46,11 @@ public class EventoEmailService {
 		model.setIdpaciente(idpaciente);
 		model.setResidencia(residencia.getRazao());
 		model.setResponsaveis(responsaveis);
-		byte[] photo = pacientePhoto.getPhoto();
-		if(photo != null){
-		photo = PhotoUtil.base64(photo);
-		}
-		model.setFotoPaciente(photo);
+		//byte[] photo = pacientePhoto.getPhoto();
+		//if(photo != null){
+		//photo = PhotoUtil.base64(photo);
+		//}
+		//model.setFotoPaciente(photo);
 		eventoEmail.sendMessage(model);
 	}
 

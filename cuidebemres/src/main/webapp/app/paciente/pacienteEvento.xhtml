@@ -35,6 +35,11 @@
 		<p:sticky target="menupanel"></p:sticky>
 		</div>
 			<div class="ui-g-9 ui-md-10 ui-lg-10">
+			<div class="ui-panel ui-widget ui-widget-content ui-corner-all">
+			<div id="timeline_header" class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all"><span class="ui-panel-title">
+	Eventos de  #{eventopacientemb.paciente.apelido}
+	</span></div>
+			</div>
 			<p:panel id="finddate">
 			<f:facet name="header">
 			#{bundle.find}
@@ -52,11 +57,11 @@
 			
 			</p:panel>
 			<ui:include src="/app/memorando/memorando.xhtml" />
-			
+			<ui:include src="/app/paciente/pacientephoto.xhtml" />
 			
 						<p:panel id="timeline">
 					<f:facet name="header">
-		#{bundle.timeline_de} #{eventopacientemb.paciente.apelido}
+		#{bundle.timeline} 
 	</f:facet>
 					<section class="timeline">
 					<ul>

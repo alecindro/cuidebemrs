@@ -49,5 +49,17 @@ public class PhotoUtil {
 	public static byte[] base64(byte[] photo){
 		return java.util.Base64.getEncoder().encode(photo);
 	}
+	
+	public static byte[] decoderBase64(byte[] photo){
+		return java.util.Base64.getDecoder().decode(photo);
+	}
+	
+	public static String getExtension(String typeImage){
+		if(typeImage.startsWith("image/")){
+		String[] values = typeImage.split("/");
+		return values[1];
+		}
+		return typeImage;
+	}
 }
 

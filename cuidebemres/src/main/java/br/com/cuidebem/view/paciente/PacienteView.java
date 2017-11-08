@@ -121,7 +121,7 @@ public class PacienteView extends IndexView {
 		try {
 			Integer idpaciente = Integer.valueOf(
 					(String) ((HtmlInputHidden) event.getComponent().getChildren().get(0)).getSubmittedValue());
-			photoFacade.create(event.getFile().getInputstream(), idpaciente);
+			photoFacade.create(event.getFile().getInputstream(), idpaciente, event.getFile().getContentType());
 			JsfUtil.addSuccessMessage(Bundle.getValue("cadimagesucesso"));
 		} catch (ControllerException e) {
 			JsfUtil.addErrorMessage(e.getMessage());

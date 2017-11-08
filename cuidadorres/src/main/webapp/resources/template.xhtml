@@ -159,6 +159,30 @@ padding: 10px 16px;
     
 }
 
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn-upload {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
 
 </style>
 	<script type="text/javascript">
@@ -188,14 +212,60 @@ PrimeFaces.locales['pt'] = {
 	    day: 'Dia',
 	    allDayText : 'Todo o Dia'
 	};
+
+function printCanvas(blob, appendId,maxWidth,maxHeight){
+    var reader = new FileReader();
+    reader.onload = function (e) {
+	var img = new Image();
+    img.src = e.target.result;
+    img.onload = function () {
+        // CREATE A CANVAS ELEMENT AND ASSIGN THE IMAGES TO IT.
+        var canvas = document.createElement("canvas");
+		canvas.style.padding = '0px';
+		canvas.style.border = '0px';
+		canvas.style.backgroundColor = 'transparent';
+    	var newTam = resize(img.width,img.height, maxWidth,maxHeight);
+        var ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        canvas.width = newTam.width;
+        canvas.height = newTam.height;
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        jQuery('#'+appendId).empty();
+        jQuery('#'+appendId).append(canvas);      // SHOW THE IMAGES OF THE BROWSER.
+    }
+};
+reader.readAsDataURL(blob);
+}
+
+function sendPhoto(photoDescricao, _url) {
+	 jQuery.ajax({
+			type: 'POST',
+			url: _url,
+			data: JSON.stringify(photoDescricao),
+			contentType: 'application/json',
+			dataType: 'json',
+			success: function (data) {
+				
+					alert('Your file was successfully uploaded!');
+				
+			},
+			error: function (data) {
+				alert('There was an error uploading your file!');
+			}
+		});	
+	  
+}
+
 </script>
 	<h:outputStylesheet library="css" name="timeline.css"></h:outputStylesheet>
 	<h:outputScript library="js" name="timeline.js"></h:outputScript>
 	<h:outputScript library="js" name="jsfcrud.js" />
 </h:head>
 <h:body>
-	<p:growl autoUpdate="true" showDetail="true" showSummary="true"
+	<p:growl autoUpdate="true" showDetail="true" showSummary="true" widgetVar="growlWV"
 		id="growl"></p:growl>
+		<ui:insert name="dialog">
+	</ui:insert>
 	<ui:insert name="header">
 		<div class="banner-title ui-widget-header">
 			<div class="ui-corner-all">

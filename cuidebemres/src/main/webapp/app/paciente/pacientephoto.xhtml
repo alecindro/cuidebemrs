@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<p:panel id="pacientephoto" style="width:100%" header="#{bundle.foto_paciente}">
+<p:dataGrid layout="grid" value="#{photodiaview.photos}" var="photo">
+<p:panelGrid layout="grid" columns="1">
+<p:graphicImage url="/rs/images/pacientedia/#{photo.idpacientephoto}"
+										cache="true"></p:graphicImage>
+										<h:outputText value="#{photo.descricao}"></h:outputText>
+</p:panelGrid>
+
+</p:dataGrid>
+</p:panel>
+</html>

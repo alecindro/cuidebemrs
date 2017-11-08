@@ -71,6 +71,29 @@ public class DateUtil {
 		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 		return LocalDateTime.now().format(formatador);
 	}
+	
+	public static Date convertDateUnderscore(String dateinput) throws Exception {
+		Calendar calendar = Calendar.getInstance();
+		String[] values = dateinput.split("_");
+		calendar.set(Calendar.YEAR, Integer.valueOf(values[2]));
+		calendar.set(Calendar.MONTH, Integer.valueOf(values[1])-1);
+		calendar.set(Calendar.DAY_OF_MONTH, Integer.valueOf(values[0]));
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		return calendar.getTime();
+	}
+	
+	public static String convertDateUnderscore(Date date){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		int ano = calendar.get(Calendar.YEAR);
+		int mes = calendar.get(Calendar.MONTH) + 1;
+		int dia = calendar.get(Calendar.DAY_OF_MONTH);
+		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd_MM_yyyy");
+		return LocalDate.of(ano, mes, dia).format(formatador);
+
+	}
 
 	public static Date convertDate(String dateinput) throws Exception {
 		Calendar calendar = Calendar.getInstance();

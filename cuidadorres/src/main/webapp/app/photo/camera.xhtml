@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<ui:composition template="/resources/template.xhtml">
+	<ui:define name="content">
+	<h:inputHidden value="#{index.usuario.idusuario}" id="idusuario"/>
+		<div class="ui-g">
+			<div class="ui-g-12 ui-md-12 ui-lg-12">
+				<div class="ui-g">
+					<div class="ui-g-4 ui-md-3 ui-lg-2">
+						<div class="upload-btn-wrapper">
+							<p:button value="#{bundle.select_photo}"></p:button>
+							<input type="file" id="file" accept="image/*" name="file"
+								class="file-canvas" />
+						</div>
+					</div>
+					<div class="ui-g-8 ui-md-9 ui-lg-10">
+						<p id="img" class="img-canvas"></p>
+					</div>
+					<div class="ui-g-4 ui-md-3 ui-lg-2">
+						<p:outputLabel value="#{bundle.form_description}"></p:outputLabel>
+					</div>
+					<div class="ui-g-8 ui-md-9 ui-lg-10">
+						<p:inputTextarea id="descricao" class="desc-canvas"
+							style="width:100%" rows="10"></p:inputTextarea>
+					</div>
+					<div class="ui-g-4 ui-md-3 ui-lg-2">
+						<button
+							class="cancel-canvas ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+							<span class="ui-button-text ui-c">#{bundle.cancel}</span>
+						</button>
+					</div>
+					<div class="ui-g-8 ui-md-9 ui-lg-10">
+						<button id="submitFile"
+							class="submit-canvas ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-disabled"
+							disabled="disabled">
+							<span class="ui-button-text ui-c">#{bundle.save}</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+
+		var PhotoDescricao = {
+				imgbase64 : null, 
+				filename : null,
+				type : null,
+				descricao : null,
+				idpaciente : null,
+				idusuario : null
+				};
+		
+jQuery(document).ready(function () {
+jQuery('.file-canvas').change(function () {
+	var maxWidth = 240;
+	var maxHeight = 240;
+   printCanvas(this.files[0],'img-canvas',maxWidth,maxHeight);
+   jQuery('.submit-canvas').removeClass('ui-state-disabled');
+   jQuery('.submit-canvas').removeAttr('disabled');
+});
+
+jQuery('.submit-canvas').click(function () {
+
+	_photoDescricao = Object.create(PhotoDescricao);
+	_photoDescricao.descricao = jQuery('.desc-canvas').val();
+	var _url = '/rs/images/pacientedia';
+	var fileInput =  jQuery('.file-canvas')[0];
+	var _originalFile = fileInput.files[0];
+	var canvas = jQuery('.img-canvas')[0].children[0];
+	var img = canvas.toDataURL(_originalFile.type);
+	img = img.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+	img = img.replace(' ','+');
+	_photoDescricao.imgbase64 = img;
+	_photoDescricao.type = _originalFile.type;
+	_photoDescricao.filename = _originalFile.name;
+	_photoDescricao.idpaciente = urlParam('idpaciente');
+	_photoDescricao.idusuario = jQuery('#idusuario').attr('value');
+	sendData(_photoDescricao, _url);
+	
+});
+jQuery('.cancel-canvas').click(function () {
+	window.location.href= '/app/paciente/pacienteevento.xhtml?idpaciente='+urlParam('idpaciente');
+});
+
+});
+
+function urlParam(name){
+	var results = new RegExp('[\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+	return results[1] || 0;
+}
+
+
+function resize(width, height, maxWidth, maxHeight){
+	 var result = {
+		        width    : null,
+		        height : null
+		      };
+
+	 var shouldResize = (width > maxWidth) || (height > maxHeight);
+	if(shouldResize){
+		var newWidth;
+		var newHeight;
+
+		if (width > height) {
+			newHeight = height * (maxWidth / width);
+			newWidth = maxWidth;
+		} else {
+			newWidth = width * (maxHeight / height);
+			newHeight = maxHeight;
+		}
+		result.width = newWidth;
+		result.height = newHeight;
+ } else{
+	 result.width = width;
+		result.height = height;
+	 }
+	 return result;
+}
+
+
+
+function sendData(photoDescricao, _url) {
+	 jQuery.ajax({
+			type: 'POST',
+			url: _url,
+			data: JSON.stringify(photoDescricao),
+			contentType: 'application/json',
+			dataType: 'json',
+			success: function (data) {
+				PF('growlWV').renderMessage({"summary":"Foto salvo com sucesso!",
+			        "detail":"",
+			        "severity":"info"});
+				window.location.href= '/app/paciente/pacienteevento.xhtml?idpaciente='+urlParam('idpaciente');
+				
+			},
+			error: function (data) {
+				PF('growlWV').renderMessage({"summary":"Erro ao salvar foto.",
+			        "detail":"",
+			        "severity":"info"});
+			}
+		});	
+	  
+}
+
+
+function printCanvas(blob, append,maxWidth,maxHeight){
+	            var reader = new FileReader();
+                reader.onload = function (e) {
+            	var img = new Image();
+                img.src = e.target.result;
+                img.onload = function () {
+                    // CREATE A CANVAS ELEMENT AND ASSIGN THE IMAGES TO IT.
+                    var canvas = document.createElement("canvas");
+					canvas.style.padding = '0px';
+					canvas.style.border = '0px';
+					canvas.style.backgroundColor = 'transparent';
+                	var newTam = resize(img.width,img.height, maxWidth,maxHeight);
+                    var ctx = canvas.getContext("2d");
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    canvas.width = newTam.width;
+                    canvas.height = newTam.height;
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    jQuery('.'+append).empty();
+                    jQuery('.'+append).append(canvas);      // SHOW THE IMAGES OF THE BROWSER.
+                }
+            };
+            reader.readAsDataURL(blob);
+}
+</script>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Camera</title>
+<style type="text/css">
+
+
+
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn-upload {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+</style>
+<script type="text/javascript"
+	src="/javax.faces.resource/jquery/jquery.js.xhtml?ln=primefaces&amp;v=6.1"></script>
+</head>
+<body>
+
+	<div class="upload-btn-wrapper">
+  <button class="btn-upload">Selecione imagem</button>
+  <input type="file" id="file" accept="image/*" name="file" class="file-canvas"/>
+</div>
+	<p>
+		<input type="text" id="descricao" class="desc-canvas">
+</p>
+	<p id="img" class="img-canvas"></p>
+	<button id="submitFile" class="submit-canvas">Upload It</button>
+
+		<script type="text/javascript">
+
+		var PhotoDescricao = {
+				imgbase64 : null, 
+				filename : null,
+				type : null,
+				descricao : null,
+				idpaciente : null
+				};
+		
+jQuery(document).ready(function () {
+jQuery('.file-canvas').change(function () {
+	var maxWidth = 240;
+	var maxHeight = 240;
+   printCanvas(this.files[0],'img-canvas',maxWidth,maxHeight);
+});
+
+jQuery('.submit-canvas').click(function () {
+
+	_photoDescricao = Object.create(PhotoDescricao);
+	_photoDescricao.descricao = jQuery('.desc-canvas').val();
+	var _url = '/rs/images/pacientedia';
+	var fileInput =  jQuery('.file-canvas')[0];
+	var _originalFile = fileInput.files[0];
+	var canvas = jQuery('.img-canvas')[0].children[0];
+	var img = canvas.toDataURL(_originalFile.type);
+	img = img.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+	img = img.replace(' ','+');
+	_photoDescricao.imgbase64 = img;
+	_photoDescricao.type = _originalFile.type;
+	_photoDescricao.filename = _originalFile.name;
+	_photoDescricao.idpaciente = 2;
+	sendData(_photoDescricao, _url);
+	
+});
+});
+
+
+
+function resize(width, height, maxWidth, maxHeight){
+	 var result = {
+		        width    : null,
+		        height : null
+		      };
+
+	 var shouldResize = (width > maxWidth) || (height > maxHeight);
+	if(shouldResize){
+		var newWidth;
+		var newHeight;
+
+		if (width > height) {
+			newHeight = height * (maxWidth / width);
+			newWidth = maxWidth;
+		} else {
+			newWidth = width * (maxHeight / height);
+			newHeight = maxHeight;
+		}
+		result.width = newWidth;
+		result.height = newHeight;
+ } else{
+	 result.width = width;
+		result.height = height;
+	 }
+	 return result;
+}
+
+
+
+function sendData(photoDescricao, _url) {
+	 jQuery.ajax({
+			type: 'POST',
+			url: _url,
+			data: JSON.stringify(photoDescricao),
+			contentType: 'application/json',
+			dataType: 'json',
+			success: function (data) {
+				
+					alert('Your file was successfully uploaded!');
+				
+			},
+			error: function (data) {
+				alert('There was an error uploading your file!');
+			}
+		});	
+	  
+}
+
+
+function printCanvas(blob, append,maxWidth,maxHeight){
+	            var reader = new FileReader();
+                reader.onload = function (e) {
+            	var img = new Image();
+                img.src = e.target.result;
+                img.onload = function () {
+                    // CREATE A CANVAS ELEMENT AND ASSIGN THE IMAGES TO IT.
+                    var canvas = document.createElement("canvas");
+					canvas.style.padding = '0px';
+					canvas.style.border = '0px';
+					canvas.style.backgroundColor = 'transparent';
+                	var newTam = resize(img.width,img.height, maxWidth,maxHeight);
+                    var ctx = canvas.getContext("2d");
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    canvas.width = newTam.width;
+                    canvas.height = newTam.height;
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    jQuery('.'+append).empty();
+                    jQuery('.'+append).append(canvas);      // SHOW THE IMAGES OF THE BROWSER.
+                }
+            };
+            reader.readAsDataURL(blob);
+}
+</script>
+	
+
+
+</body>
+</html>
