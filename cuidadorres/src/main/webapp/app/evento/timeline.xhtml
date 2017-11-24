@@ -20,8 +20,8 @@
 					<div>
 						<h:inputHidden value="#{evento.idevento}" />
 						<time>#{evento.hour}</time>
-						#{evento.data} <br /> #{evento.grupoevento} <br />
-						#{evento.subgrupoevento} <br /> #{evento.respeventos} <br /> #{evento.obsevento} <br/>
+						#{evento.data} <br /> 
+						<h:outputText value="#{evento.resumo}"  escape="false"/> <br/>
 						Cuidador : #{evento.usuario.apelido}
 					</div> <p:commandButton icon="fa fa-fw fa-remove" styleClass="ui-btn-timeline"
 						action="#{eventopacientemb.excluirEvento}" 

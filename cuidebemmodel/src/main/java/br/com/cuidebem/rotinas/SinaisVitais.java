@@ -5,56 +5,97 @@ import java.util.List;
 
 import br.com.cuidebem.model.Evento;
 
-public enum SinaisVitais implements IRotina{
+public enum SinaisVitais implements IRotina {
 
-	PRESSAOARTERIAL("Pressão Arterial","/app/evento/pressaoarterial.xhtml"){
-		public void genResumo(Evento evento){
-		evento.setRespeventos(evento.getPressaoInicial() + " x " + evento.getPressaoFinal() + " mmHg");
-	} },
-	FREQUENCIACARDIACA("Frequência Cardíaca","/app/evento/frequenciacardiaca.xhtml"){
-		public void genResumo(Evento evento){
-			evento.setRespeventos(evento.getValue() + " bpm");
-		} },
-	TEMPERATURA("Temperatura Corporal","/app/evento/temperatura.xhtml"){
-			public void genResumo(Evento evento){
-				evento.setRespeventos(evento.getValue()+ " ºC");
-			} },
-	FREQUENCIARESPIRATORIA("Frequência Respiratória","/app/evento/frequenciarespiratoria.xhtml"){
-		public void genResumo(Evento evento){
-			evento.setRespeventos(evento.getValue() + " vezes/min");
-		} },
-	SATURACAOOXIGENIO("Saturação de Oxigênio (oximetria)","/app/evento/oximetria.xhtml"){
-			public void genResumo(Evento evento){
-				evento.setRespeventos(evento.getValue() + " %");
-			} },
-	CONTROLEGLICEMIA("Controle da Glicemia","/app/evento/glicemia.xhtml"){
-		public void genResumo(Evento evento){
-			evento.setRespeventos(evento.getValue() + " mmHg");
-		} };
-	
-private String descricao;
-private String page;
-public abstract void genResumo(Evento evento);
-	
-	private SinaisVitais(String descricao,String page) {
+	PRESSAOARTERIAL("Pressão Arterial", "/app/evento/pressaoarterial.xhtml") {
+		public String genResumo(Evento evento) {
+			String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+			result = result.concat(evento.getPressaoinicial() + " x " + evento.getPressaofinal() + " mmHg");
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+
+			return result;
+		}
+	},
+	FREQUENCIACARDIACA("Frequência Cardíaca", "/app/evento/frequenciacardiaca.xhtml") {
+		public String genResumo(Evento evento) {
+			String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+			result = result.concat(evento.getValue() + " bpm");
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+		}
+	},
+	TEMPERATURA("Temperatura Corporal", "/app/evento/temperatura.xhtml") {
+		public String genResumo(Evento evento) {
+			String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+			result = result.concat(evento.getValue() + " ºC");
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+		}
+	},
+	FREQUENCIARESPIRATORIA("Frequência Respiratória", "/app/evento/frequenciarespiratoria.xhtml") {
+		public String genResumo(Evento evento) {
+			String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+			result = result.concat(evento.getValue() + " vezes/min");
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+		}
+	},
+	SATURACAOOXIGENIO("Saturação de Oxigênio (oximetria)", "/app/evento/oximetria.xhtml") {
+		public String genResumo(Evento evento) {
+			String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+			result = result.concat(evento.getValue() + " %");
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+		}
+	},
+	CONTROLEGLICEMIA("Controle da Glicemia", "/app/evento/glicemia.xhtml") {
+		public String genResumo(Evento evento) {
+			String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+			result = result.concat(evento.getValue() + " mmHg");
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+		}
+	};
+
+	private String descricao;
+	private String page;
+
+
+	private SinaisVitais(String descricao, String page) {
 		this.descricao = descricao;
 		this.page = page;
 	}
-
 
 	public String getDescricao() {
 		return descricao;
 	}
 
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-    
-	public SinaisVitais[] getValues(){
+
+	public SinaisVitais[] getValues() {
 		return SinaisVitais.values();
 	}
-	
+
 	public static List<String> getDescricaos() {
 		List<String> descricaos = new ArrayList<String>();
 		for (SinaisVitais sinaisVitais : SinaisVitais.values()) {
@@ -62,12 +103,11 @@ public abstract void genResumo(Evento evento);
 		}
 		return descricaos;
 	}
-	
+
 	@Override
 	public String getPage() {
 		return page;
 	}
-
 
 	@Override
 	public IRotina fromDescricao(String descricao) {

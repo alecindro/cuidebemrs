@@ -28,7 +28,7 @@
 							<f:param name="idpaciente"
 								value="#{eventopacientemb.paciente.idpaciente}" />
 						</p:menuitem>
-						<p:menuitem value="#{bundle.add_photo}" outcome="/app/photo/camera.xhtml">
+						<p:menuitem value="#{bundle.add_photo}" outcome="/app/photo/camera.xhtml" disabled="#{!eventopacientemb.today}">
 						<f:param name="idpaciente"
 								value="#{eventopacientemb.paciente.idpaciente}" />
 						</p:menuitem>

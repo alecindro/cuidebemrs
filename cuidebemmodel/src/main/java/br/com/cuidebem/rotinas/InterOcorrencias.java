@@ -8,14 +8,18 @@ import br.com.cuidebem.model.Evento;
 public enum InterOcorrencias implements IRotina {
 
 	INTEROCORRENCIAS(" --- ","/app/evento/blank.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				evento.getObsevento());
-	}};
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento();
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+	}
+	
+	};
 	
 	private String descricao;
 	private String page;
-	public abstract void genResumo(Evento evento);
 	
 	private InterOcorrencias(String descricao,String page) {
 		this.descricao = descricao;

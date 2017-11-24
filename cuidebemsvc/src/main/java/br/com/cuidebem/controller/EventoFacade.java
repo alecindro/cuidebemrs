@@ -54,16 +54,15 @@ public class EventoFacade extends AbstractFacade<Evento> {
 			List<Object[]> tuples = query.getResultList();
 			List<Evento> eventos = new ArrayList<Evento>();
 			for (Object[] o : tuples) {
-				Evento evento = new Evento((Integer) o[0], (String) o[1], (Date) o[2], (Date) o[3],  (String.valueOf(o[4])).equals("1"),
-						(String) o[5], (String) o[6], (String) o[7], (String) o[8]);
+				Evento evento = toEvento(o);
 				Paciente paciente = new Paciente();
-				paciente.setIdpaciente((Integer) o[9]);
-				paciente.setNome((String) o[10]);
-				paciente.setApelido((String) o[11]);
+				paciente.setIdpaciente((Integer) o[18]);
+				paciente.setNome((String) o[19]);
+				paciente.setApelido((String) o[20]);
 				Usuario usuario = new Usuario();
-				usuario.setIdusuario((Integer) o[12]);
-				usuario.setNome((String) o[13]);
-				usuario.setApelido((String) o[14]);
+				usuario.setIdusuario((Integer) o[21]);
+				usuario.setNome((String) o[22]);
+				usuario.setApelido((String) o[23]);
 				evento.setUsuario(usuario);
 				evento.setPaciente(paciente);
 				eventos.add(evento);
@@ -84,16 +83,15 @@ public class EventoFacade extends AbstractFacade<Evento> {
 			List<Object[]> tuples = query.getResultList();
 			List<Evento> eventos = new ArrayList<Evento>();
 			for (Object[] o : tuples) {
-				Evento evento = new Evento((Integer) o[0], (String) o[1], (Date) o[2], (Date) o[3],  (String.valueOf(o[4])).equals("1"),
-						(String) o[5], (String) o[6], (String) o[7], (String) o[8]);
+				Evento evento = toEvento(o);
 				Paciente paciente = new Paciente();
-				paciente.setIdpaciente((Integer) o[9]);
-				paciente.setNome((String) o[10]);
-				paciente.setApelido((String) o[11]);
+				paciente.setIdpaciente((Integer) o[18]);
+				paciente.setNome((String) o[19]);
+				paciente.setApelido((String) o[20]);
 				Usuario usuario = new Usuario();
-				usuario.setIdusuario((Integer) o[12]);
-				usuario.setNome((String) o[13]);
-				usuario.setApelido((String) o[14]);
+				usuario.setIdusuario((Integer) o[21]);
+				usuario.setNome((String) o[22]);
+				usuario.setApelido((String) o[23]);
 				evento.setUsuario(usuario);
 				evento.setPaciente(paciente);
 				eventos.add(evento);
@@ -104,6 +102,8 @@ public class EventoFacade extends AbstractFacade<Evento> {
 		}
 	}
 	
+
+
 	public List<Evento> findByPacienteDataregistro(Integer idpaciente, Date date) throws ControllerException {
 		try {
 			javax.persistence.Query query = getEntityManager().createNativeQuery(Evento.EVENTO_BYDATAPACIENTE);
@@ -113,16 +113,15 @@ public class EventoFacade extends AbstractFacade<Evento> {
 			List<Object[]> tuples = query.getResultList();
 			List<Evento> eventos = new ArrayList<Evento>();
 			for (Object[] o : tuples) {
-				Evento evento = new Evento((Integer) o[0], (String) o[1], (Date) o[2], (Date) o[3],  (String.valueOf(o[4])).equals("1"),
-						(String) o[5], (String) o[6], (String) o[7], (String) o[8]);
+				Evento evento = toEvento(o);
 				Paciente paciente = new Paciente();
-				paciente.setIdpaciente((Integer) o[9]);
-				paciente.setNome((String) o[10]);
-				paciente.setApelido((String) o[11]);
+				paciente.setIdpaciente((Integer) o[18]);
+				paciente.setNome((String) o[19]);
+				paciente.setApelido((String) o[20]);
 				Usuario usuario = new Usuario();
-				usuario.setIdusuario((Integer) o[12]);
-				usuario.setNome((String) o[13]);
-				usuario.setApelido((String) o[14]);
+				usuario.setIdusuario((Integer) o[21]);
+				usuario.setNome((String) o[22]);
+				usuario.setApelido((String) o[23]);
 				evento.setUsuario(usuario);
 				evento.setPaciente(paciente);
 				eventos.add(evento);
@@ -143,16 +142,15 @@ public class EventoFacade extends AbstractFacade<Evento> {
 			List<Object[]> tuples = query.getResultList();
 			List<Evento> eventos = new ArrayList<Evento>();
 			for (Object[] o : tuples) {
-				Evento evento = new Evento((Integer) o[0], (String) o[1], (Date) o[2], (Date) o[3],  (String.valueOf(o[4])).equals("1"),
-						(String) o[5], (String) o[6], (String) o[7], (String) o[8]);
+				Evento evento = toEvento(o);
 				Paciente paciente = new Paciente();
-				paciente.setIdpaciente((Integer) o[9]);
-				paciente.setNome((String) o[10]);
-				paciente.setApelido((String) o[11]);
+				paciente.setIdpaciente((Integer) o[18]);
+				paciente.setNome((String) o[19]);
+				paciente.setApelido((String) o[20]);
 				Usuario usuario = new Usuario();
-				usuario.setIdusuario((Integer) o[12]);
-				usuario.setNome((String) o[13]);
-				usuario.setApelido((String) o[14]);
+				usuario.setIdusuario((Integer) o[21]);
+				usuario.setNome((String) o[22]);
+				usuario.setApelido((String) o[23]);
 				evento.setUsuario(usuario);
 				evento.setPaciente(paciente);
 				eventos.add(evento);
@@ -173,16 +171,15 @@ public class EventoFacade extends AbstractFacade<Evento> {
 			List<Object[]> tuples = query.getResultList();
 			List<Evento> eventos = new ArrayList<Evento>();
 			for (Object[] o : tuples) {
-				Evento evento = new Evento((Integer) o[0], (String) o[1], (Date) o[2], (Date) o[3],  (String.valueOf(o[4])).equals("1"),
-						(String) o[5], (String) o[6], (String) o[7], (String) o[8]);
+				Evento evento = toEvento(o);
 				Paciente paciente = new Paciente();
-				paciente.setIdpaciente((Integer) o[9]);
-				paciente.setNome((String) o[10]);
-				paciente.setApelido((String) o[11]);
+				paciente.setIdpaciente((Integer) o[18]);
+				paciente.setNome((String) o[19]);
+				paciente.setApelido((String) o[20]);
 				Usuario usuario = new Usuario();
-				usuario.setIdusuario((Integer) o[12]);
-				usuario.setNome((String) o[13]);
-				usuario.setApelido((String) o[14]);
+				usuario.setIdusuario((Integer) o[21]);
+				usuario.setNome((String) o[22]);
+				usuario.setApelido((String) o[23]);
 				evento.setUsuario(usuario);
 				evento.setPaciente(paciente);
 				eventos.add(evento);
@@ -217,6 +214,29 @@ public class EventoFacade extends AbstractFacade<Evento> {
 	public List<CheckReport> reportCheck(Integer idpaciente, Date inicio, Date fim,boolean checkin) throws ControllerException{
 		List<Evento> eventos = findByNativeQuery("Evento.check", idpaciente,inicio,fim);
 		return CheckReportFactory.mountcheck(eventos, checkin);
+	}
+	
+	private Evento toEvento(Object[] tuple){
+		Evento evento = new Evento();
+		evento.setIdevento((Integer) tuple[0]);
+		evento.setIdpaciente((Integer) tuple[1]);
+		evento.setIdusuario((Integer) tuple[2]);
+		evento.setDescevento((String) tuple[3]);
+		evento.setDataevento((Date) tuple[4]);
+		evento.setDataregistro((Date) tuple[5]);
+		evento.setEnabled((String.valueOf(tuple[6])).equals("1"));
+		evento.setObsevento((String) tuple[7]);
+		evento.setGrupoevento((String) tuple[8]);
+		evento.setSubgrupoevento((String) tuple[9]);
+		evento.setRespeventos((String) tuple[10]);
+		evento.setPeso((Integer) tuple[11]);
+		evento.setPressaoinicial((Integer) tuple[12]);
+		evento.setPressaofinal((Integer) tuple[13]);
+		evento.setValue((Integer) tuple[14]);
+		evento.setDescricao((String) tuple[15]);
+		evento.setAspecto((String) tuple[16]);
+		evento.setQuantidade((String) tuple[17]);
+		return evento;
 	}
 
 }

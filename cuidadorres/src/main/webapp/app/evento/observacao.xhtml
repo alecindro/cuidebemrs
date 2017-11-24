@@ -4,11 +4,15 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-<p:outputPanel></p:outputPanel>
+	<style type="text/css">
+.ui-widget-content{border: none}
+</style>
+<p:panelGrid columns="2" layout="grid"
+							columnClasses="twenty-percent,fifty-percent">
 		<p:outputLabel value="Observação:" for="obsevento"></p:outputLabel>
 	
 		<p:inputTextarea id="obsevento" required="false" styleClass="sixty-percent"
 			value="#{eventomb.evento.obsevento}"></p:inputTextarea>
-
+</p:panelGrid>
 
 </html>

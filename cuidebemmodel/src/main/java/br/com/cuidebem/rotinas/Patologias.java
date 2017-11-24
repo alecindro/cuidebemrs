@@ -8,90 +8,169 @@ import br.com.cuidebem.model.Evento;
 public enum Patologias  implements IRotina{
 
 	  HA("Hipertensão Arterial","/app/evento/blank.xhtml")
-	  {public void genResumo(Evento evento){
-			evento.setRespeventos(
-					evento.getObsevento());
-		}},
+	  {public String genResumo(Evento evento){
+			String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+		}
+	  },
 	  DIABETE("Diabetes","/app/evento/blank.xhtml")
-	  {public void genResumo(Evento evento){
-			evento.setRespeventos(
-					evento.getObsevento());
-		}},
+	  {public String genResumo(Evento evento){
+		  String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+			}
+	  },
 	  HIV ("HIV","/app/evento/blank.xhtml")
-	  {public void genResumo(Evento evento){
-			evento.setRespeventos(
-					evento.getObsevento());
-		}},
+	  {public String genResumo(Evento evento){
+		  String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+			}
+	  },
 	  CARDIO("Cardiopatia (problemas cardiacos)","/app/evento/blank.xhtml")
-	  {public void genResumo(Evento evento){
-			evento.setRespeventos(
-					evento.getObsevento());
-		}},
+	  {public String genResumo(Evento evento){
+		  String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+			}
+	  },
 	  ASMA("Asma/bronquite","/app/evento/blank.xhtml")
-	  {public void genResumo(Evento evento){
-			evento.setRespeventos(
-					evento.getObsevento());
-		}},
+	  {public String genResumo(Evento evento){
+		  String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+			}
+	  },
 	  PNEUMOPATIA("Pneumopatia (enfizema, bronquite, pneumonia)","/app/evento/blank.xhtml")
-	  {public void genResumo(Evento evento){
-			evento.setRespeventos(
-					evento.getObsevento());
-		}},
+	  {public String genResumo(Evento evento){
+		  String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+			}
+	  },
 	  AVC("Acidente vascular cerebral","/app/evento/blank.xhtml")
-	  {public void genResumo(Evento evento){
-			evento.setRespeventos(
-					evento.getObsevento());
-		}},
+	  {public String genResumo(Evento evento){
+		  String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+			}
+	  },
 	  OBESIDADE("Obesidade","/app/evento/blank.xhtml")
-	  {public void genResumo(Evento evento){
-			evento.setRespeventos(
-					evento.getObsevento());
-		}},
+	  {public String genResumo(Evento evento){
+		  String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+			}
+	  },
 	  RENAL("Renal crônico","/app/evento/blank.xhtml")
-	  {public void genResumo(Evento evento){
-			evento.setRespeventos(
-					evento.getObsevento());
-		}},
+	  {public String genResumo(Evento evento){
+		  String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+			}
+	  },
 	  EPILEPSIA("Epilepsia","/app/evento/blank.xhtml")
-	  {public void genResumo(Evento evento){
-			evento.setRespeventos(
-					evento.getObsevento());
-		}},
+	  {public String genResumo(Evento evento){
+		  String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+			}
+	  },
 	  CANCER("Cancer","/app/evento/blank.xhtml")
-	  {public void genResumo(Evento evento){
-			evento.setRespeventos(
-					evento.getObsevento());
-		}},
+	  {public String genResumo(Evento evento){
+		  String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+			}
+	  },
 	  TRAQUE("Faz uso de Traqueostomia","/app/evento/blank.xhtml")
-	  {public void genResumo(Evento evento){
-			evento.setRespeventos(
-					evento.getObsevento());
-		}},
+	  {public String genResumo(Evento evento){
+		  String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+			}
+	  },
 	  OXIGEN("Faz uso de Oxigenioterapia","/app/evento/blank.xhtml")
-	  {public void genResumo(Evento evento){
-			evento.setRespeventos(
-					evento.getObsevento());
-		}},
+	  {public String genResumo(Evento evento){
+		  String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+			}
+	  },
 	  HEPATITE("Hepatite","/app/evento/blank.xhtml")
-	  {public void genResumo(Evento evento){
-			evento.setRespeventos(
-					evento.getObsevento());
-		}},
+	  {public String genResumo(Evento evento){
+		  String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+			}
+	  },
 	  NEURO("Problemas Neurológicos","/app/evento/blank.xhtml")
-	  {public void genResumo(Evento evento){
-			evento.setRespeventos(
-					evento.getObsevento());
-		}},
+	  {public String genResumo(Evento evento){
+		  String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+			}
+	  },
 	  OUTROS("Outros","/app/evento/blank.xhtml")
-	  {public void genResumo(Evento evento){
-			evento.setRespeventos(
-					evento.getObsevento());
-		}},;
+	  {public String genResumo(Evento evento){
+		  String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
+			}
+	  };
 	
 	
 	private String descricao;
 	private String page;
-	public abstract void genResumo(Evento evento);
 	
 	private Patologias(String descricao,String page) {
 		this.descricao = descricao;

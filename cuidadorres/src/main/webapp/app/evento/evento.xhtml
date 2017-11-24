@@ -8,60 +8,67 @@
 <ui:composition template="/resources/template.xhtml">
 	<ui:define name="content">
 		<div class="ui-g">
-					<div class="ui-g-12 ui-md-12 ui-lg-12">
-		<h:form id="evento_form"> 
-			<h:inputHidden value="#{eventomb.paciente.idpaciente}" />
-			<h:inputHidden value="#{eventomb.evento.idevento}" />
-			<h:inputHidden value="#{eventomb.idagenda}" />
-			<p:panelGrid columns="2" layout="grid" columnClasses="twenty-percent,fifty-percent">
-				<f:facet name="header">
-				<b>
-				<p:outputLabel value="#{bundle.add_evento}" style="margin-right:10px"></p:outputLabel>
-					<h:outputText value="#{eventomb.paciente.apelido}" /></b>
-				</f:facet>
-				<p:outputLabel for="time-event" value="Horário:"></p:outputLabel>
+			<div class="ui-g-12 ui-md-12 ui-lg-12">
+				<h:form id="evento_form">
+					<h:inputHidden value="#{eventomb.paciente.idpaciente}" />
+					<h:inputHidden value="#{eventomb.evento.idevento}" />
+					<h:inputHidden value="#{eventomb.idagenda}" />
+					<p:panelGrid columns="2" layout="grid"
+						columnClasses="twenty-percent,fifty-percent">
+						<f:facet name="header">
+							<b> <p:outputLabel value="#{bundle.add_evento}"
+									style="margin-right:10px"></p:outputLabel> <h:outputText
+									value="#{eventomb.paciente.apelido}" /></b>
+						</f:facet>
+						<p:outputLabel for="time-event" value="Horário:"></p:outputLabel>
 						<p:inputText type="time" id="time-event" name="time-event"
 							value="#{eventomb.evento.hour}" required="true"
 							onchange="maxHour(this)" />
-				<p:outputLabel value="#{bundle.form_tipo_evento}" for="tipoevento"></p:outputLabel>
-				<p:selectOneMenu id="tipoevento" required="true"
-					value="#{eventomb.evento.grupoevento}"
-					valueChangeListener="#{eventomb.grupEventoChanged}">
-					
-					<p:ajax update="tiporotina,dados,vals">
-					</p:ajax>
-					<f:selectItem itemLabel="#{bundle.select_evento}" itemValue="" />
-					<f:selectItems value="#{eventomb.grupoEvento}" var="grupoevento"
-						itemValue="#{grupoevento}" itemLabel="#{grupoevento}" />
-				</p:selectOneMenu>
-				<p:outputLabel id="labeltiporotina" value="#{bundle.form_rotina}"
-					for="tiporotina"></p:outputLabel>
-				<p:selectOneMenu id="tiporotina" validator="passValidator" required="true"
-					value="#{eventomb.evento.subgrupoevento}" valueChangeListener="#{eventomb.subGrupEventoChanged}"> 
-					<f:param name="grupoevento" value="#{eventomb.evento.grupoevento}"></f:param>
-					<p:ajax update="dados,vals">
-					</p:ajax>
-					<f:selectItem itemLabel="#{bundle.select_rotina}" itemValue=""
-						noSelectionOption="true" />
-					<f:selectItems value="#{eventomb.subGrupoEvento}" var="item"
-						itemValue="#{item}" itemLabel="#{item}" />
-				</p:selectOneMenu>
-				<p:outputPanel id="dados" style="#{eventomb.rendered?'display:':'display:none;'}">
-				<p:outputLabel value="Dados:"></p:outputLabel>
-				</p:outputPanel>
-				<p:outputPanel id="vals">
-				<ui:include src="#{eventomb.page}" />
-				</p:outputPanel>
-				
-	<ui:include src="/app/evento/observacao.xhtml" />		
-				
-			</p:panelGrid>
-			<p:button value="#{bundle.return}" outcome="/app/paciente/pacienteevento.xhtml?idpaciente=#{eventomb.paciente.idpaciente}"></p:button>
-			<p:commandButton value="#{bundle.save}" action="#{eventomb.save}">
-		<f:param name="idpaciente" value="#{eventomb.paciente.idpaciente}"></f:param>
-			</p:commandButton>
-		</h:form>
-			<script type="text/javascript">
+						<p:outputLabel value="#{bundle.form_tipo_evento}" for="tipoevento"></p:outputLabel>
+						<p:selectOneMenu id="tipoevento" required="true"
+							value="#{eventomb.evento.grupoevento}"
+							valueChangeListener="#{eventomb.grupEventoChanged}">
+
+							<p:ajax update="tiporotina,vals,controls">
+							</p:ajax>
+							<f:selectItem itemLabel="#{bundle.select_evento}" itemValue="" />
+							<f:selectItems value="#{eventomb.grupoEvento}" var="grupoevento"
+								itemValue="#{grupoevento}" itemLabel="#{grupoevento}" />
+						</p:selectOneMenu>
+						<p:outputLabel id="labeltiporotina" value="#{bundle.form_rotina}"
+							for="tiporotina"></p:outputLabel>
+						<p:selectOneMenu id="tiporotina" validator="passValidator"
+							required="true" value="#{eventomb.evento.subgrupoevento}"
+							valueChangeListener="#{eventomb.subGrupEventoChanged}">
+							<f:param name="grupoevento"
+								value="#{eventomb.evento.grupoevento}"></f:param>
+							<p:ajax update="vals,controls">
+							</p:ajax>
+							<f:selectItem itemLabel="#{bundle.select_rotina}" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{eventomb.subGrupoEvento}" var="item"
+								itemValue="#{item}" itemLabel="#{item}" />
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<p:outputPanel id="vals">
+						<ui:include src="#{eventomb.page}" />
+					</p:outputPanel>
+
+					<p:outputPanel id="controls">
+						<p:outputPanel rendered="#{eventomb.rendered}">
+							<ui:include src="/app/evento/observacao.xhtml" />
+							</p:outputPanel>
+
+							<p:button value="#{bundle.cancel}"
+								outcome="/app/paciente/pacienteevento.xhtml?idpaciente=#{eventomb.paciente.idpaciente}"></p:button>
+							<p:commandButton value="#{bundle.save}" action="#{eventomb.save}" disabled="#{!eventomb.rendered}">
+								<f:param name="idpaciente"
+									value="#{eventomb.paciente.idpaciente}"></f:param>
+							</p:commandButton>
+						
+					</p:outputPanel>
+				</h:form>
+				<script type="text/javascript">
 				
 
 
@@ -104,9 +111,9 @@
 					})();
     
 </script>
-</div>
+			</div>
 
-</div>
+		</div>
 	</ui:define>
 </ui:composition>
 </html>

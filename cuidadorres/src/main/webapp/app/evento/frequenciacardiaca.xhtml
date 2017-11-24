@@ -4,7 +4,15 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<div class="ui-g">
+<style type="text/css">
+.ui-widget-content{border: none}
+</style>
+
+						<p:panelGrid  columns="2" layout="grid"
+							columnClasses="twenty-percent,fifty-percent">
+		<p:outputLabel value="Frequência:"></p:outputLabel>
+		<h:panelGroup>
+		<div class="ui-g">
 	<div class="ui-g-6 ui-md-7 ui-lg-3">
 		<p:inputText id="fc" type="NUMBER" value="#{eventomb.evento.value}" styleClass="ninety-percent" required="true">
 			<p:keyFilter mask="pint"></p:keyFilter>
@@ -15,4 +23,6 @@
 		<p:outputLabel value="bpm" style="float:left;margin-top:10px" for="fc" />
 	</div>
 </div>
+</h:panelGroup>
+</p:panelGrid>
 </html>

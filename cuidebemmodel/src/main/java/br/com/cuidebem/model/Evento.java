@@ -25,6 +25,7 @@ import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import br.com.cuidebem.model.util.DateUtil;
+import br.com.cuidebem.rotinas.Rotinas;
 
 /**
  *
@@ -45,20 +46,20 @@ import br.com.cuidebem.model.util.DateUtil;
 		@NamedQuery(name = "Evento.findByRespeventos", query = "SELECT e FROM Evento e WHERE e.respeventos = :respeventos") })
 @NamedNativeQueries({
 		@NamedNativeQuery(name = "Evento.findByPaciente", query = "select * from evento where idpaciente=?1 and dataevento between ?2 and ?3", resultClass = Evento.class),
-		@NamedNativeQuery(name = "Evento.findByDataPaciente", query = "select * from evento where date(dataregistro) = date(?1) and idpaciente = ?2 order by dataregistro asc", resultClass = Evento.class),
+		@NamedNativeQuery(name = "Evento.findByDataPaciente", query = "select e.*, p.*, u.* from evento e inner join paciente p on e.idpaciente = p.idpaciente inner join usuario u on e.idusuario = u.idusuario where e.enabled = 1 and e.idpaciente=?1 and date(e.dataregistro) = date(?2) order by e.dataregistro asc", resultClass = Evento.class),
 		@NamedNativeQuery(name="Evento.check", query="select * from evento where idpaciente = ?1 and (date(dataevento) between date(?2) and date(?3)) and (grupoevento = 'Saiu' or grupoevento =  'Entrou') and enabled = 1 order by dataregistro asc", resultClass = Evento.class)
 })
 
 public class Evento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	public final static String EVENTO_PACIENTE_DATAREGISTRO = "select e.idevento,e.descevento,e.dataevento,e.dataregistro,e.enabled,e.obsevento,e.grupoevento,e.subgrupoevento,e.respeventos, p.idpaciente as id_paciente,p.nome as nome_paciente, p.apelido as apelido_paciente, u.idusuario as id_usuario, u.nome as nome_usuario, u.apelido as apelido_usuario from evento e inner join paciente p on e.idpaciente = p.idpaciente inner join usuario u on e.idusuario = u.idusuario where e.enabled = 1 and e.idpaciente=?1 and e.dataregistro between ?2 and ?3 order by e.dataregistro asc";
-	public final static String EVENTO_CUIDADOR_DATAREGISTRO = "select e.idevento,e.descevento,e.dataevento,e.dataregistro,e.enabled,e.obsevento,e.grupoevento,e.subgrupoevento,e.respeventos,p.idpaciente as id_paciente,p.nome as nome_paciente, p.apelido as apelido_paciente, u.idusuario as id_usuario, u.nome as nome_usuario, u.apelido as apelido_usuario from evento e inner join paciente p on e.idpaciente = p.idpaciente inner join usuario u on e.idusuario = u.idusuario where e.enabled = 1 and e.idusuario=?1  and e.dataregistro between ?2 and ?3 order by e.dataregistro asc";
-	public final static String EVENTO_BYDATAPACIENTE = "select e.idevento,e.descevento,e.dataevento,e.dataregistro,e.enabled,e.obsevento,e.grupoevento,e.subgrupoevento,e.respeventos, p.idpaciente as id_paciente,p.nome as nome_paciente, p.apelido as apelido_paciente, u.idusuario as id_usuario, u.nome as nome_usuario, u.apelido as apelido_usuario from evento e inner join paciente p on e.idpaciente = p.idpaciente inner join usuario u on e.idusuario = u.idusuario where e.enabled = 1 and e.idpaciente=?1 and date(e.dataregistro) = date(?2) order by e.dataregistro asc";
+	public final static String EVENTO_PACIENTE_DATAREGISTRO = "select e.*, p.idpaciente as id_paciente,p.nome as nome_paciente, p.apelido as apelido_paciente, u.idusuario as id_usuario, u.nome as nome_usuario, u.apelido as apelido_usuario from evento e inner join paciente p on e.idpaciente = p.idpaciente inner join usuario u on e.idusuario = u.idusuario where e.enabled = 1 and e.idpaciente=?1 and e.dataregistro between ?2 and ?3 order by e.dataregistro asc";
+	public final static String EVENTO_CUIDADOR_DATAREGISTRO = "select e.*,p.idpaciente as id_paciente,p.nome as nome_paciente, p.apelido as apelido_paciente, u.idusuario as id_usuario, u.nome as nome_usuario, u.apelido as apelido_usuario from evento e inner join paciente p on e.idpaciente = p.idpaciente inner join usuario u on e.idusuario = u.idusuario where e.enabled = 1 and e.idusuario=?1  and e.dataregistro between ?2 and ?3 order by e.dataregistro asc";
+	public final static String EVENTO_BYDATAPACIENTE = "select e.*, p.idpaciente as id_paciente,p.nome as nome_paciente, p.apelido as apelido_paciente, u.idusuario as id_usuario, u.nome as nome_usuario, u.apelido as apelido_usuario from evento e inner join paciente p on e.idpaciente = p.idpaciente inner join usuario u on e.idusuario = u.idusuario where e.enabled = 1 and e.idpaciente=?1 and date(e.dataregistro) = date(?2) order by e.dataregistro asc";
 	
 	
-	public final static String EVENTO_PACIENTE = "select e.idevento,e.descevento,e.dataevento,e.dataregistro,e.enabled,e.obsevento,e.grupoevento,e.subgrupoevento,e.respeventos, p.idpaciente as id_paciente,p.nome as nome_paciente, p.apelido as apelido_paciente, u.idusuario as id_usuario, u.nome as nome_usuario, u.apelido as apelido_usuario from evento e inner join paciente p on e.idpaciente = p.idpaciente inner join usuario u on e.idusuario = u.idusuario where e.enabled = 1 and e.idpaciente=?1 and e.dataevento between DATE_SUB(?2, INTERVAL 1 DAY) and ?3 order by e.dataevento desc";
-	public final static String EVENTO_CUIDADOR = "select e.idevento,e.descevento,e.dataevento,e.dataregistro,e.enabled,e.obsevento,e.grupoevento,e.subgrupoevento,e.respeventos,p.idpaciente as id_paciente,p.nome as nome_paciente, p.apelido as apelido_paciente, u.idusuario as id_usuario, u.nome as nome_usuario, u.apelido as apelido_usuario from evento e inner join paciente p on e.idpaciente = p.idpaciente inner join usuario u on e.idusuario = u.idusuario where e.enabled = 1 and e.idusuario=?1  and e.dataevento between DATE_SUB(?2, INTERVAL 1 DAY) and ?3 order by e.dataevento desc";
+	public final static String EVENTO_PACIENTE = "select e.*, p.idpaciente as id_paciente,p.nome as nome_paciente, p.apelido as apelido_paciente, u.idusuario as id_usuario, u.nome as nome_usuario, u.apelido as apelido_usuario from evento e inner join paciente p on e.idpaciente = p.idpaciente inner join usuario u on e.idusuario = u.idusuario where e.enabled = 1 and e.idpaciente=?1 and e.dataevento between DATE_SUB(?2, INTERVAL 1 DAY) and ?3 order by e.dataevento desc";
+	public final static String EVENTO_CUIDADOR = "select e.*,p.idpaciente as id_paciente,p.nome as nome_paciente, p.apelido as apelido_paciente, u.idusuario as id_usuario, u.nome as nome_usuario, u.apelido as apelido_usuario from evento e inner join paciente p on e.idpaciente = p.idpaciente inner join usuario u on e.idusuario = u.idusuario where e.enabled = 1 and e.idusuario=?1  and e.dataevento between DATE_SUB(?2, INTERVAL 1 DAY) and ?3 order by e.dataevento desc";
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
@@ -86,13 +87,15 @@ public class Evento implements Serializable {
 	private Usuario usuario;
 	@Transient
 	private Paciente paciente;
+	@Transient
+	private String resumo;
 	
 	private String quantidade;
 	private String aspecto;
 	private String descricao;
 	private Integer value;
-	private Integer pressaoInicial;
-	private Integer pressaoFinal;
+	private Integer pressaoinicial;
+	private Integer pressaofinal;
 
 	public Evento() {
 	}
@@ -122,6 +125,8 @@ public class Evento implements Serializable {
 		this.subgrupoevento = subgrupoevento;
 		this.respeventos = respeventos;
 	}
+	
+	
 
 	public Integer getIdevento() {
 		return idevento;
@@ -227,7 +232,7 @@ public class Evento implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
+	
 	public Paciente getPaciente() {
 		return paciente;
 	}
@@ -259,23 +264,27 @@ public class Evento implements Serializable {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-	public Integer getPressaoInicial() {
-		return pressaoInicial;
-	}
-
-	public void setPressaoInicial(Integer pressaoInicial) {
-		this.pressaoInicial = pressaoInicial;
-	}
-
-	public Integer getPressaoFinal() {
-		return pressaoFinal;
-	}
-
-	public void setPressaoFinal(Integer pressaoFinal) {
-		this.pressaoFinal = pressaoFinal;
-	}
 	
+	
+
+	public Integer getPressaofinal() {
+		return pressaofinal;
+	}
+
+	public void setPressaofinal(Integer pressaofinal) {
+		this.pressaofinal = pressaofinal;
+	}
+
+	
+	
+	public Integer getPressaoinicial() {
+		return pressaoinicial;
+	}
+
+	public void setPressaoinicial(Integer pressaoinicial) {
+		this.pressaoinicial = pressaoinicial;
+	}
+
 	public Integer getValue() {
 		return value;
 	}
@@ -315,6 +324,19 @@ public class Evento implements Serializable {
 
 	public void setData(String data) {
 		this.data = data;
+	}
+	
+	
+
+	public String getResumo() {
+		if(resumo == null){
+			resumo = Rotinas.genResumo(this);
+		}
+		return resumo;
+	}
+
+	public void setResumo(String resumo) {
+		this.resumo = resumo;
 	}
 
 	@Override

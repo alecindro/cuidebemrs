@@ -4,11 +4,13 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<div class="ui-g">
-	<div class="ui-g-6 ui-md-7 ui-lg-3">
+<style type="text/css">
+.ui-widget-content{border: none}
+</style>
+
+						<p:panelGrid  columns="2" layout="grid"
+							columnClasses="twenty-percent,fifty-percent">
 		<p:outputLabel value="#{bundle.form_description}" for="opLANCHE"></p:outputLabel>
-	</div>
-	<div class="ui-g-6 ui-md-5 ui-lg-9">
 		<p:selectOneRadio id="opLANCHE" value="#{eventomb.evento.descricao}" required="true" columns="1" layout="responsive">
 			<f:selectItem itemLabel="#{bundle.aceitou_bem}"
 				itemValue="#{bundle.aceitou_bem}" />
@@ -18,6 +20,5 @@
 				itemValue="#{bundle.nao_aceitou}" />
 
 		</p:selectOneRadio>
-	</div>
-</div>
+	</p:panelGrid>
 </html>

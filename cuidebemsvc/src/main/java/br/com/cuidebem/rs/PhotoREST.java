@@ -57,7 +57,7 @@ public class PhotoREST {
 	@Path("/pacientedia/{idpacientephoto}")
 	@Produces("image/*")
 	public Response getPacientePhoto(@PathParam(value = "idpacientephoto") Integer idpacientephoto){
-		PacientePhoto pacientePhoto = pacientePhotoFacade.findById(idpacientephoto);
+		PacientePhoto pacientePhoto = pacientePhotoFacade.find(idpacientephoto);
 		if(pacientePhoto == null){
 			throw new InternalServerErrorException(Bundle.getValue("error.photonotfound"));
 		}
@@ -137,7 +137,7 @@ public class PhotoREST {
 	@Produces("image/*")
 	public Response getImagePaciente(@PathParam(value = "pacienteId") Integer pacienteId) {
 		if (pacienteId != null) {
-			PacientePhoto pacPhoto = pacientePhotoFacade.find(pacienteId);
+			PacientePhoto pacPhoto = pacientePhotoFacade.findByPaciente(pacienteId);
 			if (pacPhoto != null && pacPhoto.getPhoto() != null) {
 				return buildPhoto(pacPhoto.getPhoto());
 			}

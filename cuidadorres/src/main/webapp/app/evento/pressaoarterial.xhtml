@@ -5,23 +5,31 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<div class="ui-g">
-	<div class="ui-g-6 ui-md-7 ui-lg-3">
-		<p:inputText type="NUMBER" maxlength="3" size="3" value="#{eventomb.evento.pressaoInicial}" styleClass="ninety-percent">
-		<p:keyFilter mask="pint"></p:keyFilter></p:inputText>
-	</div>
-	<div class="ui-g-1 ui-md-1 ui-lg-1" style="text-align:center">
-		<p:outputLabel value="x" style="margin-top:10px" />
-	</div>
+<style type="text/css">
+.ui-widget-content{border: none}
+</style>
 
+						<p:panelGrid  columns="2" layout="grid"
+							columnClasses="twenty-percent,fifty-percent">
+<p:outputLabel value="Pressão:"></p:outputLabel>
+	<h:panelGroup>
+	<div class="ui-g">
 	<div class="ui-g-6 ui-md-7 ui-lg-3">
-		<p:inputText style="float:left" type="NUMBER" maxlength="3" size="3" value="#{eventomb.evento.pressaoFinal}" styleClass="ninety-percent">
+		<p:inputText type="NUMBER" maxlength="3" size="3" value="#{eventomb.evento.pressaoinicial}" styleClass="ninety-percent">
+		<p:keyFilter mask="pint"></p:keyFilter></p:inputText>
+		</div>
+		<div class="ui-g-1 ui-md-1 ui-lg-1" style="text-align:center">
+		<p:outputLabel value="x" style="margin-top:10px" />
+		</div>
+		<div class="ui-g-6 ui-md-7 ui-lg-3">
+			<p:inputText style="float:left" type="NUMBER" maxlength="3" size="3" value="#{eventomb.evento.pressaofinal}" styleClass="ninety-percent">
 		<p:keyFilter mask="pint"></p:keyFilter>
 		</p:inputText>
-	</div>
-	<div class="ui-g-6 ui-md-5 ui-lg-3">
+		</div>
+		<div class="ui-g-6 ui-md-5 ui-lg-3">
 		<p:outputLabel value="mm Hg" style="float:left;margin-top:10px" />
-	</div>
-</div>
-
+		</div>
+		</div>
+		</h:panelGroup>
+	</p:panelGrid>
 </html>

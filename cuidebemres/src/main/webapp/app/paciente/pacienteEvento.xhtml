@@ -73,9 +73,7 @@
 								<div>
 								<time>#{evento.hour}</time>
 									#{evento.data} <br/>
-									#{evento.grupoevento} <br /> #{evento.subgrupoevento} <br />
-									#{evento.respeventos} <br /> 
-									#{evento.obsevento} <br /> 
+										<h:outputText value="#{evento.resumo}"  escape="false"/> <br/>
 									Cuidador : #{evento.usuario.apelido}
 								</div> <span class="ui-btn-timeline"> </span>
 							</li>

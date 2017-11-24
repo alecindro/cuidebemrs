@@ -4,17 +4,18 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-<div class="ui-g">
-	<div class="ui-g-6 ui-md-7 ui-lg-3">
+<style type="text/css">
+.ui-widget-content{border: none}
+</style>
+
+						<p:panelGrid  columns="2" layout="grid"
+							columnClasses="twenty-percent,fifty-percent">
 		<p:outputLabel value="#{bundle.form_size}" for="opDORMIR"></p:outputLabel>
-	</div>
-	<div class="ui-g-6 ui-md-5 ui-lg-9">
-		<p:selectOneRadio id="opDORMIR" value="#{eventomb.evento.descricao}" required="true">
+		<p:selectOneRadio id="opDORMIR" value="#{eventomb.evento.descricao}" required="true" columns="1" layout="responsive">
 			<f:selectItem itemLabel="#{bundle.normal}"
 				itemValue="#{bundle.normal}" />
 			<f:selectItem itemLabel="#{bundle.base_remedio}"
 				itemValue="#{bundle.base_remedio}" />
 		</p:selectOneRadio>
-	</div>
-</div>
+	</p:panelGrid>
 </html>

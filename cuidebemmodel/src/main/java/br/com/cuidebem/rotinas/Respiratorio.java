@@ -9,22 +9,33 @@ import br.com.cuidebem.model.Evento;
 public enum Respiratorio implements IRotina{
 
 	TRAQUEAL("Aspiração Traqueal",Arrays.asList("Oral","Nasal"),Arrays.asList("Pouco","Normal","Grande"),Arrays.asList("Seroide","Mucosa","Purulenta"),"/app/evento/traqueal.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				"Descrição: " + evento.getDescricao() + " - Quantidade: " + evento.getQuantidade() + " - Aspecto: " + evento.getAspecto());
-	}},
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento().concat("<br/>");
+		result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+		result = result.concat("Descrição: " + evento.getDescricao() + " - Quantidade: " + evento.getQuantidade() + " - Aspecto: " + evento.getAspecto());
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+	}
+	},
 	NEBULIZACAO("Nebulização",Arrays.asList("Oral","Nasal"),Arrays.asList("Pouco","Normal","Grande"),Arrays.asList("Seroide","Mucosa","Purulenta"),"/app/evento/nebulizacao.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				"Descrição: " + evento.getDescricao() + " - Quantidade: " + evento.getQuantidade() + " - Aspecto: " + evento.getAspecto());
-	}};
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento().concat("<br/>");
+		result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+		result = result.concat("Descrição: " + evento.getDescricao() + " - Quantidade: " + evento.getQuantidade() + " - Aspecto: " + evento.getAspecto());
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+	}
+	};
 	
 	private String descricao;
 	private List<String> opcoes;
 	private List<String> quantidade;
 	private List<String> aspecto;
 	private String page;
-	public abstract void genResumo(Evento evento);
 	
 	private Respiratorio(String descricao, List<String> opcoes, List<String> quantidade, List<String> aspecto,String page) {
 		this.descricao = descricao;

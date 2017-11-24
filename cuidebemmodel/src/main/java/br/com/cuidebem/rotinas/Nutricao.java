@@ -9,40 +9,83 @@ import br.com.cuidebem.model.Evento;
 public enum Nutricao implements IRotina{
 
 	CAFE("Café da manhã",Arrays.asList("Aceitou bem","Aceitou parcialmente","Não aceitou"),"/app/evento/cafe.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				evento.getDescricao() );
-	}},
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento().concat("<br/>");
+		result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+		result = result.concat(evento.getDescricao());
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+	}
+	
+	},
 	ALMOCO("Almoço",Arrays.asList("Aceitou bem","Aceitou parcialmente","Não aceitou"),"/app/evento/almoco.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				evento.getDescricao() );
-	}},
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento().concat("<br/>");
+		result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+		result = result.concat(evento.getDescricao());
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+
+		}
+	
+	},
 	JANTAR("Jantar",Arrays.asList("Aceitou bem","Aceitou parcialmente","Não aceitou"),"/app/evento/jantar.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				evento.getDescricao() );
-	}},
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento().concat("<br/>");
+		result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+		result = result.concat(evento.getDescricao());
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+
+		}
+	
+	},
 	CEIA("Ceia",Arrays.asList("Aceitou bem","Aceitou parcialmente","Não aceitou"),"/app/evento/ceia.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				evento.getDescricao() );
-	}},
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento().concat("<br/>");
+		result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+		result = result.concat(evento.getDescricao());
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+}
+	
+	},
 	LANCHE("Lanche",Arrays.asList("Aceitou bem","Aceitou parcialmente","Não aceitou"),"/app/evento/lanche.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				evento.getDescricao() );
-	}},
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento().concat("<br/>");
+		result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+		result = result.concat(evento.getDescricao());
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+		}
+	
+	},
 	LIQUIDOS("Ingestão de Líquidos",Arrays.asList("Pouco","Moderada","Grande"),"/app/evento/liquidos.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				evento.getDescricao() );
-	}};
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento().concat("<br/>");
+		result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+		result = result.concat(evento.getDescricao());
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+		}
+	
+	};
 	
 	private String descricao;
 	private List<String> opcoes;
 	private String page;
-	public abstract void genResumo(Evento evento);
 	
 	private Nutricao(String descricao, List<String> opcoes, String page) {
 		this.descricao = descricao;

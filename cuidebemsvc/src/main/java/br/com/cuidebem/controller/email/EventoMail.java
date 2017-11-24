@@ -71,9 +71,9 @@ public class EventoMail {
 	private final static String footerFotos = "</div>";
 	private final static String content_type = "text/html;charset=UTF-8";
 	private final static String subject_email = "Relatório diário de eventos - {0}";
-	private static String urlpacientefoto = "http://localhost:8080/rs/images/paciente/{0}";
-	private static String urlpacienteids = "http://localhost:8080/rs/pacientephotos/{0}/{1}";
-	private static String urlfotodiaria = "http://localhost:8080/rs/images/pacientedia/{0}";
+	private static String urlpacientefoto = "http://lar.cuidebemapp.com/rs/images/paciente/{0}";
+	private static String urlpacienteids = "http://lar.cuidebemapp.com/rs/pacientephotos/diaria/{0}/{1}";
+	private static String urlfotodiaria = "http://lar.cuidebemapp.com/rs/images/pacientedia/{0}";
 	
 	
 	private List<FileMail> fileMails;
@@ -172,7 +172,7 @@ public class EventoMail {
 			} else {
 				row = MessageFormat.format(rightRow, lineEvento(evento.getHour()), lineEvento(evento.getData()),
 						lineEvento(evento.getGrupoevento()), lineEvento(evento.getSubgrupoevento()),
-						lineEvento(evento.getRespeventos()), lineObsEvento(evento.getObsevento(),evento.getRespeventos()),
+						lineEvento(evento.getRespeventos()), lineEvento(evento.getObsevento()),
 						lineCuidador(evento.getUsuario().getApelido()));
 			}
 			_timeline = _timeline.concat(row);
@@ -189,14 +189,7 @@ public class EventoMail {
 		return descricao.concat("<br/>");
 	}
 	
-	private String lineObsEvento(String obs, String resp) {
-		if (obs == null || obs.trim().length() == 0) {
-			return "";
-		}
 	
-		return obs.concat("<br/>");
-	}
-
 	private String lineCuidador(String descricao) {
 		if (descricao == null || descricao.trim().length() == 0) {
 			return "";

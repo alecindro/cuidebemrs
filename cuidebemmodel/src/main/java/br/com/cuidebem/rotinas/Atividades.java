@@ -8,44 +8,93 @@ import br.com.cuidebem.model.Evento;
 public enum Atividades implements IRotina{
 	
 	ARTERAPIA("Arterapia","/app/evento/atividades.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				evento.getObsevento());
-	}},
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento().concat("<br/>");
+		result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+		result = result.concat(evento.getDescricao());
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+	}
+	
+	},
 	ESTIMULACAOCOGNITIVA("Estimulação Cognitiva","/app/evento/atividades.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				evento.getObsevento());
-	}},
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento().concat("<br/>");
+		result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+		result = result.concat(evento.getDescricao());
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+	}
+	
+	},
 	MASSAGEM("Massagem","/app/evento/atividades.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				evento.getObsevento());
-	}},
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento().concat("<br/>");
+		result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+		result = result.concat(evento.getDescricao());
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+	}
+	
+	},
 	DANCA("Dança","/app/evento/atividades.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				evento.getObsevento());
-	}},
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento().concat("<br/>");
+		result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+		result = result.concat(evento.getDescricao());
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+	}
+	
+	},
 	ATIVIDADEFISICA("Atividade Física","/app/evento/atividades.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				evento.getObsevento());
-	}},
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento().concat("<br/>");
+		result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+		result = result.concat(evento.getDescricao());
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+	}
+	
+	},
 	ATIVIDADESLUDICAS("Atividades Lúdicas","/app/evento/atividades.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				evento.getObsevento());
-	}},
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento().concat("<br/>");
+		result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+		result = result.concat(evento.getDescricao());
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+	}
+	
+	},
 	OUTRAS("Outras","/app/evento/atividades.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				evento.getObsevento());
-	}};
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento().concat("<br/>");
+		result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+		result = result.concat(evento.getDescricao());
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+	}
+
+	};
 	
 	private String descricao;
 	private String page;
-	public abstract void genResumo(Evento evento);
+	
 	
 	
 

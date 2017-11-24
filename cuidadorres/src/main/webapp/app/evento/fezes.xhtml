@@ -4,25 +4,21 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
+<style type="text/css">
+.ui-widget-content{border: none}
+</style>
 
-<div class="ui-g">
-	<div class="ui-g-6 ui-md-7 ui-lg-3">
-		<p:outputLabel value="#{bundle.form_size}" for="qtFEZES"></p:outputLabel>
-	</div>
-	<div class="ui-g-6 ui-md-5 ui-lg-9">
-		<p:selectOneRadio id="qtFEZES" value="#{eventomb.evento.quantidade}" required="true">
+						<p:panelGrid  columns="2" layout="grid"
+							columnClasses="twenty-percent,fifty-percent">		<p:outputLabel value="#{bundle.form_size}" for="qtFEZES"></p:outputLabel>
+		<p:selectOneRadio id="qtFEZES" value="#{eventomb.evento.quantidade}" required="true" columns="1" layout="responsive">
 			<f:selectItem itemLabel="#{bundle.pouco}" itemValue="#{bundle.pouco}" />
 			<f:selectItem itemLabel="#{bundle.normal}"
 				itemValue="#{bundle.normal}" />
 			<f:selectItem itemLabel="#{bundle.grande}"
 				itemValue="#{bundle.grande}" />
 		</p:selectOneRadio>
-	</div>
-	<div class="ui-g-6 ui-md-7 ui-lg-3">
 		<p:outputLabel value="#{bundle.form_aspect}" for="aspecFEZES"></p:outputLabel>
-	</div>
-	<div class="ui-g-6 ui-md-5 ui-lg-9">
-		<p:selectOneRadio id="aspecFEZES" value="#{eventomb.evento.aspecto}">
+		<p:selectOneRadio id="aspecFEZES" value="#{eventomb.evento.aspecto}" columns="1" layout="responsive" required="true">
 			<f:selectItem itemLabel="#{bundle.liquido}"
 				itemValue="#{bundle.liquido}" />
 			<f:selectItem itemLabel="#{bundle.pastoso}"
@@ -33,6 +29,5 @@
 				itemValue="#{bundle.fecaloma}" />
 
 		</p:selectOneRadio>
-	</div>
-</div>
+	</p:panelGrid>
 </html>

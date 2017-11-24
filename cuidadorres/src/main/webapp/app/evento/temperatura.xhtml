@@ -4,8 +4,15 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+<style type="text/css">
+.ui-widget-content{border: none}
+</style>
 
-<div class="ui-g">
+						<p:panelGrid  columns="2" layout="grid"
+							columnClasses="twenty-percent,fifty-percent">
+									<p:outputLabel value="Temperatura:"></p:outputLabel>
+	<h:panelGroup>
+		<div class="ui-g">
 	<div class="ui-g-6 ui-md-7 ui-lg-3">
 		<p:inputText id="temp" type="NUMBER"
 			value="#{eventomb.evento.value}" size="3" maxlength="3" styleClass="ninety-percent">
@@ -16,4 +23,6 @@
 			for="temp" />
 	</div>
 </div>
+</h:panelGroup>
+	</p:panelGrid>
 </html>

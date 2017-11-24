@@ -81,15 +81,15 @@ public enum Rotinas {
 		return null;
 	}
 	
-	public static void genResumo(Evento evento){
+	public static String genResumo(Evento evento){
 		Rotinas rotina = Rotinas.fromDescricao(evento.getGrupoevento());
 		for(IRotina iRotina : rotina.getArrayRotinas()){
 			IRotina subgrupo = iRotina.fromDescricao(evento.getSubgrupoevento());
 			if(subgrupo != null){
-				subgrupo.genResumo(evento);
+				return subgrupo.genResumo(evento);
 			}
 		}
-		
+		return "";
 	}
 	
 	

@@ -8,5 +8,5 @@ public interface IRotina {
 	public String getPage();
 	
 	public IRotina fromDescricao(String descricao);
-	public void genResumo(Evento evento);
+	public String genResumo(Evento evento);
 }

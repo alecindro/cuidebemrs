@@ -9,38 +9,72 @@ import br.com.cuidebem.model.Evento;
 public enum BemEstar implements IRotina {
 
 	ACORDAR("Sono - Acordou", Arrays.asList("Dormiu bem", "Agitou", "Insônia"), "/app/evento/acordar.xhtml") {
-		public void genResumo(Evento evento) {
-			evento.setRespeventos(evento.getDescricao());
+		public String genResumo(Evento evento) {
+			String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+			result = result.concat(evento.getDescricao());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
 		}
+
 	},
 	DORMIR("Sono - Dormiu", Arrays.asList("Normal", "A base de remédios"), "/app/evento/dormir.xhtml") {
-		public void genResumo(Evento evento) {
-			evento.setRespeventos(evento.getDescricao());
+		public String genResumo(Evento evento) {
+			String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+			result = result.concat(evento.getDescricao());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
 		}
+		
 	},
 	PASSEIOS("Passeios", Arrays.asList("Iniciou", "Retornou"), "/app/evento/passeios.xhtml") {
-		public void genResumo(Evento evento) {
-			evento.setRespeventos(evento.getDescricao());
+		public String genResumo(Evento evento) {
+			String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+			result = result.concat(evento.getDescricao());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
 		}
+		
 	},
 	CONSCIENCIA("Nível de Consciência", Arrays.asList("Acordado", "Sonolento", "Irresponsivo"),
 			"/app/evento/consciencia.xhtml") {
-		public void genResumo(Evento evento) {
-			evento.setRespeventos(evento.getDescricao());
+		public String genResumo(Evento evento) {
+			String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+			result = result.concat(evento.getDescricao());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
 		}
+		
 	},
 	HUMOR("Humor", Arrays.asList("Alegre", "Calmo", "Apático", "Depressivo", "Agressivo", "Agitado"),
 			"/app/evento/humor.xhtml") {
-		public void genResumo(Evento evento) {
-			evento.setRespeventos(evento.getDescricao());
+		public String genResumo(Evento evento) {
+			String result = evento.getGrupoevento().concat("<br/>");
+			result = result.concat(evento.getSubgrupoevento()).concat("<br/>");
+			result = result.concat(evento.getDescricao());
+			if (evento.getObsevento() != null) {
+				result = result.concat("<br/>").concat(evento.getObsevento());
+			}
+			return result;
 		}
+		
 	};
 
 	private String descricao;
 	private List<String> opcoes;
 	private String page;
 
-	public abstract void genResumo(Evento evento);
 
 	private BemEstar(String descricao, List<String> opcoes, String page) {
 		this.descricao = descricao;

@@ -43,7 +43,7 @@ public class PacientePhotoFacade extends AbstractFacade<PacientePhoto>  {
 			br.com.cuidebem.model.util.PhotoUtil.resize(photo, baos);
 			baos.flush();
 			byte[] imageInByte = baos.toByteArray();
-			PacientePhoto pacientePhoto = find(idpaciente);
+			PacientePhoto pacientePhoto = findByPaciente(idpaciente);
 			if(pacientePhoto == null){
 				pacientePhoto = new PacientePhoto();
 				pacientePhoto.setIdpaciente(idpaciente);
@@ -60,7 +60,7 @@ public class PacientePhotoFacade extends AbstractFacade<PacientePhoto>  {
 		}
 	}
     
-    public PacientePhoto find(Object idpaciente) {
+    public PacientePhoto findByPaciente(Object idpaciente) {
     	PacientePhoto pacientePhoto = null;
     	List<PacientePhoto> photos;
 		try {
@@ -74,10 +74,6 @@ public class PacientePhotoFacade extends AbstractFacade<PacientePhoto>  {
 		}
     	
     	return pacientePhoto;
-    }
-    
-    public PacientePhoto findById(Integer idpaciente) {
-    	return super.find(idpaciente);
     }
     
     public List<PacientePhoto> photoDay(Integer idpaciente, Date date) throws ControllerException{

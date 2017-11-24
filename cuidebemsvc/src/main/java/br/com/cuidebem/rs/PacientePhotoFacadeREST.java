@@ -81,7 +81,7 @@ private PacientePhotoFacade pacientePhotoFacade;
     }
     
     @GET
-    @Path("{id}/{data}")
+    @Path("diaria/{id}/{data}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response find(@PathParam("id") Integer id, @PathParam("data") String date) {
         try {

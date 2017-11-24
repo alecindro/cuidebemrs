@@ -4,22 +4,19 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
+<style type="text/css">
+.ui-widget-content{border: none}
+</style>
 
-<div class="ui-g">
-	<div class="ui-g-6 ui-md-7 ui-lg-3">
+						<p:panelGrid  columns="2" layout="grid"
+							columnClasses="twenty-percent,fifty-percent">
 	<p:outputLabel value="#{bundle.form_description}" for="opTRAQUEAL"></p:outputLabel>
-	</div>
-		<div class="ui-g-6 ui-md-5 ui-lg-9">
 						<p:selectOneRadio value="#{eventomb.evento.descricao}" id="opTRAQUEAL" columns="2" layout="responsive" required="true">
 							<f:selectItem
 								itemLabel="#{bundle.oral}" itemValue="#{bundle.oral}" />
 						<f:selectItem
 								itemLabel="#{bundle.nasal}" itemValue="#{bundle.nasal}" /></p:selectOneRadio>
-						</div>
-						<div class="ui-g-6 ui-md-7 ui-lg-3">
 						<p:outputLabel value="#{bundle.form_size}" for="qtTRAQUEAL"></p:outputLabel>
-						</div>
-						<div class="ui-g-6 ui-md-5 ui-lg-9">
 						<p:selectOneRadio id="qtTRAQUEAL" value="#{eventomb.evento.quantidade}" columns="1" layout="responsive" required="true">
 							<f:selectItem
 								itemLabel="#{bundle.pouco}" itemValue="#{bundle.pouco}" />
@@ -29,11 +26,7 @@
 								itemLabel="#{bundle.grande}" itemValue="#{bundle.grande}" />
 								</p:selectOneRadio>
 						
-						</div>
-						<div class="ui-g-6 ui-md-7 ui-lg-3">
 							<p:outputLabel value="#{bundle.form_aspect}" for="aspecTRAQUEAL"></p:outputLabel>
-						</div>
-						<div class="ui-g-6 ui-md-5 ui-lg-9">
 						<p:selectOneRadio id="aspecTRAQUEAL" value="#{eventomb.evento.aspecto}" columns="1" layout="responsive" required="true">
 						<f:selectItem
 								itemLabel="#{bundle.ceroide}" itemValue="#{bundle.ceroide}" />
@@ -42,6 +35,5 @@
 				<f:selectItem
 								itemLabel="#{bundle.purulenta}" itemValue="#{bundle.purulenta}" />
 								</p:selectOneRadio>
-						</div>
-			</div>
+</p:panelGrid>
 </html>

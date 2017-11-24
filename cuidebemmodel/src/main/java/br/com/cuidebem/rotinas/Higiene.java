@@ -8,19 +8,30 @@ import br.com.cuidebem.model.Evento;
 public enum Higiene implements IRotina{
 
 	BANHO("Realização de Banho","/app/evento/blank.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				evento.getObsevento());
-	}},
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento().concat("<br/>");
+		result = result.concat(evento.getSubgrupoevento());
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+	}
+	
+	},
 	ORAL("Higiene Oral","/app/evento/blank.xhtml")
-	{public void genResumo(Evento evento){
-		evento.setRespeventos(
-				evento.getObsevento());
-	}};
+	{public String genResumo(Evento evento){
+		String result = evento.getGrupoevento().concat("<br/>");
+		result = result.concat(evento.getSubgrupoevento());
+		if (evento.getObsevento() != null) {
+			result = result.concat("<br/>").concat(evento.getObsevento());
+		}
+		return result;
+	}
+	
+	};
 	
 	private String descricao;
 	private String page;
-	public abstract void genResumo(Evento evento);
 	
 	private Higiene(String descricao, String page) {
 		this.descricao = descricao;

@@ -5,8 +5,16 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+<style type="text/css">
+.ui-widget-content{border: none}
+</style>
 
-<div class="ui-g">
+						<p:panelGrid  columns="2" layout="grid"
+							columnClasses="twenty-percent,fifty-percent">
+															<p:outputLabel value="Frequência:"></p:outputLabel>
+	<h:panelGroup>
+	
+	<div class="ui-g">
 	<div class="ui-g-6 ui-md-7 ui-lg-3">
 		<p:inputText id="fqp" type="NUMBER"
 			value="#{eventomb.evento.value}" styleClass="ninety-percent" required="true">
@@ -17,5 +25,6 @@
 			for="fqp" />
 	</div>
 </div>
-
+			</h:panelGroup>
+	</p:panelGrid>
 </html>

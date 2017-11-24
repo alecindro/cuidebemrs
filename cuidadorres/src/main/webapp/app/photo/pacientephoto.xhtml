@@ -6,10 +6,20 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <p:panel id="pacientephoto" style="width:100%" header="#{bundle.foto_paciente}">
 <p:dataGrid layout="grid" value="#{photodiaview.photos}" var="photo">
-<p:panelGrid layout="grid" columns="1">
+<p:panelGrid layout="grid" columns="1" style="text-align:center">
 <p:graphicImage url="/rs/images/pacientedia/#{photo.idpacientephoto}"
-										cache="true"></p:graphicImage>
+										cache="true">
+											
+										</p:graphicImage>
 										<h:outputText value="#{photo.descricao}"></h:outputText>
+									<p:commandButton value="#{bundle.delete}" 
+						action="#{photodiaview.delete(photo.idpacientephoto)}" 
+						rendered="#{photo.idusuario eq photodiaview.usuario.idusuario}" disabled="#{!photodiaview.today}"
+						update="pacientephoto">	
+						<p:confirm header="#{bundle.confirmation}" message="#{bundle.message_delete}" icon="ui-icon-alert" />
+						<f:param name="idpaciente"
+							value="#{photodiaview.idpaciente}" />
+					</p:commandButton>
 </p:panelGrid>
 
 </p:dataGrid>

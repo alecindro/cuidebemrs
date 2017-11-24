@@ -11,16 +11,23 @@
 	<h:inputHidden value="#{index.usuario.idusuario}" id="idusuario"/>
 		<div class="ui-g">
 			<div class="ui-g-12 ui-md-12 ui-lg-12">
+			<div class="ui-panel ui-widget ui-widget-content ui-corner-all">
+			<div id="timeline_header" class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all"><span class="ui-panel-title">
+	#{bundle.foto_paciente}
+	</span></div>
+			</div>
 				<div class="ui-g">
 					<div class="ui-g-4 ui-md-3 ui-lg-2">
+					
 						<div class="upload-btn-wrapper">
-							<p:button value="#{bundle.select_photo}"></p:button>
+							<p:button value="#{bundle.select_photo}" onmouseover="this.style.cursor='pointer'"></p:button>
 							<input type="file" id="file" accept="image/*" name="file"
 								class="file-canvas" />
 						</div>
-					</div>
+						</div>
+					
 					<div class="ui-g-8 ui-md-9 ui-lg-10">
-						<p id="img" class="img-canvas"></p>
+						<p id="img" class="img-canvas ui-widget-content" style="width:240px; height:240px"></p>
 					</div>
 					<div class="ui-g-4 ui-md-3 ui-lg-2">
 						<p:outputLabel value="#{bundle.form_description}"></p:outputLabel>
@@ -166,6 +173,9 @@ function printCanvas(blob, append,maxWidth,maxHeight){
                     canvas.width = newTam.width;
                     canvas.height = newTam.height;
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    jQuery('.'+append).css('border-color','transparent');
+                    jQuery('.'+append).css('width',canvas.width);
+                    jQuery('.'+append).css('height',canvas.height);                    
                     jQuery('.'+append).empty();
                     jQuery('.'+append).append(canvas);      // SHOW THE IMAGES OF THE BROWSER.
                 }

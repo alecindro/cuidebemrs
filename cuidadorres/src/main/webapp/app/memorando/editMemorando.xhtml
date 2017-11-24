@@ -8,6 +8,11 @@
 	<ui:define name="content">
 	<div class="ui-g">
 	<div class="ui-g-12 ui-md-12 ui-lg-12">
+	<div class="ui-panel ui-widget ui-widget-content ui-corner-all">
+			<div id="timeline_header" class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all"><span class="ui-panel-title">
+	#{bundle.memorando}
+	</span></div>
+			</div>
 	<h:form>
 	<p:editor value="#{memomb.memorando.descricao}" style="width:100%"></p:editor>
 	<h:inputHidden value="#{memomb.memorando.idmemorando}" />
@@ -17,7 +22,7 @@
 	</h:inputHidden>
 
 	<p:panelGrid columns="2" layout="grid">
-	<p:button value="#{bundle.return}" outcome="/app/paciente/pacienteevento.xhtml" >
+	<p:button value="#{bundle.cancel}" outcome="/app/paciente/pacienteevento.xhtml" >
 	<f:param name="idpaciente" value="#{memomb.memorando.idpaciente}" />
 	</p:button>
 	<p:commandButton action="#{memomb.save}" value="#{bundle.save}">

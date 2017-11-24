@@ -25,15 +25,21 @@ public class PhotoDiaView extends IndexView{
 	private List<PacientePhoto> photos;
 	private Integer idpaciente;
 	private Date dataevento;
+	private boolean today;
 	
 	@PostConstruct
 	private void init(){
 		String _idpaciente = JsfUtil.getRequestParameter("idpaciente");
 		dataevento = Calendar.getInstance().getTime();
 		String _dataevento = JsfUtil.getRequestParameter("dataevento");
+		today = true;
 		if(_dataevento != null){
 			try {
-				dataevento = DateUtil.convertDate(_dataevento);
+				Date data = DateUtil.convertDate(_dataevento);
+				if(data.compareTo(DateUtil.getZeroHour(dataevento))!=0){
+					today = false;
+				}
+				dataevento = data;
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -72,6 +78,22 @@ public class PhotoDiaView extends IndexView{
 		} catch (ControllerException e) {
 			JsfUtil.addErrorMessage(Bundle.getValue("error.delphoto"));
 		}
+	}
+
+	public boolean isToday() {
+		return today;
+	}
+
+	public void setToday(boolean today) {
+		this.today = today;
+	}
+
+	public Integer getIdpaciente() {
+		return idpaciente;
+	}
+
+	public void setIdpaciente(Integer idpaciente) {
+		this.idpaciente = idpaciente;
 	}
 	
 	

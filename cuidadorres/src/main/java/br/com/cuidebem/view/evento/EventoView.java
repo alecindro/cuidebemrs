@@ -87,6 +87,7 @@ public class EventoView extends IndexView{
 		try {
 			Date dataevento = Calendar.getInstance().getTime();
 			evento.setIdpaciente(paciente.getIdpaciente());
+			evento.setPaciente(paciente);
 			evento.setDataregistro(dataevento);
 			evento.setEnabled(true);
 			evento.setIdusuario(getUsuario().getIdusuario());
@@ -104,6 +105,7 @@ public class EventoView extends IndexView{
 	public void grupEventoChanged(ValueChangeEvent  e) {
 		subGrupoEvento = Rotinas.getSubGrupoEventos(e.getNewValue().toString());
 		if(subGrupoEvento != null && subGrupoEvento.size() == 1){
+			rendered = true;
 			evento.setSubgrupoevento(subGrupoEvento.get(0));
 		}
 	}
@@ -112,10 +114,8 @@ public class EventoView extends IndexView{
 		String _subgrupoevento = e.getNewValue().toString();
 		if(_grupoevento!= null && _grupoevento!= "null"){
 		this.page = Rotinas.getPage(_grupoevento, _subgrupoevento);
-		if(!page.equals("/app/evento/blank.xhtml")){
-	  		rendered = true;
+			rendered = true;
 	  	}
-		}
 	}
 
 	public Paciente getPaciente() {
