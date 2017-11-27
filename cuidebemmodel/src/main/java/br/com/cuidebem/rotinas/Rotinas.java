@@ -82,12 +82,22 @@ public enum Rotinas {
 	}
 	
 	public static String genResumo(Evento evento){
+		try{
 		Rotinas rotina = Rotinas.fromDescricao(evento.getGrupoevento());
+		if(rotina == null){
+			return evento.getGrupoevento();
+		}
 		for(IRotina iRotina : rotina.getArrayRotinas()){
+			if(evento.getSubgrupoevento() == null){
+				return evento.getGrupoevento();
+			}
 			IRotina subgrupo = iRotina.fromDescricao(evento.getSubgrupoevento());
 			if(subgrupo != null){
 				return subgrupo.genResumo(evento);
 			}
+		}
+		}catch(Exception e){
+			System.out.println("Evento:" + evento.toString());
 		}
 		return "";
 	}

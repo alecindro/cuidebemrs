@@ -59,6 +59,7 @@ public class DateUtil {
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		calendar.set(Calendar.MINUTE,0);
 		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND,0);
 		return calendar.getTime();
 	}
 	
@@ -209,6 +210,14 @@ public class DateUtil {
 	    int minutes = total % 60;
 	    int hours = ((total - minutes) / 60) % 24;
 	    return String.format("%02d:%02d", hours, minutes);
+	}
+	
+	public static boolean compareData(Date init, Date end){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(init);
+		Calendar calendar2 = Calendar.getInstance();
+		calendar2.setTime(init);
+		return calendar.equals(calendar2);
 	}
 
 }

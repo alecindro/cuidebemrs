@@ -41,7 +41,7 @@ public class EventoPacienteView extends IndexView {
 		if(_dataevento != null){
 			try {
 				Date _data = DateUtil.convertDate(_dataevento);
-				if(_data.compareTo(DateUtil.getZeroHour(dataEvento))!=0){
+				if(!(DateUtil.getZeroHour(dataEvento).equals(DateUtil.getZeroHour(_data)))){
 					today = false;
 				}
 				dataEvento = _data;

@@ -32,13 +32,12 @@ public class AgendaDiaria extends IndexView  {
 	private void init() {
 		dataevento = Calendar.getInstance().getTime();
 		today = true;
-		dataevento = DateUtil.getZeroHour(dataevento);
 		String _dataevento = JsfUtil.getRequestParameter("dataevento");
 		if(_dataevento != null){
 			try {
 				
 				Date _data = DateUtil.convertDate(_dataevento);
-				if(_data.compareTo(DateUtil.getZeroHour(dataevento))!=0){
+				if(!DateUtil.getZeroHour(dataevento).equals(DateUtil.getZeroHour(_data))){
 					today = false;
 				}
 				dataevento = _data;

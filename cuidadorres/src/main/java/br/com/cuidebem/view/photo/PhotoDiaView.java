@@ -31,12 +31,13 @@ public class PhotoDiaView extends IndexView{
 	private void init(){
 		String _idpaciente = JsfUtil.getRequestParameter("idpaciente");
 		dataevento = Calendar.getInstance().getTime();
+	
 		today = true;
 		String _dataevento = JsfUtil.getRequestParameter("dataevento");
 		if(_dataevento != null){
 			try {
 				Date data = DateUtil.convertDate(_dataevento);
-				if(data.compareTo(DateUtil.getZeroHour(dataevento))!=0){
+				if(!DateUtil.getZeroHour(dataevento).equals(DateUtil.getZeroHour(data))){
 					today = false;
 				}
 				

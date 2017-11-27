@@ -29,7 +29,7 @@
 							value="#{eventomb.evento.grupoevento}"
 							valueChangeListener="#{eventomb.grupEventoChanged}">
 
-							<p:ajax update="tiporotina,vals,controls">
+							<p:ajax update="tiporotina,vals">
 							</p:ajax>
 							<f:selectItem itemLabel="#{bundle.select_evento}" itemValue="" />
 							<f:selectItems value="#{eventomb.grupoEvento}" var="grupoevento"
@@ -42,7 +42,7 @@
 							valueChangeListener="#{eventomb.subGrupEventoChanged}">
 							<f:param name="grupoevento"
 								value="#{eventomb.evento.grupoevento}"></f:param>
-							<p:ajax update="vals,controls">
+							<p:ajax update="vals">
 							</p:ajax>
 							<f:selectItem itemLabel="#{bundle.select_rotina}" itemValue=""
 								noSelectionOption="true" />
@@ -54,19 +54,16 @@
 						<ui:include src="#{eventomb.page}" />
 					</p:outputPanel>
 
-					<p:outputPanel id="controls">
-						<p:outputPanel rendered="#{eventomb.rendered}">
+				
 							<ui:include src="/app/evento/observacao.xhtml" />
-							</p:outputPanel>
-
+				
 							<p:button value="#{bundle.cancel}"
 								outcome="/app/paciente/pacienteevento.xhtml?idpaciente=#{eventomb.paciente.idpaciente}"></p:button>
-							<p:commandButton value="#{bundle.save}" action="#{eventomb.save}" disabled="#{!eventomb.rendered}">
+							<p:commandButton value="#{bundle.save}" action="#{eventomb.save}" >
 								<f:param name="idpaciente"
 									value="#{eventomb.paciente.idpaciente}"></f:param>
 							</p:commandButton>
 						
-					</p:outputPanel>
 				</h:form>
 				<script type="text/javascript">
 				

@@ -53,14 +53,14 @@ public class EventoMail {
 	private final static String tablepanelEvento = "<table align=\"center\" style=\"font-family: monospace, 'latoregular', Trebuchet MS, Arial, Helvetica, sans-serif;font-size: 14px; background: #C2D5D3;\">";
 	private final static String leftRow = "<tr><td style=\"width:90%; border:1px solid #46A7A3;background:#46A7A3;color:#dddddd;float:right\">"
 			+ "<time style=\"font-size: 1.2rem;display: block;font-weight: bold;margin-bottom: 8px;\">{0}</time>"
-			+ "{1} {2}  {3} {4} {5} {6}</td>" + "<td style=\"text-align:center;width:20%\">" + "</td><td></td></tr>";
+			+ "{1} {2}  {3}</td>" + "<td style=\"text-align:center;width:20%\">" + "</td><td></td></tr>";
 	private final static String centerRow = "<tr style=\"height: 30px\"><td></td><td style=\"vertical-align: baseline;text-align:center;width:20%\">"
 			+ "<span class=\"ui-btn-timeline\" style=\"content: '';position: absolute;transform: translateX(-50%);width: 30px;height: 30px;border-radius: 50%;background: inherit; background: #46A7A3 !important;border-color: #46A7A3 !important;\"> "
 			+ "</span></td><td></td></tr>";
 	private final static String rightRow = "<tr><td ></td>" + "<td style=\"width:20%;text-align:center\">"
 			+ "</td><td style=\"border:1px solid #46A7A3;background:#46A7A3;color:#dddddd;float:left;width:90%\">"
 			+ "<time style=\"font-size: 1.2rem;display: block;font-weight: bold;margin-bottom: 8px;\">{0}</time>"
-			+ "{1} {2}  {3} {4} {5} {6}</td></tr>";
+			+ "{1} {2}  {3}</td></tr>";
 	private final static String endTableEvento = "</table>";
 	private final static String headerFotos = "<div  style=\"padding: .2em;border-radius: 3px;border: 1px solid #262626;color: #dddddd;background-color: #4d4d4d;background: -webkit-radial-gradient(50% 75%,circle,#676767,#343434);\">"
 			+"<div  style=\"padding: .5em 1em .3em;text-align: center;font-weight: normal;border-radius: 3px;background: linear-gradient(#99a699,#778877);outline: 0;border: 1px solid #3c443c;color: #eeffee;\">"
@@ -162,8 +162,7 @@ public class EventoMail {
 			String row = null;
 			if (left) {
 				row = MessageFormat.format(leftRow, lineEvento(evento.getHour()), lineEvento(evento.getData()),
-						lineEvento(evento.getGrupoevento()), lineEvento(evento.getSubgrupoevento()),
-						lineEvento(evento.getRespeventos()), lineEvento(evento.getObsevento()),
+						lineEvento(evento.getResumo()),
 						lineCuidador(evento.getUsuario().getApelido()));
 				if (i < (eventos.size() - 1)) {
 					row = row.concat(centerRow);
@@ -171,8 +170,7 @@ public class EventoMail {
 
 			} else {
 				row = MessageFormat.format(rightRow, lineEvento(evento.getHour()), lineEvento(evento.getData()),
-						lineEvento(evento.getGrupoevento()), lineEvento(evento.getSubgrupoevento()),
-						lineEvento(evento.getRespeventos()), lineEvento(evento.getObsevento()),
+						lineEvento(evento.getResumo()),
 						lineCuidador(evento.getUsuario().getApelido()));
 			}
 			_timeline = _timeline.concat(row);
