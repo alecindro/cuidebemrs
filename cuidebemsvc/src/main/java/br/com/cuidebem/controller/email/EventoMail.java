@@ -78,7 +78,7 @@ public class EventoMail {
 	
 	private List<FileMail> fileMails;
 	
-	public void sendMessage(EventoEmailModel model){
+	public void sendMessage(EventoEmailModel model,boolean automatic){
 		fileMails = new ArrayList<FileMail>();
 		String content = mountContent(model);
 		String subject = MessageFormat.format(subject_email, model.getResidencia());
@@ -87,7 +87,7 @@ public class EventoMail {
 			to_email = to_email.concat(",").concat(model.getResponsaveis().get(i).getEmail());
 		}
 		
-		sendEmail.send(to_email, subject, content, content_type,fileMails);
+		sendEmail.send(model.getIdresidencia(), to_email, subject, content, content_type,model.getData(),automatic, fileMails);
 	}
 	
 	private String generateUrl(String url,Object... parameters){

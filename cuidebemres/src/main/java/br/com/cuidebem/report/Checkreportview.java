@@ -42,8 +42,14 @@ public class Checkreportview extends IndexView {
 		list = new ArrayList<CheckReport>();
 		datainicio = Calendar.getInstance().getTime();
 		datafim = datainicio;
-		List<Paciente> _pacientes = pacienteFacade.findAll();
-		pacientes = getItems(_pacientes);
+		List<Paciente> _pacientes;
+		try {
+			_pacientes = pacienteFacade.findEnabled(getIdresidencia());
+			pacientes = getItems(_pacientes);
+		} catch (ControllerException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		
 	}
 	
 	private  SelectItem[] getItems(List<Paciente> entities) {

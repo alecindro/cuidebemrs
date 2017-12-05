@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/resources/template.xhtml">
+	<ui:define name="content">
+	<p:fieldset legend="#{bundle.sended_email}">
+	<h:form>
+	
+	<p:dataTable value="#{emailenviadoMB.emails}" var="email" lazy="true" rows="10" rowExpandMode="single"
+                         paginator="true" paginatorPosition="bottom" rowStyleClass="#{email.error?'errorStyle':''}"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                         rowsPerPageTemplate="5,10,15">
+                         <p:column>
+                          <p:rowToggler  />
+                         </p:column>
+                         <p:column headerText="#{bundle.send_date}">
+                         <h:outputText value="#{email.dataenvio}">
+                         <f:convertDateTime pattern="dd/MM/yyyy"/>
+                         </h:outputText>
+                         </p:column>
+                          <p:column headerText="#{bundle.send_hour}">
+                         <h:outputText value="#{email.dataenvio}"  >
+                         <f:convertDateTime pattern="HH:mm"/>
+                         </h:outputText>
+                         </p:column>
+                         <p:column headerText="#{bundle.date_report}">
+                         <h:outputText value="#{email.datarelatorio}"  >
+                         <f:convertDateTime pattern="dd/MM/yyyy"/>
+                         </h:outputText>
+                         </p:column>
+                         <p:column headerText="#{bundle.emails}">
+                          <h:outputText value="#{email.to_email}" />
+                         </p:column>
+                         <p:column headerText="#{bundle.automatic}">
+                          <h:outputText value="#{email.automatic}" />
+                         </p:column>
+                         <p:column headerText="#{bundle.message}">
+                         <h:outputText value="#{email.message}"  />
+                         </p:column>
+                      <p:rowExpansion >
+                     <div style="position:relative;width:100%;padding-bottom:40%;height:0;overflow:hidden;">
+                      <object data="/rs/emailcontent/#{email.idemailenviado}" style="width:100%; height:100%; position:absolute;"></object>
+                      </div>
+                      </p:rowExpansion>
+                         </p:dataTable>
+	
+	</h:form>
+	</p:fieldset>
+	</ui:define>
+	</ui:composition>
+</html>

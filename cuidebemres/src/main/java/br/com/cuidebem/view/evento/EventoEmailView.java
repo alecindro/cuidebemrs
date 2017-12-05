@@ -80,7 +80,7 @@ public class EventoEmailView extends IndexView{
 		List<Integer> ids = Arrays.asList(idresponsaveis);
 		List<Responsavel> selecteds = responsaveis.stream().filter(r -> ids.contains(r.getIdresponsavel())).collect(Collectors.toList());
 		try {
-			ems.sendEmail(selecteds, getResidencia(), idpaciente,date);
+			ems.sendEmail(selecteds, getResidencia(), idpaciente,date,false);
 			JsfUtil.addSuccessMessage(Bundle.getValue("email_sucess"));
 		} catch (ControllerException e) {
 			JsfUtil.addErrorMessage(Bundle.getValue("error_sendemail"));

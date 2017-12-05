@@ -205,15 +205,61 @@
 					</p:panelGrid>
 				</h:form>
 			</p:panel>
+			<p:panel header="#{bundle.agendamento}" id="agendamento"
+				visible="#{responsavelmb.responsavel.idresponsavel != null}"
+				>
+				<h:inputHidden value="#{responsavelmb.schedulemail.idschedulemail}" />
+				<h:form prependId="false">
+				<p:panelGrid columns="2" layout="grid"
+						columnClasses="twenty-percent,eighty-percent">
+						<p:outputLabel value="#{bundle.form_enabled}" for="enabled" />
+						<p:inputSwitch onchange="blockAgenda()" widgetVar="sw" value="#{responsavelmb.schedulemail.enabled}" id="enabled" onLabel="#{bundle.ativo}" offLabel="#{bundle.inativo}"/>
+						</p:panelGrid>
+				<p:panelGrid columns="2" layout="grid" id="gridAgenda"
+						columnClasses="twenty-percent,eighty-percent">
+						<p:outputLabel value="#{bundle.form_dias_semana}" for="semana" />
+									<p:selectCheckboxMenu id="semana" layout="responsive"  widgetVar="semanaCheck"  updateLabel="true"
+										columns="1" value="#{responsavelmb.schedulemail.dias}" label="#{bundle.selecione}">
+										<f:selectItem itemValue="1"
+											itemLabel="#{bundle.segunda_semana}" />
+										<f:selectItem itemValue="2" itemLabel="#{bundle.terca_semana}" />
+										<f:selectItem itemValue="3"
+											itemLabel="#{bundle.quarta_semana}" />
+										<f:selectItem itemValue="4"
+											itemLabel="#{bundle.quinta_semana}" />
+										<f:selectItem itemValue="5" itemLabel="#{bundle.sexta_semana}" />
+										<f:selectItem itemValue="6"
+											itemLabel="#{bundle.sabado_semana}" />
+										<f:selectItem itemValue="7"
+											itemLabel="#{bundle.domingo_semana}" />
+									</p:selectCheckboxMenu>
+									<p:outputLabel value="#{bundle.form_horario}" for="hora"></p:outputLabel>
+										<p:inputText id="hora" type="time" placeholder="HH:mm" 
+									required="true" value="#{responsavelmb.schedulemail.hora}">
+									
+								</p:inputText>
+								<p:blockUI block="gridAgenda" widgetVar="bui" blocked="#{!responsavelmb.schedulemail.enabled}"/>
+					</p:panelGrid>
+					<p:commandButton value="#{bundle.save}" action="#{responsavelmb.saveAgenda}" update="@form">
+								<f:param name="idpaciente"
+							value="#{responsavelmb.paciente.idpaciente}" />
+							<f:param name="idresponsavel"
+							value="#{responsavelmb.responsavel.idresponsavel}" />
+								</p:commandButton>
+					
+				</h:form>
+				</p:panel>
+			
 			<p:panel header="#{bundle.telefones}" id="telefone"
 				visible="#{responsavelmb.responsavel.idresponsavel != null}"
 				>
 				<h:form>
+				
 					<p:panelGrid columns="2" layout="grid"
 						columnClasses="twenty-percent,eighty-percent">
 						<p:outputLabel value="#{bundle.form_tipotelefone}"
 							for="tipotelefone" />
-						<p:selectOneMenu value="#{responsavelmb.telefone.tipo}"
+						<p:selectOneMenu value="#{responsavelmb.telefone.tipo}" 
 							id="tipotelefone" title="#{bundle.tipotelefone}">
 							<f:selectItem itemLabel="Selecione" />
 							<f:selectItems value="#{usuariomb.tipoTelefones}"
@@ -283,6 +329,14 @@
 		</p:outputPanel>
 </div>
 </div>
+<script type="text/javascript">
+function blockAgenda(){
+	PF('bui').hide();
+	if(!PF('sw').input.prop('checked')){
+		PF('bui').show();
+		}
+}
+</script>
 	</ui:define>
 </ui:composition>
 </html>

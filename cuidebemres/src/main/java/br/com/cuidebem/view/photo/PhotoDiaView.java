@@ -36,7 +36,7 @@ public class PhotoDiaView extends IndexView{
 		if(_dataevento != null){
 			try {
 				Date data = DateUtil.convertDate(_dataevento);
-				data = DateUtil.getZeroHour(dataevento);
+				data = DateUtil.getZeroHour(data);
 				if(!data.equals(DateUtil.getZeroHour(dataevento))){
 					today = false;
 				}

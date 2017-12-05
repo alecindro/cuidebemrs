@@ -17,9 +17,11 @@ import br.com.cuidebem.controller.ResponsavelPhotoFacade;
 import br.com.cuidebem.controller.ResponsavelTelefoneFacade;
 import br.com.cuidebem.controller.TelefoneFacade;
 import br.com.cuidebem.controller.exception.ControllerException;
+import br.com.cuidebem.controller.schedule.ScheduleEmailFacade;
 import br.com.cuidebem.model.Paciente;
 import br.com.cuidebem.model.Responsavel;
 import br.com.cuidebem.model.Telefone;
+import br.com.cuidebem.model.email.Schedulemail;
 import br.com.cuidebem.translate.Bundle;
 import br.com.cuidebem.view.IndexView;
 import br.com.cuidebem.view.util.JsfUtil;
@@ -33,6 +35,7 @@ public class ResponsavelView extends IndexView {
 	private Responsavel responsavel;
 	private Telefone telefone;
 	private Paciente paciente;
+	private Schedulemail schedulemail; 
 	
 	private ListDataModel<Telefone> telefones;
 	@EJB
@@ -45,6 +48,8 @@ public class ResponsavelView extends IndexView {
 	private TelefoneFacade telefoneFacade;
 	@EJB
 	private ResponsavelTelefoneFacade responsavelTelefoneFacade;
+	@EJB
+	private ScheduleEmailFacade scheduleEmailFacade;
 
 	@PostConstruct
 	private void init(){
@@ -52,6 +57,7 @@ public class ResponsavelView extends IndexView {
 		telefone = new Telefone();
 		paciente = new Paciente();
 		telefones = new ListDataModel<>();
+		schedulemail = new Schedulemail();
 		String _idpaciente = JsfUtil.getRequestParameter("idpaciente");
 		if(_idpaciente == null){
 			return;
@@ -61,6 +67,7 @@ public class ResponsavelView extends IndexView {
 		if(_idresponsavel!= null){
 			responsavel = responsavelFacade.find(Integer.valueOf(_idresponsavel));
 			loadTelefones();
+			loadSchedule();
 		}
 	}
 	
@@ -108,6 +115,18 @@ public class ResponsavelView extends IndexView {
 		}
 
 	}
+	
+	public void saveAgenda(){
+		schedulemail.setIdpaciente(paciente.getIdpaciente());
+		schedulemail.setResponsavel(responsavel);
+		schedulemail.setResidencia(getResidencia());
+		try {
+			schedulemail = scheduleEmailFacade.save(schedulemail);
+			JsfUtil.addSuccessMessage(Bundle.getValue("cadsucesso"));
+		} catch (ControllerException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
 
 	
 	
@@ -147,6 +166,14 @@ public class ResponsavelView extends IndexView {
 		}
 	}
 	
+	private void loadSchedule(){
+		try{
+		schedulemail = scheduleEmailFacade.find(getPaciente().getIdpaciente(), getResponsavel().getIdresponsavel());
+		} catch (ControllerException e) {
+			JsfUtil.addErrorMessage(e, Bundle.getValue("error.loadschedule"));
+		}
+	}
+	
 	public Responsavel getResponsavel() {
 		return responsavel;
 	}
@@ -178,6 +205,16 @@ public class ResponsavelView extends IndexView {
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
 	}
+
+	public Schedulemail getSchedulemail() {
+		return schedulemail;
+	}
+
+	public void setSchedulemail(Schedulemail schedulemail) {
+		this.schedulemail = schedulemail;
+	}
+
+
 
 
 

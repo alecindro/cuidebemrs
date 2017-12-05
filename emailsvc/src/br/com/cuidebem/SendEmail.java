@@ -2,12 +2,15 @@ package br.com.cuidebem;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.annotation.Resource;
 import javax.ejb.Asynchronous;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.mail.Address;
 import javax.mail.Message;
@@ -20,11 +23,18 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import br.com.cuidebem.controller.EmailException;
+import br.com.cuidebem.controller.EmailJpaController;
+import br.com.cuidebem.model.Emailenviado;
+
 @Stateless
 public class SendEmail {
 
 	@Resource(mappedName = "java:/cuidebemmail")
 	private Session mailSession;
+	@EJB
+	private EmailJpaController emailJpaController;
+	
 
 	@Asynchronous
 	public void send(String to_email, String subject, String content, String type_content) {
@@ -87,7 +97,15 @@ public class SendEmail {
 	}
 
 	@Asynchronous
-	public void send(String to_email, String subject, String content, String type_content, List<FileMail> fileMails) {
+	public void send(Integer idresidencia, String to_email, String subject, String content, String type_content, Date dataRelatorio, boolean automatic, List<FileMail> fileMails) {
+		Emailenviado emailenviado = new Emailenviado ();
+		emailenviado.setContent_type(type_content);
+		emailenviado.setDataenvio(Calendar.getInstance().getTime());
+		emailenviado.setSubject(subject);
+		emailenviado.setTo_email(to_email);
+		emailenviado.setDatarelatorio(dataRelatorio);
+		emailenviado.setIdresidencia(idresidencia);
+		emailenviado.setAutomatic(automatic);
 		try {
 			MimeMessage m = new MimeMessage(mailSession);
 			MimeMultipart mimeMultipart = new MimeMultipart("related");
@@ -106,10 +124,33 @@ public class SendEmail {
 			m.setContent(mimeMultipart);
 			m.setSubject(subject);
 			sendMessage(m, to_email);
+			emailenviado.setError(false);
+			emailenviado.setMessage("Email enviado com sucesso");
+		} catch (javax.mail.SendFailedException e) {
+			String message = e.getMessage();
+			if(e.getInvalidAddresses()!=null){
+			  message = "Email Inválido: ";
+			  for(Address addrees : e.getInvalidAddresses()){
+				  message = message.concat(addrees.toString()).concat(";");
+			  }
+			}
+			emailenviado.setError(true);
+			emailenviado.setMessage(message);
+			
+		
 		} catch (javax.mail.MessagingException e) {
 			e.printStackTrace();
-
+			emailenviado.setError(true);
+			emailenviado.setMessage(e.getMessage());
+			
 		} catch (IOException e) {
+			e.printStackTrace();
+			emailenviado.setError(true);
+			emailenviado.setMessage(e.getMessage());
+		}
+		try {
+			emailJpaController.create(emailenviado,content);
+		} catch (EmailException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

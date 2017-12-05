@@ -46,6 +46,7 @@ public class ApplicationConfig extends Application {
         resources.add(br.com.cuidebem.rs.UsuarioResidenciaFacadeREST.class);
         resources.add(br.com.cuidebem.rs.UsuarioTelefoneFacadeREST.class);
         resources.add(br.com.cuidebem.rs.PhotoREST.class);
+        resources.add(br.com.cuidebem.rs.EmailcontentREST.class);
     }
     
 }

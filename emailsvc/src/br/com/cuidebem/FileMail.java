@@ -4,9 +4,9 @@ import java.io.File;
 
 public class FileMail {
 	
+	
 	private String cid;
 	private File file;
-
 	
 	public FileMail() {
 		super();
@@ -29,6 +29,4 @@ public class FileMail {
 		this.file = file;
 	}
 	
-	
-
 }
