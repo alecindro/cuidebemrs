@@ -12,7 +12,7 @@
 			<div class="ui-g-12 ui-md-12 ui-lg-6">
 				<p:panel>
 					<f:facet name="header">
-	Eventos do Paciente: #{eventocuidadormb.cuidador.apelido}
+	Eventos do Cuidador: #{eventocuidadormb.cuidador.apelido}
 	</f:facet>
 					<section class="timeline">
 					<ul>
@@ -20,9 +20,9 @@
 							<li class="in-view">
 								<div>
 									<time>#{evento.hour}</time>
-											#{evento.data} <br/>
-										<h:outputText value="#{evento.resumo}"  escape="false"/> <br/>
-									Cuidador : #{evento.usuario.apelido}
+									#{evento.data} <br/>
+									<h:outputText value="#{evento.resumo}"  escape="false"/> <br/>
+									 Paciente : #{evento.idpaciente.apelido}
 								</div> <span class="ui-btn-timeline"> </span>
 							</li>
 						</ui:repeat>
