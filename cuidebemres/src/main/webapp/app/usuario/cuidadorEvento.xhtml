@@ -22,7 +22,8 @@
 									<time>#{evento.hour}</time>
 									#{evento.data} <br/>
 									<h:outputText value="#{evento.resumo}"  escape="false"/> <br/>
-									 Paciente : #{evento.idpaciente.apelido}
+									 Paciente : #{evento.paciente.apelido}
+									 
 								</div> <span class="ui-btn-timeline"> </span>
 							</li>
 						</ui:repeat>

@@ -6,8 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.activation.DataHandler;
-import javax.activation.FileDataSource;
 import javax.annotation.Resource;
 import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
@@ -40,37 +38,17 @@ public class SendEmail {
 	public void send(String to_email, String subject, String content, String type_content) {
 		try {
 			MimeMessage m = new MimeMessage(mailSession);
-			m.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to_email));
 			m.setSubject(subject);
 			m.setSentDate(new java.util.Date());
 			m.setContent(content, type_content);
-			Transport.send(m);
+			sendMessage(m, to_email);
 		} catch (javax.mail.MessagingException e) {
 			e.printStackTrace();
 
 		}
 	}
 
-	@Asynchronous
-	public void send(String to_email, String subject, String content, String type_content, File file) {
-		try {
-			MimeMessage m = new MimeMessage(mailSession);
-			Address[] to = new InternetAddress[] { new InternetAddress(to_email) };
-			m.setRecipients(Message.RecipientType.TO, to);
-			m.setSubject(subject);
-			m.setSentDate(new java.util.Date());
-			m.setContent(content, type_content);
-			m.saveChanges();
-			FileDataSource fds = new FileDataSource(file);
-			m.setDataHandler(new DataHandler(fds));
-			m.setFileName(file.getName());
-			Transport.send(m);
-		} catch (javax.mail.MessagingException e) {
-			e.printStackTrace();
-
-		}
-	}
-
+	
 	@Asynchronous
 	public void send(String to_email, String subject, String content, String cid, String type_content, File file) {
 		try {
