@@ -47,6 +47,12 @@ public class SendEmail {
 
 		}
 	}
+	
+	@Asynchronous
+	public void send(String to_email, String subject, String content, String type_content, File file)
+	{
+		
+	}
 
 	
 	@Asynchronous
