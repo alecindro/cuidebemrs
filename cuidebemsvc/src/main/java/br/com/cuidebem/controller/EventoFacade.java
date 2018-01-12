@@ -199,7 +199,7 @@ public class EventoFacade extends AbstractFacade<Evento> {
 				throw new ControllerException(Bundle.getValue("evento_saved_before"));
 			}
 			agenda.setIdevento(evento.getIdevento());
-			agenda.setData(evento.getDataregistro());
+			agenda.setDataregistro(evento.getDataregistro());
 			agendaFacade.edit(agenda);
 		}
 		return evento;
