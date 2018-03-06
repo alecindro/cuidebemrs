@@ -136,7 +136,7 @@ public class EventoMail {
 	}
 
 	private String mountPanelFoto(Date data, String paciente, Integer idpaciente) {
-		String _url = generateUrl(urlpacientefoto, idpaciente);
+		String _url = generateUrl(urlpacientefoto, String.valueOf(idpaciente));
 		String cid = ContentIdGenerator.getContentId();
 		File photo = loadImage(paciente,_url,null);
 		fileMails.add(new FileMail(cid, photo));
