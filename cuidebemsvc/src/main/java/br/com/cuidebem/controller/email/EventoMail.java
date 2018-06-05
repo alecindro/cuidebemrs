@@ -111,7 +111,7 @@ public class EventoMail {
 			result = result.concat(headerFotos);
 			for(PacientePhoto pacientePhoto: list){
 				Integer idfoto = pacientePhoto.getIdpacientephoto();
-				String _url = generateUrl(urlfotodiaria, idfoto);
+				String _url = generateUrl(urlfotodiaria, String.valueOf(idfoto));
 				String cid = ContentIdGenerator.getContentId();
 				File photo = loadImage(paciente+"_"+pacientePhoto.getIdpacientephoto(),_url,pacientePhoto.getType());
 				fileMails.add(new FileMail(cid, photo));
@@ -234,7 +234,7 @@ public class EventoMail {
 	private List<PacientePhoto> loadPacientePhoto(Integer id,Date date){
 		List<PacientePhoto> list = new ArrayList<PacientePhoto>();
 		Client client = javax.ws.rs.client.ClientBuilder.newClient();
-		String _url = java.text.MessageFormat.format(urlpacienteids, id,DateUtil.convertDateUnderscore(date));
+		String _url = java.text.MessageFormat.format(urlpacienteids, String.valueOf(id),DateUtil.convertDateUnderscore(date));
 		WebTarget webTarget = client.target(_url);
 		List<Object> objects = webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(List.class);
 		ObjectMapper mapper = new ObjectMapper();
