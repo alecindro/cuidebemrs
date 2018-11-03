@@ -2,6 +2,7 @@ package br.com.cuidebem.model.view;
 
 import java.io.Serializable;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.EntityResult;
 import javax.persistence.Id;
@@ -10,6 +11,7 @@ import javax.persistence.SqlResultSetMapping;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@Cacheable
 @SqlResultSetMapping(name = "eventoCuidadoratual", entities = @EntityResult(entityClass = CuidadorEventoAtual.class))
 @NamedNativeQuery(name = "CuidadorEventoAtual.findAllByResidencia", query = "  select p.idusuario as idcuidador, p.apelido as apelido,  count(s.idusuario) as qtdade, (count(s.idusuario) != 0) "
 		+ "as enabled  from usuario p left join (select e.grupoevento, e.idpaciente, e.idusuario, e.dataevento "

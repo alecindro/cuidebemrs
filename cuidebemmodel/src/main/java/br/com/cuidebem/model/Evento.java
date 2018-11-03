@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.QueryHint;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,6 +34,7 @@ import br.com.cuidebem.rotinas.Rotinas;
  * @author aleci
  */
 @Entity
+@Cacheable
 @Table(catalog = "cuidebemres", schema = "", name="evento")
 @XmlRootElement
 
@@ -45,9 +48,12 @@ import br.com.cuidebem.rotinas.Rotinas;
 		@NamedQuery(name = "Evento.findBySubgrupoevento", query = "SELECT e FROM Evento e WHERE e.subgrupoevento = :subgrupoevento"),
 		@NamedQuery(name = "Evento.findByRespeventos", query = "SELECT e FROM Evento e WHERE e.respeventos = :respeventos") })
 @NamedNativeQueries({
-		@NamedNativeQuery(name = "Evento.findByPaciente", query = "select * from evento where idpaciente=?1 and dataevento between ?2 and ?3", resultClass = Evento.class),
-		@NamedNativeQuery(name = "Evento.findByDataPaciente", query = "select e.*, p.*, u.* from evento e inner join paciente p on e.idpaciente = p.idpaciente inner join usuario u on e.idusuario = u.idusuario where e.enabled = 1 and e.idpaciente=?1 and date(e.dataregistro) = date(?2) order by e.dataregistro asc", resultClass = Evento.class),
-		@NamedNativeQuery(name="Evento.check", query="select * from evento where idpaciente = ?1 and (date(dataevento) between date(?2) and date(?3)) and (grupoevento = 'Saiu' or grupoevento =  'Entrou') and enabled = 1 order by dataregistro asc", resultClass = Evento.class)
+		@NamedNativeQuery(name = "Evento.findByPaciente", query = "select * from evento where idpaciente=?1 and dataevento between ?2 and ?3", resultClass = Evento.class, hints = { @QueryHint(name = "org.hibernate.cacheable", value =
+				"true") } ),
+		@NamedNativeQuery(name = "Evento.findByDataPaciente", query = "select e.*, p.*, u.* from evento e inner join paciente p on e.idpaciente = p.idpaciente inner join usuario u on e.idusuario = u.idusuario where e.enabled = 1 and e.idpaciente=?1 and date(e.dataregistro) = date(?2) order by e.dataregistro asc", resultClass = Evento.class, hints = { @QueryHint(name = "org.hibernate.cacheable", value =
+				"true") } ),
+		@NamedNativeQuery(name="Evento.check", query="select * from evento where idpaciente = ?1 and (date(dataevento) between date(?2) and date(?3)) and (grupoevento = 'Saiu' or grupoevento =  'Entrou') and enabled = 1 order by dataregistro asc", resultClass = Evento.class, hints = { @QueryHint(name = "org.hibernate.cacheable", value =
+				"true") } )
 })
 
 public class Evento implements Serializable {

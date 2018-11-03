@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityResult;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.QueryHint;
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -35,7 +36,8 @@ import br.com.cuidebem.model.def.Check;
 		+ "and a1.dataregistro is null)) "
 		+ "an on p.idpaciente = an.idpaciente "
 		+ "where p.idresidencia = ?5 and p.enabled =1 "
-		+ "group by p.idpaciente;", resultSetMapping="eventoatual")
+		+ "group by p.idpaciente;", resultSetMapping="eventoatual", hints = { @QueryHint(name = "org.hibernate.cacheable", value =
+				"true") }  )
 @XmlRootElement
 public class PacienteEventoAtual implements Serializable {
 

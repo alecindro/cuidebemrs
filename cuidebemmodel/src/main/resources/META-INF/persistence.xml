@@ -4,10 +4,13 @@
   <persistence-unit name="cuidebemresPU" transaction-type="JTA">
     <jta-data-source>java:/cuidebemres</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <shared-cache-mode>ALL</shared-cache-mode>
    <properties>
     <property name="hibernate.dialect"
 value="org.hibernate.dialect.MySQL5Dialect" />
     <property name="hibernate.show_sql" value="true"/>
+    <property name="hibernate.cache.use_second_level_cache" value="true"/>
+    <property name="hibernate.cache.use_query_cache" value="true"/>
     </properties>
   </persistence-unit>
   </persistence>

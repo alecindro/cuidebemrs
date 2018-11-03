@@ -13,6 +13,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServlet;
+
 import br.com.cuidebem.model.Evento;
 import br.com.cuidebem.model.def.Check;
 import br.com.cuidebem.model.util.DateUtil;
@@ -23,7 +26,7 @@ import br.com.cuidebem.model.view.CheckReportFactory;
 public class TestBasic {
 
 	public static void main(String[] args) {
-		System.out.println(TestBasic.convertDate());
+	
 	}
 	
 	public static String convertDate(){
