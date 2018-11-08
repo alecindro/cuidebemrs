@@ -55,7 +55,7 @@ public class PhotoREST {
 	
 	@GET
 	@Path("/pacientedia/{idpacientephoto}")
-	@Produces("image/*")
+	@Produces("text/plain")
 	public Response getPacientePhoto(@PathParam(value = "idpacientephoto") Integer idpacientephoto){
 		PacientePhoto pacientePhoto = pacientePhotoFacade.find(idpacientephoto);
 		if(pacientePhoto == null){
@@ -66,7 +66,7 @@ public class PhotoREST {
 
 	@GET
 	@Path("/usuario")
-	@Produces("image/*")
+	@Produces("text/plain")
 	public Response getNoImage() {
 		try {
 			return buildPhoto(noPhoto());
@@ -79,21 +79,21 @@ public class PhotoREST {
 
 	@GET
 	@Path("/responsavel")
-	@Produces("image/*")
+	@Produces("text/plain")
 	public Response getNoImageResponsavel() {
 		return getNoImage();
 	}
 
 	@GET
 	@Path("/paciente")
-	@Produces("image/*")
+	@Produces("text/plain")
 	public Response getNoImagePaciente() {
 		return getNoImage();
 	}
 
 	@GET
 	@Path("/usuario/{usuarioId}")
-	@Produces("image/*")
+	@Produces("text/plain")
 	public Response getImageUsuario(@PathParam(value = "usuarioId") Integer usuarioId) {
 		if (usuarioId != null) {
 			UsuarioPhoto usuarioPhoto = usuarioPhotoFacade.find(usuarioId);
@@ -113,7 +113,7 @@ public class PhotoREST {
 
 	@GET
 	@Path("/responsavel/{idresponsavel}")
-	@Produces("image/*")
+	@Produces("text/plain")
 	public Response getImageResponsavel(@PathParam(value = "idresponsavel") Integer idresponsavel) {
 
 		if (idresponsavel != null) {
@@ -134,7 +134,7 @@ public class PhotoREST {
 
 	@GET
 	@Path("/paciente/{pacienteId}")
-	@Produces("image/*")
+	@Produces("text/plain")
 	public Response getImagePaciente(@PathParam(value = "pacienteId") Integer pacienteId) {
 		if (pacienteId != null) {
 			PacientePhoto pacPhoto = pacientePhotoFacade.findByPaciente(pacienteId);

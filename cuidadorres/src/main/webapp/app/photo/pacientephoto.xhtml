@@ -8,7 +8,7 @@
 <p:dataGrid layout="grid" value="#{photodiaview.photos}" var="photo">
 <p:panelGrid layout="grid" columns="1" style="text-align:center">
 <p:graphicImage url="/rs/images/pacientedia/#{photo.idpacientephoto}"
-										cache="true">
+										cache="false">
 											
 										</p:graphicImage>
 										<h:outputText value="#{photo.descricao}"></h:outputText>

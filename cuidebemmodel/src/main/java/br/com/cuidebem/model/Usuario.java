@@ -30,12 +30,15 @@ import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  *
  * @author aleci
  */
 @Entity
 @Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(catalog = "cuidebemres", schema = "", name="usuario")
 @XmlRootElement
 @NamedQueries({ @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),

@@ -8,6 +8,7 @@ package br.com.cuidebem.model;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,11 +22,15 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  *
  * @author aleci
  */
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(catalog = "cuidebemres", schema = "",name="residencia")
 @XmlRootElement
 @NamedQueries({

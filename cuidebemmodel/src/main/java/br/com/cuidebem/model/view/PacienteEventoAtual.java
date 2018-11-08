@@ -3,23 +3,28 @@ package br.com.cuidebem.model.view;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.EntityResult;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQuery;
-import javax.persistence.QueryHint;
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import br.com.cuidebem.model.def.Check;
 
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SqlResultSetMapping(name="eventoatual", entities=@EntityResult(entityClass=PacienteEventoAtual.class)) 
-@NamedNativeQuery(name="PacienteEventoAtual.findAllByResidencia", query="select p.idpaciente,p.apelido,  count(s.idpaciente) as qtdade, "
-		+ "(count(s.idpaciente) != 0) as enabled, ue.grupoevento as lastgrupoevento, "
+@NamedNativeQuery(name="PacienteEventoAtual.findAllByResidencia", query="select p.idpaciente,p.apelido,  "
+		+ "count(s.idpaciente) as qtdade, (count(s.idpaciente) != 0) as enabled, ue.grupoevento as lastgrupoevento,"
 		+ "ue.idevento as lastidevento, an.grupoevento as nextgrupoagenda, an.subgrupoevento as nextsubgrupoagenda, "
-		+ "an.data as nextdataagenda, an.idagenda as nextidagenda from paciente p left join "
+		+ "an.data as nextdataagenda, an.idagenda as nextidagenda from paciente p "
+		+ "left join "
 		+ "(select e.grupoevento, e.idpaciente, e.idusuario, e.dataevento "
 		+ "from evento e where date(e.dataevento) = date(now())) s on p.idpaciente = s.idpaciente "
 		+ "left join (SELECT e1.idpaciente, e1.idevento, e1.grupoevento, e1.dataregistro "
@@ -28,16 +33,11 @@ import br.com.cuidebem.model.def.Check;
 		+ "FROM evento e2 inner join paciente p2 on e2.idpaciente = p2.idpaciente "
 		+ "WHERE e2.idpaciente = e1.idpaciente and e2.enabled = 1 and p2.idresidencia = ?2)) ue "
 		+ "on p.idpaciente = ue.idpaciente "
-		+ "left join (SELECT a1.idpaciente, a1.grupoevento, a1.data, a1.subgrupoevento, a1.idagenda "
-		+ "FROM agenda a1 inner join paciente p1 on a1.idpaciente = p1.idpaciente "
-		+ "WHERE p1.idresidencia = ?3 and a1.data = (SELECT min(a2.data) "
+		+ "left join (SELECT a2.idpaciente, a2.grupoevento, min(a2.data) as data, a2.subgrupoevento, a2.idagenda  "
 		+ "FROM agenda a2 inner join paciente p2 on a2.idpaciente = p2.idpaciente "
-		+ "WHERE a2.idpaciente = a1.idpaciente and p2.idresidencia = ?4 and a2.data > date_sub(now(), interval 1 hour) "
-		+ "and a1.dataregistro is null)) "
+		+ "WHERE a2.data >= curdate() and p2.idresidencia = ?3) "
 		+ "an on p.idpaciente = an.idpaciente "
-		+ "where p.idresidencia = ?5 and p.enabled =1 "
-		+ "group by p.idpaciente;", resultSetMapping="eventoatual", hints = { @QueryHint(name = "org.hibernate.cacheable", value =
-				"true") }  )
+		+ "where p.idresidencia = ?4 and p.enabled =1 group by p.idpaciente", resultSetMapping="eventoatual")
 @XmlRootElement
 public class PacienteEventoAtual implements Serializable {
 

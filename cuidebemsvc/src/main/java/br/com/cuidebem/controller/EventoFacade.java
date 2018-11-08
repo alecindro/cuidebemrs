@@ -19,6 +19,7 @@ import br.com.cuidebem.model.Paciente;
 import br.com.cuidebem.model.Usuario;
 import br.com.cuidebem.model.view.CheckReport;
 import br.com.cuidebem.model.view.CheckReportFactory;
+import br.com.cuidebem.model.view.PacienteEventoAtual;
 import br.com.cuidebem.translate.Bundle;
 
 /**
@@ -209,6 +210,7 @@ public class EventoFacade extends AbstractFacade<Evento> {
 		Evento evento = find(idevento);
 		evento.setEnabled(false);
 		edit(evento);
+		getEntityManager().getEntityManagerFactory().getCache().evict(PacienteEventoAtual.class);
 	}
 	
 	public List<CheckReport> reportCheck(Integer idpaciente, Date inicio, Date fim,boolean checkin) throws ControllerException{
@@ -238,5 +240,6 @@ public class EventoFacade extends AbstractFacade<Evento> {
 		evento.setQuantidade((String) tuple[17]);
 		return evento;
 	}
+	
 
 }

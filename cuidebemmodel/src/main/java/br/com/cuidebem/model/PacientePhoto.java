@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,6 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author aleci
  */
 @Entity
+@Cacheable(value=false)
 @Table(name = "paciente_photo", catalog = "cuidebemres", schema = "")
 @XmlRootElement
 @NamedQueries({ @NamedQuery(name = "PacientePhoto.findAll", query = "SELECT p FROM PacientePhoto p"),

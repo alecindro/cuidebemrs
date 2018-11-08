@@ -17,7 +17,7 @@ public class PacienteEventoAtualFacade extends AbstractFacade<PacienteEventoAtua
 	}
 	
 	public List<PacienteEventoAtual> findByResidencia(Integer idresidencia) throws ControllerException{
-		List<PacienteEventoAtual> list = findByNativeQuery("PacienteEventoAtual.findAllByResidencia", idresidencia,idresidencia,idresidencia,idresidencia,idresidencia);
+		List<PacienteEventoAtual> list = findByNativeQuery("PacienteEventoAtual.findAllByResidencia", idresidencia,idresidencia,idresidencia,idresidencia);
 		return list;
 	}
 

@@ -20,8 +20,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(catalog = "cuidebemres", schema = "", name="agenda")
 @XmlRootElement
 @NamedQueries({

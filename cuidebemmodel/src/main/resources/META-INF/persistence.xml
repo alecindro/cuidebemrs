@@ -4,7 +4,7 @@
   <persistence-unit name="cuidebemresPU" transaction-type="JTA">
     <jta-data-source>java:/cuidebemres</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <shared-cache-mode>ALL</shared-cache-mode>
+    <shared-cache-mode>DISABLE_SELECTIVE</shared-cache-mode>
    <properties>
     <property name="hibernate.dialect"
 value="org.hibernate.dialect.MySQL5Dialect" />

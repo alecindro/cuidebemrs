@@ -26,6 +26,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import br.com.cuidebem.model.util.DateUtil;
 import br.com.cuidebem.rotinas.Rotinas;
 
@@ -35,6 +37,7 @@ import br.com.cuidebem.rotinas.Rotinas;
  */
 @Entity
 @Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(catalog = "cuidebemres", schema = "", name="evento")
 @XmlRootElement
 
